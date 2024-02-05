@@ -3,17 +3,17 @@
 
         <item
             android:id="@+id/fragment_home"
-            android:title=""
+            android:title="홈"
             android:icon="@drawable/ic_home"/>
 
         <item
             android:id="@+id/fragment_search"
-            android:title=""
+            android:title="검색"
             android:icon="@drawable/ic_glass"/>
 
         <item
             android:id="@+id/fragment_my"
-            android:title=""
+            android:title="마이페이지"
             android:icon="@drawable/ic_my"/>
 
 </menu>
