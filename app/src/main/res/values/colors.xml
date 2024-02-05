@@ -2,5 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="thema">#7790D9</color>
+    <color name="String">#6274DA</color>
+    <color name="BG_color">#F2F2F2</color>
+    <color name="Solid">#A4C8FF</color>
+    <color name="Video">#D9D9D9</color>
+    <color name="BG_Item">#A7BAF2</color>
+    <color name="BG_Black">#202427</color>
+    <color name="nav_blue">#7790D9</color>
 </resources>

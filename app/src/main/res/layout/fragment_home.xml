@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ly_home"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/BG_color"
+    tools:context=".HomeFragment">
+
+    <ImageView
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:src="@drawable/icon_foot"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_title"
+        app:layout_constraintEnd_toStartOf="@+id/tv_title"
+        app:layout_constraintTop_toTopOf="@+id/tv_title" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="GGuqGGuqTube"
+        android:textColor="@color/String"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:src="@drawable/icon_foot"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_title"
+        app:layout_constraintStart_toEndOf="@+id/tv_title"
+        app:layout_constraintTop_toTopOf="@+id/tv_title" />
+
+    <ImageView
+        android:id="@+id/iv_line"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_line">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="6dp"
+                        android:background="@drawable/shape"
+                        android:gravity="center"
+                        android:text="강아지" />
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="6dp"
+                        android:background="@drawable/shape"
+                        android:gravity="center"
+                        android:text="고양이" />
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="6dp"
+                        android:background="@drawable/shape"
+                        android:gravity="center"
+                        android:text="앵무새" />
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="6dp"
+                        android:background="@drawable/shape"
+                        android:gravity="center"
+                        android:text="코끼리" />
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="6dp"
+                        android:background="@drawable/shape"
+                        android:gravity="center"
+                        android:text="햄스터" />
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="6dp"
+                        android:background="@drawable/shape"
+                        android:gravity="center"
+                        android:text="토끼" />
+
+                </LinearLayout>
+
+
+            </HorizontalScrollView>
+
+            <TextView
+                android:id="@+id/tv_recommendation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:text="추천 영상"
+                android:textColor="@color/String"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/re_Horizon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_recommendation" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="10dp"
+                android:text="Shorts"
+                android:textColor="@color/String"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/re_Horizon" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/re_shorts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="10dp"
+                android:text="전체"
+                android:textColor="@color/String"
+                android:textStyle="bold"
+                android:textSize="18sp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/re_Vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"/>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

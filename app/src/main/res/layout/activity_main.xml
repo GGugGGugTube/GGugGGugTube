@@ -7,22 +7,25 @@
     tools:context=".MainActivity">
 
     <FrameLayout
-        android:id="@+id/frame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_nav"
+        android:id="@+id/main_frame"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/thema"
-        android:padding="10dp"
-        app:itemIconSize="30dp"
-        app:itemBackground="@drawable/ic_rounded_background"
-        app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_bottom_nav" />
+        app:layout_constraintTop_toTopOf="parent">
+    </FrameLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/nav_menu"
+        app:itemBackground="@color/nav_blue"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
