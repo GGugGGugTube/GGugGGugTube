@@ -58,4 +58,9 @@ dependencies {
     // OKHttp for 통신 로그
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
 
+    //bottomnavigation
+    implementation("androidx.navigation:navigation-fragment-ktx:2.4.0")
+    implementation("androidx.navigation:navigation-ui-ktx:2.4.0")
+    implementation("com.google.android.material:material:1.11.0")
+
 }
