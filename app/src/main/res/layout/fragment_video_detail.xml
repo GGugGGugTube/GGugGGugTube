@@ -81,11 +81,11 @@
 
         <Button
             android:id="@+id/btn_like"
-            android:layout_width="wrap_content"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:backgroundTint="@color/white"
-            android:drawableLeft="@drawable/ic_drawable_resize"
+            android:drawableLeft="@drawable/ic_drawable_resizefoot"
             android:text="좋아요"
             android:textColor="@color/String"
             android:textSize="20sp"
@@ -100,6 +100,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:backgroundTint="@color/white"
+            android:drawableLeft="@drawable/ic_drawable_resizeshare"
             android:text="공유하기"
             android:textColor="@color/String"
             android:textSize="20sp"
