@@ -6,21 +6,21 @@
     app:startDestination="@+id/homeFragment">
 
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.example.myapplication.HomeFragment"
-        android:label="HomeFragment"
-        tools:layout="@layout/fragment_home"/>
-
-    <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.myapplication.SearchFragment"
         android:label="SearchFragment"
         tools:layout="@layout/fragment_search"/>
 
     <fragment
-        android:id="@+id/myvideoFragment"
+        android:id="@+id/homeFragment"
+        android:name="com.example.myapplication.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home"/>
+
+    <fragment
+        android:id="@+id/myVideoFragment"
         android:name="com.example.myapplication.MyVideoFragment"
-        android:label="MybideoFragment"
+        android:label="MyVideoFragment"
         tools:layout="@layout/fragment_my_video"/>
 
 </navigation>
