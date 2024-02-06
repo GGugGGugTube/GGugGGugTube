@@ -41,6 +41,7 @@
         app:layout_constraintTop_toBottomOf="@+id/iv_videoimage" />
 
     <TextView
+        android:id="@+id/tv_videoDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="날짜 / 시간"
