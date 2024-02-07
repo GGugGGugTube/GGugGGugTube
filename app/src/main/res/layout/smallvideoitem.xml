@@ -3,50 +3,53 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/BG_Item"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
-    >
+    android:id="@+id/iv_smallVideoItems"
+    android:layout_marginStart="10dp">
+
 
     <ImageView
-        android:id="@+id/iv_videoimage"
-        android:layout_width="match_parent"
-        android:layout_height="230dp"
+        android:id="@+id/iv_smallVideoImage"
+        android:layout_width="180dp"
+        android:layout_height="115dp"
         android:background="@color/BG_Black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:id="@+id/iv_smallVideoLike"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:src="@drawable/icon_foot_line"
-        app:layout_constraintEnd_toEndOf="@+id/iv_videoimage"
-        app:layout_constraintTop_toTopOf="@+id/iv_videoimage" />
+        android:src="@drawable/icon_foot"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iv_smallVideoImage" />
 
     <TextView
-        android:id="@+id/tv_videoName"
+        android:id="@+id/tv_smallVideoName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
         android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="2dp"
         android:text="동영상 이름"
-        android:textSize="18sp"
         android:textColor="@color/white"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_videoimage" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_smallVideoImage" />
 
     <TextView
+        android:id="@+id/tv_smallVideoTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="날짜 / 시간"
-        android:layout_marginTop="5dp"
         android:layout_marginStart="5dp"
         android:layout_marginBottom="5dp"
+        android:text="날짜 / 시간"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_videoName" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_smallVideoName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

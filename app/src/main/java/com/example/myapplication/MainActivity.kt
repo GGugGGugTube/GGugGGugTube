@@ -3,6 +3,7 @@ package com.example.myapplication
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.myapplication.databinding.ActivityMainBinding
+import com.example.myapplication.myvideo.MyVideoFragment
 
 class MainActivity : AppCompatActivity() {
     private var mBinding: ActivityMainBinding? = null
@@ -11,6 +12,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
 
         binding.navMain.setOnItemSelectedListener { item->
             when(item.itemId) {
@@ -28,6 +31,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         setFrag(0)
+        binding.navMain.selectedItemId = R.id.homeFragment
     }
     private fun setFrag(fragNum : Int) : Boolean {
         val ft = supportFragmentManager.beginTransaction()
