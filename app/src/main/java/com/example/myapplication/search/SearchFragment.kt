@@ -1,11 +1,14 @@
-package com.example.myapplication
+package com.example.myapplication.search
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.myapplication.CategoryItem
+import com.example.myapplication.CategoryItemManager
 import com.example.myapplication.databinding.FragmentSearchBinding
 
 
@@ -24,6 +27,14 @@ class SearchFragment : Fragment() {
         binding = FragmentSearchBinding.inflate(layoutInflater, container, false)
 
         itemView()
+
+        binding.tvEdit.setOnClickListener{
+            adapter.itemClick = object : SearchAdapter.ItemClick {
+                override fun onClick(view: View, position: Int) {
+
+                    }
+                }
+            }
 
         return binding.root
     }

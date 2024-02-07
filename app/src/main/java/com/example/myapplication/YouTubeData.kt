@@ -1,12 +1,14 @@
 package com.example.myapplication
 
 data class YoutubeApiResponse(
-    val items: List<YoutubeVideoItem>
-)
+    val items: List<YoutubeVideoItem>,
+
+    )
 
 data class YoutubeVideoItem(
     val id: YoutubeVideoId,
-    val snippet: YoutubeSnippet
+    val snippet: YoutubeSnippet,
+    var liked: Boolean = false
 )
 
 data class YoutubeVideoId(
@@ -16,7 +18,9 @@ data class YoutubeVideoId(
 data class YoutubeSnippet(
     val title: String,
     val description: String,
-    val thumbnails: YoutubeThumbnails
+    val thumbnails: YoutubeThumbnails,
+    val publishedAt: String
+
 )
 
 data class YoutubeThumbnails(

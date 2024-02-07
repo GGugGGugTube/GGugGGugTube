@@ -1,10 +1,11 @@
-package com.example.myapplication
+package com.example.myapplication.search
 
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.CategoryItem
 import com.example.myapplication.databinding.SearchRecyclerviewItemBinding
 
 class SearchAdapter(val mItem: List<CategoryItem>): RecyclerView.Adapter<SearchAdapter.SearchItemHolder>() {
@@ -16,7 +17,7 @@ class SearchAdapter(val mItem: List<CategoryItem>): RecyclerView.Adapter<SearchA
     var itemClick : ItemClick? = null
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchAdapter.SearchItemHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchItemHolder {
         val binding = SearchRecyclerviewItemBinding.inflate(LayoutInflater.from(parent.context),parent, false)
         Log.d("MyAdapter", "onCreateViewHolder()")
         return SearchItemHolder(binding)
