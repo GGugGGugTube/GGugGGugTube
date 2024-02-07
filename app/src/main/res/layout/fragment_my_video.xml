@@ -180,7 +180,7 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_myLikeVideo"
-                tools:listitem="@layout/longscaleshortsitem" />
+                tools:listitem="@layout/long_scale_shorts_item" />
 
             <ImageView
                 android:id="@+id/iv_mvLine2"
@@ -227,7 +227,7 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_myWatchList"
-                tools:listitem="@layout/smallvideoitem" />
+                tools:listitem="@layout/small_video_item" />
 
 
             <ImageView
@@ -273,7 +273,7 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_myWatchList2"
-                tools:listitem="@layout/shortsitem" />
+                tools:listitem="@layout/shorts_item" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
