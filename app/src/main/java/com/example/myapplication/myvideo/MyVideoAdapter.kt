@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.DateUtils.getDateFromTimestampWithFormat
-import com.example.myapplication.VIEW_TYPE_LONG_SCALE_SHORTS
-import com.example.myapplication.VIEW_TYPE_SMALL_VIDEO
+
+import com.example.myapplication.YouTubeVieType
 import com.example.myapplication.YoutubeVideo
-import com.example.myapplication.databinding.LongscaleshortsitemBinding
-import com.example.myapplication.databinding.SmallvideoitemBinding
+import com.example.myapplication.databinding.LongScaleShortsItemBinding
+import com.example.myapplication.databinding.SmallVideoItemBinding
 
 class MyVideoAdapter(private val mContext: Context) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -22,21 +22,21 @@ class MyVideoAdapter(private val mContext: Context) :
 
 
         return if (items[position].isShorts) {
-            VIEW_TYPE_LONG_SCALE_SHORTS
-        } else VIEW_TYPE_SMALL_VIDEO
+            YouTubeVieType.VIEW_TYPE_LONG_SCALE_SHORTS.ordinal
+        } else  YouTubeVieType.VIEW_TYPE_LONG_SCALE_SHORTS.ordinal
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(mContext)
         return when (viewType) {
-            VIEW_TYPE_SMALL_VIDEO -> {
-                val binding = SmallvideoitemBinding.inflate(inflater, parent, false)
+            YouTubeVieType.VIEW_TYPE_SMALL_VIDEO.ordinal -> {
+                val binding = SmallVideoItemBinding.inflate(inflater, parent, false)
                 SmallVideoViewHolder(binding)
             }
 
 
-            VIEW_TYPE_LONG_SCALE_SHORTS -> {
-                val binding = LongscaleshortsitemBinding.inflate(inflater, parent, false)
+            YouTubeVieType.VIEW_TYPE_LONG_SCALE_SHORTS.ordinal -> {
+                val binding = LongScaleShortsItemBinding.inflate(inflater, parent, false)
                 LongScaleShortsViewHolder(binding)
             }
 
@@ -63,7 +63,7 @@ class MyVideoAdapter(private val mContext: Context) :
         return items.size
     }
 
-    inner class SmallVideoViewHolder(private val binding: SmallvideoitemBinding) :
+    inner class SmallVideoViewHolder(private val binding: SmallVideoItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: YoutubeVideo) {
             // 썸네일 이미지 로드
@@ -93,7 +93,7 @@ class MyVideoAdapter(private val mContext: Context) :
         }
     }
 
-    inner class LongScaleShortsViewHolder(private val binding: LongscaleshortsitemBinding) :
+    inner class LongScaleShortsViewHolder(private val binding: LongScaleShortsItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: YoutubeVideo) {
             // 기존의 onBindViewHolder 내용과 좋아요 아이콘 관련 로직을 여기에 추가

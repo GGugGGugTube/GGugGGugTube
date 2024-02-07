@@ -125,7 +125,7 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_moreRemain"
-                tools:listitem="@layout/smallvideoitem" />
+                tools:listitem="@layout/small_video_item" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/re_moreListDog"
@@ -135,7 +135,7 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_moreDog"
-                tools:listitem="@layout/smallvideoitem" />
+                tools:listitem="@layout/small_video_item" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/re_moreListCat"
@@ -145,7 +145,7 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_moreCat"
-                tools:listitem="@layout/smallvideoitem" />
+                tools:listitem="@layout/small_video_item" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

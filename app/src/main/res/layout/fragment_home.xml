@@ -64,7 +64,7 @@
                 android:layout_marginTop="10dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_recommendation"
-                tools:listitem="@layout/shortsitem"
+                tools:listitem="@layout/shorts_item"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
