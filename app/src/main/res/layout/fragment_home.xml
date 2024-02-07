@@ -9,33 +9,26 @@
     tools:context=".HomeFragment">
 
     <ImageView
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:src="@drawable/icon_foot"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_title"
-        app:layout_constraintEnd_toStartOf="@+id/tv_title"
-        app:layout_constraintTop_toTopOf="@+id/tv_title" />
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/icon_ggug"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="GGuqGGuqTube"
+        android:layout_marginTop="20dp"
+        android:text="GGugGGugTube"
         android:textColor="@color/String"
-        android:textSize="24sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:src="@drawable/icon_foot"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_title"
-        app:layout_constraintStart_toEndOf="@+id/tv_title"
-        app:layout_constraintTop_toTopOf="@+id/tv_title" />
 
     <ImageView
         android:id="@+id/iv_line"
@@ -47,116 +40,40 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_line">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="80dp"
-                        android:layout_height="35dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="6dp"
-                        android:background="@drawable/shape"
-                        android:gravity="center"
-                        android:text="강아지" />
-
-                    <TextView
-                        android:layout_width="80dp"
-                        android:layout_height="35dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="6dp"
-                        android:background="@drawable/shape"
-                        android:gravity="center"
-                        android:text="고양이" />
-
-                    <TextView
-                        android:layout_width="80dp"
-                        android:layout_height="35dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="6dp"
-                        android:background="@drawable/shape"
-                        android:gravity="center"
-                        android:text="앵무새" />
-
-                    <TextView
-                        android:layout_width="80dp"
-                        android:layout_height="35dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="6dp"
-                        android:background="@drawable/shape"
-                        android:gravity="center"
-                        android:text="코끼리" />
-
-                    <TextView
-                        android:layout_width="80dp"
-                        android:layout_height="35dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="6dp"
-                        android:background="@drawable/shape"
-                        android:gravity="center"
-                        android:text="햄스터" />
-
-                    <TextView
-                        android:layout_width="80dp"
-                        android:layout_height="35dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="6dp"
-                        android:background="@drawable/shape"
-                        android:gravity="center"
-                        android:text="토끼" />
-
-                </LinearLayout>
-
-
-            </HorizontalScrollView>
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/iv_line">
 
             <TextView
-                android:id="@+id/tv_recommendation"
+                android:id="@+id/tv_bestShorts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="15dp"
-                android:text="추천 영상"
+                android:text="인기 동물 Shorts"
                 android:textColor="@color/String"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/re_Horizon"
+                android:id="@+id/re_bestShorts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_recommendation" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_recommendation"
+                tools:listitem="@layout/shorts_item"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:layout_marginStart="10dp"
-                android:text="Shorts"
+                android:text="인기 동물 동영상"
                 android:textColor="@color/String"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -167,27 +84,11 @@
                 android:id="@+id/re_shorts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:layout_marginStart="10dp"
-                android:text="전체"
-                android:textColor="@color/String"
-                android:textStyle="bold"
-                android:textSize="18sp"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/re_Vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"/>
-
+                tools:listitem="@layout/videoitem"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
         </LinearLayout>
-    </ScrollView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
