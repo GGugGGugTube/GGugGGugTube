@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.DateUtils.getDateFromTimestampWithFormat
 
-import com.example.myapplication.YouTubeVieType
+import com.example.myapplication.YouTubeViewType
 import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.databinding.LongScaleShortsItemBinding
 import com.example.myapplication.databinding.SmallVideoItemBinding
@@ -22,20 +22,20 @@ class MyVideoAdapter(private val mContext: Context) :
 
 
         return if (items[position].isShorts) {
-            YouTubeVieType.VIEW_TYPE_LONG_SCALE_SHORTS.ordinal
-        } else  YouTubeVieType.VIEW_TYPE_LONG_SCALE_SHORTS.ordinal
+            YouTubeViewType.VIEW_TYPE_LONG_SCALE_SHORTS.ordinal
+        } else  YouTubeViewType.VIEW_TYPE_LONG_SCALE_SHORTS.ordinal
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(mContext)
         return when (viewType) {
-            YouTubeVieType.VIEW_TYPE_SMALL_VIDEO.ordinal -> {
+            YouTubeViewType.VIEW_TYPE_SMALL_VIDEO.ordinal -> {
                 val binding = SmallVideoItemBinding.inflate(inflater, parent, false)
                 SmallVideoViewHolder(binding)
             }
 
 
-            YouTubeVieType.VIEW_TYPE_LONG_SCALE_SHORTS.ordinal -> {
+            YouTubeViewType.VIEW_TYPE_LONG_SCALE_SHORTS.ordinal -> {
                 val binding = LongScaleShortsItemBinding.inflate(inflater, parent, false)
                 LongScaleShortsViewHolder(binding)
             }
