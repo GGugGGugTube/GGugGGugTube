@@ -15,11 +15,11 @@
         android:id="@+id/homeFragment"
         android:name="com.example.myapplication.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home"/>
+        tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/myVideoFragment"
-        android:name="com.example.myapplication.MyVideoFragment"
+        android:name="com.example.myapplication.myvideo.MyVideoFragment"
         android:label="MyVideoFragment"
         tools:layout="@layout/fragment_my_video"/>
 
