@@ -27,7 +27,8 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        setFrag(0)
+//        setFrag(0)
+        binding.navMain.selectedItemId = R.id.homeFragment
     }
     private fun setFrag(fragNum : Int) : Boolean {
         val ft = supportFragmentManager.beginTransaction()
