@@ -1,5 +1,3 @@
-import com.android.build.api.dsl.ViewBinding
-
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -17,6 +15,18 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    packagingOptions {
+        exclude ("META-INF/DEPENDENCIES")
+        exclude ("META-INF/LICENSE")
+        exclude ("META-INF/LICENSE.txt")
+        exclude ("META-INF/license.txt")
+        exclude ("META-INF/NOTICE")
+        exclude ("META-INF/NOTICE.txt")
+        exclude ("META-INF/INDEX.LIST")
+        exclude ("META-INF/notice.txt")
+        exclude ("META-INF/ASL2.0")
     }
 
     buildTypes {
@@ -43,14 +53,16 @@ android {
 }
 
 dependencies {
-
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("com.google.android.gms:play-services-base:18.3.0")
+    //test
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     // Gson Converter
@@ -58,4 +70,11 @@ dependencies {
     // OKHttp for 통신 로그
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
 
+    // Youtube api
+    implementation ("com.google.apis:google-api-services-youtube:v3-rev183-1.22.0")
+    implementation ("com.google.http-client:google-http-client-android:+")
+    implementation ("com.google.api-client:google-api-client-android:1.30.5")
+    implementation ("com.google.api-client:google-api-client-gson:1.30.5")
+    implementation ("pub.devrel:easypermissions:3.0.0")
+    implementation("androidx.profileinstaller:profileinstaller:1.3.1")
 }
