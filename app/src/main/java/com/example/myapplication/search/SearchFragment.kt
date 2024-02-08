@@ -1,5 +1,7 @@
 package com.example.myapplication.search
 
+import android.adservices.adselection.RemoveAdSelectionOverrideRequest
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myapplication.CategoryItemManager
+import com.example.myapplication.CategoryItemManager.Companion.getItem
+import com.example.myapplication.CtItem
 import com.example.myapplication.databinding.FragmentSearchBinding
 
 
@@ -17,31 +21,48 @@ class SearchFragment : Fragment() {
     private lateinit var gridManager: GridLayoutManager
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?, ): View? {
         binding = FragmentSearchBinding.inflate(layoutInflater, container, false)
 
         itemView()
 
         binding.tvEdit.setOnClickListener{
-            adapter.itemClick = object : SearchAdapter.ItemClick {
+            adapter.animalClick = object : SearchAdapter.AnimalClick {
                 override fun onClick(view: View, position: Int) {
-
+//                    val ad = AlertDialog.Builder(context)
+//                    ad.setTitle("삭제")
+//                    ad.setMessage("정말 삭제하시겠습니까?")
+//                    ad.setPositiveButton("확인") { dialog, _ ->
+//                        CtItem.CategoryItem.removeAt(position)
+//                        adapter.notifyItemRemoved(position)
+//                    }
+//                    ad.setNegativeButton("취소"){dialog, _->
+//                        dialog.dismiss()
+//                        }
                     }
                 }
             }
 
+        adapter.plusClick = object : SearchAdapter.PlusClick{
+            override fun onClick(view: View, position: Int) {
+
+            }
+        }
+
+
         return binding.root
     }
+
     private fun itemView() {
-        val categoryItem = CategoryItemManager.getItem().sortedBy { it.Id }
-        adapter = SearchAdapter(categoryItem)
+
+        adapter = SearchAdapter(getItem())
         binding.reSearch.adapter = adapter
         gridManager = GridLayoutManager(context, 3)
         binding.reSearch.layoutManager = gridManager
+
+
     }
+
+
 
 }
