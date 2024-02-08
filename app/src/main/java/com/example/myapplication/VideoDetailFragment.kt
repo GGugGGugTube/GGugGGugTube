@@ -27,19 +27,26 @@ class VideoDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding?.btnLike?.setOnClickListener {  }
+//        binding?.btnLike?.setOnClickListener {
+//            val drawable = {
+//                if(isLike) context?.let { ContextCompat.getDrawable(it, R.drawable.ic_drawable_resizefoot) }
+//                else context?.let { ContextCompat.getDrawable(it, R.drawable.ic_drawable_resizefoot_blank) }
+//            }
+//
+//            button.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+//        }
 
-        binding?.btnShare?.setOnClickListener {
-            val intent = Intent(Intent.ACTION_SEND).apply{
-                type = "text/plane"
-                putExtra(Intent.EXTRA_TEXT, url)
-            }
-            startActivity(Intent.createChooser(intent, url))
-        }
+//        binding?.btnShare?.setOnClickListener {
+//            val intent = Intent(Intent.ACTION_SEND).apply{
+//                type = "text/plane"
+//                putExtra(Intent.EXTRA_TEXT, url)
+//            }
+//            startActivity(Intent.createChooser(intent, url))
+//        }
     }
 
     //추후에 Parcelize 되면 추가
-    companion object{
+//    companion object{
 //        fun newInstance() {
 //            VideoDetailFragment().apply {
 //                arguments = Bundle().apply {
@@ -47,5 +54,5 @@ class VideoDetailFragment : Fragment() {
 //                }
 //            }
 //        }
-    }
+//    }
 }
