@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".myvideo.MyVideoFragment"
+    android:background="@color/BG_color">
+
+    <FrameLayout
+        android:id="@+id/main_frame"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/icon_ggug"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="GGugGGugTube"
+        android:textColor="@color/String"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/iv_mvLine"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/setting"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@color/BG_color"
+        app:layout_constraintBottom_toTopOf="@+id/nav_main"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_mvLine"
+        tools:context=".myvideo.MyVideoFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/myCon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_mvLine">
+
+            <ImageView
+                android:id="@+id/ig_myImage"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/imagecircle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/linear"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:duplicateParentState="true"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@+id/ig_myImage"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ig_myImage"
+                app:layout_constraintTop_toTopOf="@+id/ig_myImage">
+
+                <TextView
+                    android:id="@+id/tv_myName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="4dp"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:lineSpacingExtra="5sp"
+                    android:maxLines="1"
+                    android:text="hyunparrot"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="1dp"
+                    android:gravity="center_vertical"
+                    android:lineSpacingExtra="5sp"
+                    android:text="xxxx@gmail.com"
+                    android:textColor="#7790D9"
+                    android:textSize="13sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/tv_datetime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="1dp"
+                    android:gravity="center_vertical"
+                    android:lineSpacingExtra="5sp"
+                    android:text="2023/02/05"
+                    android:textColor="#7790D9"
+                    android:textSize="13sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_myLikeVideo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="좋아요 표시한 영상"
+                android:textColor="@color/String"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/iv_mvLine2"
+                app:layout_constraintTop_toBottomOf="@+id/ig_myImage" />
+
+            <TextView
+                android:id="@+id/tv_moreVideo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="더보기"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_myLikeVideo"
+                app:layout_constraintEnd_toEndOf="@+id/iv_mvLine2" />
+
+
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="100dp"-->
+<!--                android:text="더보기"-->
+<!--                tools:layout_editor_absoluteX="155dp"-->
+<!--                tools:layout_editor_absoluteY="85dp" />-->
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/re_myLikeList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_myLikeVideo"
+                tools:listitem="@layout/long_scale_shorts_item" />
+
+            <ImageView
+                android:id="@+id/iv_mvLine2"
+                android:layout_width="380dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/re_myLikeList" />
+
+            <TextView
+                android:id="@+id/tv_myWatchList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="시청 기록"
+                android:textColor="@color/String"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/iv_mvLine2"
+                app:layout_constraintTop_toBottomOf="@+id/iv_mvLine2" />
+
+
+            <TextView
+                android:id="@+id/tv_allDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="전체 삭제"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_myWatchList"
+                app:layout_constraintEnd_toEndOf="@+id/iv_mvLine2"
+                app:layout_constraintTop_toTopOf="@+id/tv_myWatchList" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/re_myWatchList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_myWatchList"
+                tools:listitem="@layout/small_video_item" />
+
+
+            <ImageView
+                android:id="@+id/iv_mvLine3"
+                android:layout_width="380dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/re_myWatchList" />
+
+            <TextView
+                android:id="@+id/tv_myWatchList2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="시청 기록 shorts"
+                android:textColor="@color/String"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/iv_mvLine3"
+                app:layout_constraintTop_toBottomOf="@+id/iv_mvLine3" />
+
+            <TextView
+                android:id="@+id/tv_allDelete2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="전체 삭제"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/iv_mvLine3"
+                app:layout_constraintTop_toBottomOf="@+id/iv_mvLine3" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/re_myShortsWatchList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_myWatchList2"
+                tools:listitem="@layout/shorts_item" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:itemBackground="@color/nav_blue"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/nav_menu" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

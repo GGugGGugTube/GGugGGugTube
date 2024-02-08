@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".showMoreFragment"
+    android:background="@color/BG_color">
+
+
+    <TextView
+        android:id="@+id/tv_moreTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="좋아요 표시한 영상"
+        android:textColor="@color/String"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:src="@drawable/back"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_moreTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_moreTitle" />
+
+    <ImageView
+        android:id="@+id/iv_mvLine"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_moreTitle" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/BG_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_mvLine"
+        tools:context=".myvideo.MyVideoFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/myCon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_mvLine">
+
+
+            <ImageView
+                android:id="@+id/iv_mvLine4"
+                android:layout_width="380dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/re_moreListRemain" />
+
+            <ImageView
+                android:id="@+id/iv_mvLine5"
+                android:layout_width="380dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/re_moreListDog" />
+
+            <TextView
+                android:id="@+id/tv_moreRemain"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:gravity="center"
+                android:text="꾹꾹"
+                android:textColor="@color/String"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_moreDog"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:gravity="center"
+                android:text="강아지"
+                android:textColor="@color/String"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_mvLine4" />
+
+            <TextView
+                android:id="@+id/tv_moreCat"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:gravity="center"
+                android:text="고양이"
+                android:textColor="@color/String"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_mvLine5" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/re_moreListRemain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_moreRemain"
+                tools:listitem="@layout/small_video_item" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/re_moreListDog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_moreDog"
+                tools:listitem="@layout/small_video_item" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/re_moreListCat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_moreCat"
+                tools:listitem="@layout/small_video_item" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
