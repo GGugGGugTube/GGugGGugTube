@@ -3,6 +3,7 @@ import com.android.build.api.dsl.ViewBinding
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -84,4 +85,8 @@ dependencies {
     implementation ("com.google.api-client:google-api-client-gson:1.30.5")
     implementation ("pub.devrel:easypermissions:3.0.0")
     implementation("androidx.profileinstaller:profileinstaller:1.3.1")
+
+    //스플래시
+    implementation ("com.airbnb.android:lottie:6.0.0")
+
 }

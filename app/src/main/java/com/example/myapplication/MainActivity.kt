@@ -3,7 +3,9 @@ package com.example.myapplication
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.myapplication.databinding.ActivityMainBinding
+import com.example.myapplication.home.HomeFragment
 import com.example.myapplication.myvideo.MyVideoFragment
+import com.example.myapplication.search.SearchFragment
 
 class MainActivity : AppCompatActivity() {
     private var mBinding: ActivityMainBinding? = null
@@ -30,7 +32,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        setFrag(0)
         binding.navMain.selectedItemId = R.id.homeFragment
     }
     private fun setFrag(fragNum : Int) : Boolean {
