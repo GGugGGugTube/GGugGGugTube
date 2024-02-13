@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/BG_color"
-    tools:context=".HomeFragment">
+    tools:context=".home.HomeFragment">
 
     <ImageView
         android:layout_width="60dp"
@@ -47,7 +47,7 @@
             app:layout_constraintTop_toBottomOf="@+id/iv_line">
 
             <TextView
-                android:id="@+id/tv_bestShorts"
+                android:id="@+id/tv_home_bestShorts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -58,7 +58,7 @@
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/re_bestShorts"
+                android:id="@+id/re_home_bestShorts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -82,7 +82,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/re_Horizon" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/re_shorts"
+                android:id="@+id/re_home_video"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"

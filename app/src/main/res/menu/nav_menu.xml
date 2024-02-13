@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/searchFragment"
-        android:icon="@drawable/icon_search"
+        android:icon="@drawable/search_selector"
         android:title="검색"/>
 
     <item
         android:id="@+id/homeFragment"
-        android:icon="@drawable/icon_home"
+        android:icon="@drawable/home_selector"
         android:title="홈"/>
 
     <item
         android:id="@+id/myvideoFragment"
-        android:icon="@drawable/icon_mypage"
+        android:icon="@drawable/mypage_selector"
         android:title="마이페이지"/>
 
 </menu>
