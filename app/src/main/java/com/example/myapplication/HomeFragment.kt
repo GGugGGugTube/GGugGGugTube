@@ -57,3 +57,61 @@ class HomeFragment : Fragment() {
             }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 동물 추가 버튼 클릭 시 다이얼로그 표시
+//binding.btnAddAnimal.setOnClickListener {
+//    showAddAnimalDialog()
+//}
+//
+//// 동물 추가 다이얼로그 표시 메서드
+//private fun showAddAnimalDialog() {
+//    val builder = AlertDialog.Builder(requireContext())
+//    val inflater = layoutInflater
+//    val dialogView = inflater.inflate(R.layout.dialog_add_animal, null)
+//    builder.setView(dialogView)
+//        .setTitle("Add Animal")
+//        .setPositiveButton("Confirm") { dialogInterface, _ ->
+//            val etAnimalName = dialogView.findViewById<EditText>(R.id.etAnimalName)
+//            val animalName = etAnimalName.text.toString()
+//            // 설정된 동물 이름을 받아옴
+//            addAnimalToOthers(animalName)
+//            dialogInterface.dismiss()
+//        }
+//        .setNegativeButton("Cancel") { dialogInterface, _ ->
+//            dialogInterface.dismiss()
+//        }
+//    dialog = builder.create()
+//    dialog.show()
+//}
