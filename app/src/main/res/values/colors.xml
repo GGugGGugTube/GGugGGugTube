@@ -9,4 +9,5 @@
     <color name="BG_Item">#A7BAF2</color>
     <color name="BG_Black">#202427</color>
     <color name="nav_blue">#7790D9</color>
+    <color name="click_pink">#FFD1D1</color>
 </resources>

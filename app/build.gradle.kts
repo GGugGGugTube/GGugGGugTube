@@ -67,4 +67,7 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
     implementation("com.google.android.material:material:1.11.0")
 
+    //스플래시
+    implementation ("com.airbnb.android:lottie:6.0.0")
+
 }

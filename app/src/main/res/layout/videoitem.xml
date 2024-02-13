@@ -18,6 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:id="@+id/iv_video_like"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:src="@drawable/icon_foot_line"
@@ -38,7 +39,7 @@
         app:layout_constraintTop_toBottomOf="@+id/iv_videoimage" />
 
     <TextView
-        android:id="@+id/tv_videoDate"
+        android:id="@+id/tv_VideoTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="날짜 / 시간"
