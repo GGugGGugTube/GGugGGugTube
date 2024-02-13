@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myapplication.CategoryItemManager
 import com.example.myapplication.CategoryItemManager.Companion.getItem
 import com.example.myapplication.CtItem
+import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentSearchBinding
 
 
@@ -28,7 +29,7 @@ class SearchFragment : Fragment() {
 
         binding.tvEdit.setOnClickListener{
             adapter.animalClick = object : SearchAdapter.AnimalClick {
-                override fun onClick(view: View, position: Int) {
+                override fun onClick(item: CtItem, position: Int) {
 //                    val ad = AlertDialog.Builder(context)
 //                    ad.setTitle("삭제")
 //                    ad.setMessage("정말 삭제하시겠습니까?")
@@ -51,6 +52,22 @@ class SearchFragment : Fragment() {
 
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        with(binding) {
+            adapter.animalClick = object : SearchAdapter.AnimalClick {
+                override fun onClick(item: CtItem, position: Int) {
+                    val resultFragment = SearchResultFragment.newInstance(item)
+                    requireActivity().supportFragmentManager.beginTransaction().apply {
+                        replace(R.id.main_frame, resultFragment)
+                        setReorderingAllowed(true)
+                        addToBackStack("")
+                    }.commit()
+                }
+            }
+        }
     }
 
     private fun itemView() {

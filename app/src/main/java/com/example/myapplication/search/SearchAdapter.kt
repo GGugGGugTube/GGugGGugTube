@@ -20,7 +20,7 @@ class SearchAdapter(val mItem: List<CtItem>): RecyclerView.Adapter<ViewHolder>()
     }
 
     interface AnimalClick{
-        fun onClick(view: View, position: Int)
+        fun onClick(item: CtItem, position: Int)
     }
 
     interface PlusClick{
@@ -53,7 +53,7 @@ class SearchAdapter(val mItem: List<CtItem>): RecyclerView.Adapter<ViewHolder>()
                 holder.animalName.text = item.animalName
 
                 holder.itemView.setOnClickListener{//클릭 이벤트 추가 부분
-                    animalClick?.onClick(it, position)
+                    animalClick?.onClick(item, position)
                 }
             }
             is CtItem.CategoryPlus -> {

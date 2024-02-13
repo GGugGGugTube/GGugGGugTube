@@ -27,6 +27,14 @@ class VideoDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // 비디오 정보 받아오기
+//        videoInfo = arguments?.getParcelable(Key.EXTRA_VIDEO)
+//        binding?.tvDetailTitle?.text = videoInfo?.ds
+//        binding?.imgDetailVideo?.setImageURI(videoInfo?.)
+//        binding?.tvNameDetail?.text = videoInfo?.
+//        binding?.tvDateDetail?.text = videoInfo?.
+//        binding?.tvViewcountDetail?.text = videoInfo?.
+
 //        binding?.btnLike?.setOnClickListener {
 //            val drawable = {
 //                if(isLike) context?.let { ContextCompat.getDrawable(it, R.drawable.ic_drawable_resizefoot) }
@@ -50,7 +58,7 @@ class VideoDetailFragment : Fragment() {
 //        fun newInstance() {
 //            VideoDetailFragment().apply {
 //                arguments = Bundle().apply {
-//                    putParcelable(Key.EXTRA_USER, )
+//                    putParcelable(Key.EXTRA_VIDEO, )
 //                }
 //            }
 //        }
