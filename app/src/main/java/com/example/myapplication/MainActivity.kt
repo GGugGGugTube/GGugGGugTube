@@ -1,7 +1,8 @@
 package com.example.myapplication
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.home.HomeFragment
 import com.example.myapplication.myvideo.MyVideoFragment
@@ -50,5 +51,10 @@ class MainActivity : AppCompatActivity() {
 
         }
         return true
+    }
+
+    fun hideBottomNavigation (state:Boolean) {
+        if(state) binding.navMain.visibility = View.GONE
+        else binding.navMain.visibility= View.VISIBLE
     }
 }

@@ -1,14 +1,11 @@
 package com.example.myapplication.search
 
-import android.adservices.adselection.RemoveAdSelectionOverrideRequest
-import android.app.AlertDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.myapplication.CategoryItemManager
 import com.example.myapplication.CategoryItemManager.Companion.getItem
 import com.example.myapplication.CtItem
 import com.example.myapplication.R
@@ -66,7 +63,7 @@ class SearchFragment : Fragment() {
                     requireActivity().supportFragmentManager.beginTransaction().apply {
                         replace(R.id.main_frame, resultFragment)
                         setReorderingAllowed(true)
-                        addToBackStack("")
+                        addToBackStack(null)
                     }.commit()
                 }
             }
