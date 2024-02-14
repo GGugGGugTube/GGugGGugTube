@@ -18,7 +18,7 @@ class ShowMoreAdapter(private val mContext: Context) :
     override fun getItemViewType(position: Int): Int {
         return if (items[position].isShorts) {
             YouTubeViewType.VIEW_TYPE_LONG_SCALE_SHORTS.ordinal
-        } else YouTubeViewType.VIEW_TYPE_LONG_SCALE_SHORTS.ordinal
+        } else YouTubeViewType.VIEW_TYPE_SMALL_VIDEO.ordinal
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

@@ -9,7 +9,10 @@ object OnHeartClickedListener {
         val likedVideos = LikedUtils.getLikedVideos().toMutableList()
         Log.d(TAG, "before_likedVideos.size = ${likedVideos.size}")
 
-        if (youtubeVideo.isLiked) likedVideos.add(youtubeVideo)
+        if (youtubeVideo.isLiked) {
+            if (!likedVideos.contains(youtubeVideo)) likedVideos.add(youtubeVideo)
+        }
+
         else likedVideos.remove(youtubeVideo)
 
         LikedUtils.saveLikedVideos(likedVideos)
