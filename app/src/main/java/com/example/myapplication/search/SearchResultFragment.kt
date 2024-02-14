@@ -77,14 +77,6 @@ class SearchResultFragment : Fragment() {
 
     }
 
-    // 뒤로가기 누를 시 Bottom Navigation 살리기
-    override fun onDestroyView() {
-        super.onDestroyView()
-
-        val mainActivity = activity as MainActivity
-        mainActivity.hideBottomNavigation(false)
-    }
-
     // 동물 카테고리를 클릭하면 그 동물의 이름 가져다오기
     private fun initAnimal() {
         animalData.animalName.run {
@@ -171,6 +163,8 @@ class SearchResultFragment : Fragment() {
 
     private fun endSearchResultFragment() {
         requireActivity().supportFragmentManager.popBackStack()
+        val mainActivity = activity as MainActivity
+        mainActivity.hideBottomNavigation(false)
     }
 
     private fun fetchYoutubeResult(query: String) = lifecycleScope.launch {
