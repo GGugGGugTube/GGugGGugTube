@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.Constants
@@ -17,14 +18,21 @@ import com.example.myapplication.naverdictionary.NaverRetrofit
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.IllegalArgumentException
 
 
 class SearchResultFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchResultBinding
     private lateinit var mContext: Context
+
     private lateinit var dictionaryAdapter: DictionaryAdapter
-    private var animalData: CtItem.CategoryItem? = null
+
+    private val animalData: CtItem.CategoryItem
+        get() = requireArguments().getParcelable<CtItem>(ARG_ANIMAL) as CtItem.CategoryItem
+            ?: throw IllegalArgumentException("Argument %{ARG_ANIMAL} required")
+
+
     var resItem: ArrayList<NaverModel> = ArrayList()
 
     override fun onAttach(context: Context) {
@@ -32,15 +40,12 @@ class SearchResultFragment : Fragment() {
         mContext = context
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSearchResultBinding.inflate(inflater, container, false)
+
         initAnimal()
         initDictionary(inflater, container)
         initViewPagerButton()
@@ -51,24 +56,28 @@ class SearchResultFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initBackButton()
     }
 
     private fun initAnimal() {
-        animalData = arguments?.getParcelable<CtItem>("EXTRA_ANIMAL") as CtItem.CategoryItem?
-        binding.tvAnimal?.text = animalData?.animalName
-
-        val animal = binding.tvAnimal.text.toString()
-        fenchNaverResult(animal)
+        animalData.animalName.run{
+            binding.tvAnimal.text = this
+            fetchNaverResult(this)
+        }
     }
 
-    private fun fenchNaverResult(query: String) {
-        NaverRetrofit.naverApiService.naverDic(Constants.NAVER_CLIENT_ID, Constants.NAVER_CLIENT_SECRET, query)
-            ?.enqueue(object: Callback<NaverData> {
+    private fun fetchNaverResult(query: String) {
+        NaverRetrofit.naverApiService.naverDic(
+            Constants.NAVER_CLIENT_ID,
+            Constants.NAVER_CLIENT_SECRET,
+            query
+        )
+            ?.enqueue(object : Callback<NaverData> {
                 override fun onResponse(call: Call<NaverData>, response: Response<NaverData>) {
                     val body = response.body()
 
                     body?.let {
-                        response.body()!!.items.forEach{ item ->
+                        response.body()!!.items.forEach { item ->
                             val title = item.title
                             val description = item.description
                             val url = item.thumbnail
@@ -88,7 +97,7 @@ class SearchResultFragment : Fragment() {
     }
 
     private fun initDictionary(inflater: LayoutInflater, container: ViewGroup?) {
-        with(binding){
+        with(binding) {
             dictionaryAdapter = DictionaryAdapter(mContext)
             searchDictionary.adapter = dictionaryAdapter
             searchDictionary.orientation = ViewPager2.ORIENTATION_HORIZONTAL
@@ -116,14 +125,26 @@ class SearchResultFragment : Fragment() {
             }
         }
     }
+    private fun initBackButton(){
+        binding.imgSearchBack.setOnClickListener {
+            endSearchResultFragment()
+        }
+        requireActivity().onBackPressedDispatcher.addCallback {
+            endSearchResultFragment()
+        }
+    }
+
+    private fun endSearchResultFragment(){
+        requireActivity().supportFragmentManager.popBackStack()
+    }
 
     companion object {
-
+        private const val ARG_ANIMAL = "argAnimal"
         @JvmStatic
         fun newInstance(ctItem: CtItem) =
             SearchResultFragment().apply {
                 arguments = Bundle().apply {
-                    putParcelable("EXTRA_ANIMAL", ctItem)
+                    putParcelable(ARG_ANIMAL, ctItem)
                 }
             }
     }

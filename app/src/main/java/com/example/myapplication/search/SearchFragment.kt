@@ -14,13 +14,11 @@ import com.example.myapplication.CtItem
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentSearchBinding
 
-
 class SearchFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchBinding
     private lateinit var adapter: SearchAdapter
     private lateinit var gridManager: GridLayoutManager
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
