@@ -23,4 +23,15 @@
         android:label="MyVideoFragment"
         tools:layout="@layout/fragment_my_video"/>
 
+    <fragment
+        android:id="@+id/showMoreFragment"
+        android:name="com.example.myapplication.showmore.ShowMoreFragment"
+        android:label="ShowMoreFragment"
+        tools:layout="@layout/fragment_show_more"/>
+
+
+    <action
+        android:id="@+id/action_MyVideoFragment_to_ShowMoreFragment"
+        app:destination="@id/showMoreFragment" />
+
 </navigation>

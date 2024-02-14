@@ -6,10 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.GridLayout
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.databinding.FragmentHomeBinding
+import com.example.myapplication.youtubeApi.YoutubeNetworkClient.youtubeNetWork
+import kotlinx.coroutines.launch
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+
 
 class HomeFragment : Fragment() {
 
@@ -36,12 +40,37 @@ class HomeFragment : Fragment() {
         shortsadapter = HomeShortsAdapter(mContext)
         binding.reHomeBestShorts.adapter = shortsadapter
         binding.reHomeBestShorts.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        //아이템 깜빡임 방지
+        binding.reHomeBestShorts.itemAnimator = null
     }
 
     private fun videoView(){
         videoadapter = HomeVideoAdapter(mContext)
         binding.reHomeVideo.adapter = videoadapter
         binding.reHomeVideo.layoutManager = LinearLayoutManager(context)
+        //아이템 깜빡임 방지
+        binding.reHomeVideo.itemAnimator = null
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        lifecycleScope.launch{
+            youtubeNetWork.getMostPopularPetAndAnimals()
+        }
+    }
+
+    private suspend fun getVideoList(){
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://www.googleapis.com/youtube/v3/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        retrofit.create(youtubeNetWork::class.java).also {
+            it.getMostPopularPetAndAnimals("snippet", "mostPopular", "ko", 25, "kr", "15")
+
+        }
+    }
+
 
 }

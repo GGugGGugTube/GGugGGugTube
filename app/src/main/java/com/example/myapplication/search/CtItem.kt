@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.search
 
 sealed class CtItem{
     data class CategoryItem(var Id: Int, var animalIcon: Int, var animalName: String ): CtItem()

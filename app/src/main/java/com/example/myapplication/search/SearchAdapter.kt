@@ -1,14 +1,10 @@
 package com.example.myapplication.search
 
-import android.media.RouteListingPreference.Item
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.example.myapplication.CategoryItemManager
-import com.example.myapplication.CtItem
-import com.example.myapplication.databinding.FragmentSearchBinding
 import com.example.myapplication.databinding.SearchRecyclerviewItemBinding
 
 class SearchAdapter(var mItem: List<CtItem>): RecyclerView.Adapter<ViewHolder>() {

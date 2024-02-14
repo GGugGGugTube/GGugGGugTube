@@ -10,11 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.myapplication.CategoryItemManager
-import com.example.myapplication.CategoryItemManager.Companion.addItem
-import com.example.myapplication.CategoryItemManager.Companion.getItem
-import com.example.myapplication.CategoryItemManager.Companion.getPlus
-import com.example.myapplication.CtItem
+import com.example.myapplication.search.CategoryItemManager.Companion.getItem
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentSearchBinding
 import com.example.myapplication.databinding.SearchRecyclerviewItemBinding
@@ -29,12 +25,14 @@ class SearchFragment : Fragment() {
     private var dataList = ArrayList<CtItem>()
 
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?, ): View? {
         binding = FragmentSearchBinding.inflate(layoutInflater, container, false)
         _binding = SearchRecyclerviewItemBinding.inflate(layoutInflater, container, false)
 
         itemView()
 
+        //삭제 다이얼로그
         adapter.itemLongClick = object : SearchAdapter.ItemLongClick {
             override fun onLongClick(view: View, position: Int) {
                 val ad = AlertDialog.Builder(context)
@@ -70,10 +68,11 @@ class SearchFragment : Fragment() {
         gridManager = GridLayoutManager(context, 3)
         binding.reSearch.layoutManager = gridManager
 
-
     }
 
-    //
+
+
+    //추가 버튼을 누르면 뜨는 다이얼로그
     private fun dialog(){
         val builder = AlertDialog.Builder(context)
         builder.setTitle("동물 추가")
@@ -87,7 +86,6 @@ class SearchFragment : Fragment() {
 
             _binding.tvSearchitemname.text = edit?.text
             CategoryItemManager.addItem(edit?.text.toString())
-//            adapter.notifyItemRemoved(getPlus().size)
             adapter.changeDataset(CategoryItemManager.getItem())
             adapter.notifyDataSetChanged()
         }
