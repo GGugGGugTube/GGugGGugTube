@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.Constants
 import com.example.myapplication.CtItem
@@ -15,6 +16,8 @@ import com.example.myapplication.databinding.FragmentSearchResultBinding
 import com.example.myapplication.model.NaverModel
 import com.example.myapplication.naverdictionary.NaverData
 import com.example.myapplication.naverdictionary.NaverRetrofit
+import com.example.myapplication.youtubeApi.YoutubeNetworkClient
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -57,6 +60,8 @@ class SearchResultFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initBackButton()
+
+        val YoutubeVideoSearchResult = fetchYoutubeResult(animalData.animalName)
     }
 
     private fun initAnimal() {
@@ -136,6 +141,10 @@ class SearchResultFragment : Fragment() {
 
     private fun endSearchResultFragment(){
         requireActivity().supportFragmentManager.popBackStack()
+    }
+
+    private fun fetchYoutubeResult(query: String) = lifecycleScope.launch {
+        //TODO 유튜브 API 검색 결과 받아오기
     }
 
     companion object {
