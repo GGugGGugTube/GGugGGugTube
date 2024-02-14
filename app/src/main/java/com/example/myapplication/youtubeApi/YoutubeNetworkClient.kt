@@ -1,5 +1,8 @@
 package com.example.myapplication.youtubeApi
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import com.example.myapplication.MyApplication
 import com.google.api.client.extensions.android.AndroidUtils
 import okhttp3.Cache
@@ -12,7 +15,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-
 object YoutubeNetworkClient {
 
     private const val YOUTUBE_BASE_URL = "https://www.googleapis.com/youtube/v3/"
@@ -24,13 +26,6 @@ object YoutubeNetworkClient {
         val cache = Cache(context.cacheDir, cacheSize)
 
         val cacheInterceptor = Interceptor { chain ->
-//            var request = chain.request()
-//            request = request.newBuilder()
-//                .header(HTTP_HEADER_CACHE_CONTROL, CACHE_MAX_AGE)
-//                .build()
-//
-//            chain.proceed(request)
-
             val response: Response = chain.proceed(chain.request())
             val cacheControl = CacheControl.Builder()
                 .maxAge(30, TimeUnit.MINUTES)
@@ -44,7 +39,7 @@ object YoutubeNetworkClient {
         val offlineInterceptor = Interceptor{chain ->
             var request: Request = chain.request()
 
-            if (!AndroidUtils.isNetworkAvailable()) {
+            if (!isNetworkAvailable()) {
                 val cacheControl =  CacheControl.Builder()
                     .maxStale(7, TimeUnit.DAYS)
                     .build()
@@ -72,5 +67,20 @@ object YoutubeNetworkClient {
         .build()
     val youtubeNetWork = youtubeRetrofit.create(YoutubeNetWorkInterface::class.java)
 
-
+    private fun isNetworkAvailable(): Boolean {
+        val context = MyApplication.appContext!!
+        val connectivity =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (connectivity == null) {
+            return false
+        } else {
+            val info = connectivity.allNetworkInfo
+            for (networkInfo in info) {
+                if (networkInfo.state == NetworkInfo.State.CONNECTED) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
 }
