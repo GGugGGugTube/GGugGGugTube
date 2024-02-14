@@ -64,6 +64,7 @@ class SearchFragment : Fragment() {
             adapter.animalClick = object : SearchAdapter.AnimalClick {
                 override fun onClick(item: CtItem, position: Int) {
                     val resultFragment = SearchResultFragment.newInstance(item)
+
                     requireActivity().supportFragmentManager.beginTransaction().apply {
                         replace(R.id.main_frame, resultFragment)
                         setReorderingAllowed(true)

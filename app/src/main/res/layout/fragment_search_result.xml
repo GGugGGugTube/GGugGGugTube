@@ -54,7 +54,7 @@
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/search_dictionary"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:layout_margin="40dp"
         android:background="@drawable/ic_viewpager_background"
         android:orientation="horizontal"
@@ -63,6 +63,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_line" />
+
 
     <ImageView
         android:id="@+id/img_arrow_back"
