@@ -10,11 +10,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.DateUtils
 import com.example.myapplication.YoutubeVideo
 import com.bumptech.glide.Glide
+import com.example.myapplication.CtItem
 import com.example.myapplication.databinding.VideoitemBinding
+import com.example.myapplication.search.SearchAdapter
 
-class HomeVideoAdapter(private val mContext: Context): RecyclerView.Adapter<HomeVideoAdapter.ItemViewHolder>() {
+class HomeVideoAdapter(val mContext: Context): RecyclerView.Adapter<HomeVideoAdapter.ItemViewHolder>() {
 
     var items = ArrayList<YoutubeVideo>()
+
+    interface onLikedClick{
+        fun onClick(item: CtItem, position: Int)
+    }
+
+    var likedClick : HomeVideoAdapter.onLikedClick? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int, ): HomeVideoAdapter.ItemViewHolder {
         val binding = VideoitemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -30,13 +38,8 @@ class HomeVideoAdapter(private val mContext: Context): RecyclerView.Adapter<Home
             .into(holder.iv_thum_video)
         //동영상 이름
         holder.iv_video_name.text = currentItem.title
-
         //동영상 시간
-        holder.iv_video_time.text = DateUtils.getDateFromTimestampWithFormat(
-            currentItem.publishedAt,
-            "yyyy-MM-dd'T'HH:mm:ss.SSS+09:00",
-            "MM-dd HH:mm:ss"
-        )
+        holder.iv_video_time.text = currentItem.publishedAt
     }
 
     override fun getItemCount(): Int {
