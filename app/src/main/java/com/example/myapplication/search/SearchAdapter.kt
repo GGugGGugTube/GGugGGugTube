@@ -19,8 +19,8 @@ class SearchAdapter(val mItem: List<CtItem>) : RecyclerView.Adapter<ViewHolder>(
         private const val VIEW_TYPE_PLUS = 2
     }
 
-    interface AnimalClick {
-        fun onClick(view: View, position: Int)
+    interface AnimalClick{
+        fun onClick(item: CtItem, position: Int)
     }
 
     interface PlusClick {
@@ -28,8 +28,8 @@ class SearchAdapter(val mItem: List<CtItem>) : RecyclerView.Adapter<ViewHolder>(
     }
 
 
-    var animalClick: AnimalClick? = null
-    var plusClick: PlusClick? = null
+    var animalClick : AnimalClick? = null
+    var plusClick : PlusClick? = null
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -62,8 +62,8 @@ class SearchAdapter(val mItem: List<CtItem>) : RecyclerView.Adapter<ViewHolder>(
                 (holder as AnimalViewHolder).animalicon.setImageResource(item.animalIcon)
                 holder.animalName.text = item.animalName
 
-                holder.itemView.setOnClickListener {//클릭 이벤트 추가 부분
-                    animalClick?.onClick(it, position)
+                holder.itemView.setOnClickListener{//클릭 이벤트 추가 부분
+                    animalClick?.onClick(item, position)
                 }
             }
 
@@ -86,6 +86,7 @@ class SearchAdapter(val mItem: List<CtItem>) : RecyclerView.Adapter<ViewHolder>(
     override fun getItemCount(): Int {
         return mItem.size
     }
+
 
 
     override fun getItemViewType(position: Int): Int {
