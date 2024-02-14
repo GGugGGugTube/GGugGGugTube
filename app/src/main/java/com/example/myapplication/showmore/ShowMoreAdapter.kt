@@ -3,45 +3,26 @@ package com.example.myapplication.showmore
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.DateUtils.getDateFromTimestampWithFormat
-import com.example.myapplication.YouTubeViewType
 import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.databinding.SmallVideoItemBinding
 
 class ShowMoreAdapter(private val mContext: Context) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    RecyclerView.Adapter<ShowMoreAdapter.SmallVideoViewHolder>() {
 
     private var items = mutableListOf<YoutubeVideo>()
 
-    override fun getItemViewType(position: Int): Int {
-        return if (items[position].isShorts) {
-            YouTubeViewType.VIEW_TYPE_LONG_SCALE_SHORTS.ordinal
-        } else YouTubeViewType.VIEW_TYPE_LONG_SCALE_SHORTS.ordinal
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowMoreAdapter.SmallVideoViewHolder {
         val inflater = LayoutInflater.from(mContext)
-        return when (viewType) {
-            YouTubeViewType.VIEW_TYPE_SMALL_VIDEO.ordinal -> {
-                val binding = SmallVideoItemBinding.inflate(inflater, parent, false)
-                SmallVideoViewHolder(binding)
-            }
-
-            else -> throw IllegalArgumentException("Invalid view type")
-        }
+        val binding = SmallVideoItemBinding.inflate(inflater, parent, false)
+        return SmallVideoViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (items.isEmpty()) {
-            // 데이터가 없는 경우의 처리
-            // 예를 들어, 빈 상태를 나타내는 뷰를 보여줄 수 있음
-        } else {
-            when (holder) {
-                is SmallVideoViewHolder -> holder.bind(items[position])
-            }
-        }
+    override fun onBindViewHolder(holder: SmallVideoViewHolder, position: Int) {
+        holder.bind(items[position])
     }
 
     override fun getItemCount(): Int {
@@ -56,6 +37,10 @@ class ShowMoreAdapter(private val mContext: Context) :
                 .load(item.thumbnail)
                 .into(binding.ivSmallVideoImage)
 
+            binding.ivSmallVideoImage.scaleType =
+                if (item.isShorts) ImageView.ScaleType.CENTER_INSIDE
+                else ImageView.ScaleType.CENTER_CROP
+
             binding.tvSmallVideoName.text = item.title
             binding.tvSmallVideoTime.text = getDateFromTimestampWithFormat(
                 item.publishedAt,
@@ -64,13 +49,7 @@ class ShowMoreAdapter(private val mContext: Context) :
             )
 
             binding.ivSmallVideoLike.setOnClickListener {
-                val position = adapterPosition
-                if (position != RecyclerView.NO_POSITION) {
-                    val currentItem = items[position]
-                    currentItem.isLiked = !currentItem.isLiked // 좋아요 상태 변경
-                    notifyItemChanged(position) // 변경 사항을 RecyclerView에 알림
-                    // TODO: 좋아요 상태를 저장하는 로직 추가
-                }
+                //TODO 좋아요 삭제
             }
         }
     }
