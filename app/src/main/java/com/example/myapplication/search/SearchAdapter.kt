@@ -84,6 +84,7 @@ class SearchAdapter(var mItem: List<CtItem>) : RecyclerView.Adapter<ViewHolder>(
             }
         }
 
+
     }
 
     override fun getItemId(position: Int): Long {
@@ -110,6 +111,7 @@ class SearchAdapter(var mItem: List<CtItem>) : RecyclerView.Adapter<ViewHolder>(
     inner class AnimalViewHolder(val binding: SearchRecyclerviewItemBinding) : RecyclerView.ViewHolder(binding.root) {
         val animalicon = binding.ivSearchitem
         val animalName = binding.tvSearchitemname
+
     }
 
     inner class PlusViewHolder(val binding: SearchRecyclerviewItemBinding) : RecyclerView.ViewHolder(binding.root) {
