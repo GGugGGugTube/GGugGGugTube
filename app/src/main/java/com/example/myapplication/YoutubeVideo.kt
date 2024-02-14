@@ -33,7 +33,7 @@ data class YoutubeVideo(
                 val publishedAt = this.snippet.publishedAt
 
                 val category = category
-                val isShorts = ShortsUtils.isShorts(youtubeVideoResource)
+                val isShorts = ShortsUtils.isShorts(id)
 
                 YoutubeVideo(id, title, description, thumbnail, publishedAt, category, isShorts)
             }
@@ -51,7 +51,7 @@ data class YoutubeVideo(
                 val publishedAt = this.snippet.publishedAt
 
                 val category = category
-                val isShorts = ShortsUtils.isShorts(this)
+                val isShorts = ShortsUtils.isShorts(id)
 
                 YoutubeVideo(id, title, description, thumbnail, publishedAt, category, isShorts)
             }
