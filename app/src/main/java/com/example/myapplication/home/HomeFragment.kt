@@ -71,7 +71,7 @@ class HomeFragment : Fragment() {
             youtubeSearchResult.add(
                 YoutubeVideo.createYouTubeVideo("GGugGGug", it)
             )
-//            Log.d(TAG, "creating YoutubeVideo instances... size:${it.snippet.title}")
+//            Log.d(TAG, "${youtubeSearchResult.last().toString()}")
         }
 
         val youtubeShorts = mutableListOf<YoutubeVideo>()
