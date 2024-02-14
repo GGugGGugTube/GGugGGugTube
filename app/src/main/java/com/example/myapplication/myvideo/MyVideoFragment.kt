@@ -6,9 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.YoutubeVideo
-import com.example.myapplication.YoutubeVideoItem
 import com.example.myapplication.databinding.FragmentMyVideoBinding
 
 class MyVideoFragment : Fragment() {
