@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.Constants
 import com.example.myapplication.CtItem
 import com.example.myapplication.databinding.FragmentSearchResultBinding
@@ -43,6 +43,7 @@ class SearchResultFragment : Fragment() {
         binding = FragmentSearchResultBinding.inflate(inflater, container, false)
         initAnimal()
         initDictionary(inflater, container)
+        initViewPagerButton()
 
         return binding.root
     }
@@ -90,10 +91,30 @@ class SearchResultFragment : Fragment() {
         with(binding){
             dictionaryAdapter = DictionaryAdapter(mContext)
             searchDictionary.adapter = dictionaryAdapter
-            searchDictionary.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            searchDictionary.itemAnimator = null
+            searchDictionary.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         }
+    }
 
+    private fun initViewPagerButton() {
+        with(binding) {
+            imgArrowBack.setOnClickListener {
+                val current = searchDictionary.currentItem
+
+                searchDictionary.setCurrentItem(current - 1, true)
+                if (current == 0) {
+                    binding.searchDictionary.setCurrentItem(dictionaryAdapter.itemCount - 1, true)
+                }
+            }
+
+            imgArrowForword.setOnClickListener {
+                val current = searchDictionary.currentItem
+
+                searchDictionary.setCurrentItem(current + 1, true)
+                if (current == dictionaryAdapter.itemCount - 1) {
+                    binding.searchDictionary.setCurrentItem(0, true)
+                }
+            }
+        }
     }
 
     companion object {
