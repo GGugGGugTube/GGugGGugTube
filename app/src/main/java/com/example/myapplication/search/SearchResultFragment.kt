@@ -13,6 +13,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.Constants
 import com.example.myapplication.CtItem
 import com.example.myapplication.MainActivity
+import com.example.myapplication.R
+import com.example.myapplication.VideoDetailFragment
 import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.databinding.FragmentSearchResultBinding
 import com.example.myapplication.model.NaverModel
@@ -72,14 +74,7 @@ class SearchResultFragment : Fragment() {
 
         initBackButton()
         fetchYoutubeResult(animalData.animalName)
-    }
 
-    // 뒤로가기 누를 시 Bottom Navigation 살리기
-    override fun onDestroyView() {
-        super.onDestroyView()
-
-        val mainActivity = activity as MainActivity
-        mainActivity.hideBottomNavigation(false)
     }
 
     // 동물 카테고리를 클릭하면 그 동물의 이름 가져다오기
@@ -168,6 +163,8 @@ class SearchResultFragment : Fragment() {
 
     private fun endSearchResultFragment() {
         requireActivity().supportFragmentManager.popBackStack()
+        val mainActivity = activity as MainActivity
+        mainActivity.hideBottomNavigation(false)
     }
 
     private fun fetchYoutubeResult(query: String) = lifecycleScope.launch {
@@ -209,6 +206,18 @@ class SearchResultFragment : Fragment() {
     private fun initVideoRecyclerView(videos: List<YoutubeVideo>) {
         videoAdapter = SearchResultAdapter(videos)
         binding.reSearchVideo.adapter = videoAdapter
+
+        videoAdapter.videoClick = object : SearchResultAdapter.VideoClick {
+            override fun onClick(item: YoutubeVideo, position: Int) {
+                val detailFragment = VideoDetailFragment.newInstance(item)
+
+                requireActivity().supportFragmentManager.beginTransaction().apply {
+                    replace(R.id.main_frame, detailFragment)
+                    setReorderingAllowed(true)
+                    addToBackStack(null)
+                }.commit()
+            }
+        }
     }
 
     companion object {
