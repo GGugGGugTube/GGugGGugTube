@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.detail
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,7 +9,9 @@ import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.databinding.FragmentVideoDetailBinding
+import com.example.myapplication.watchlist.OnWatchListener
 import java.net.URL
 import java.text.DecimalFormat
 
@@ -19,10 +21,12 @@ class VideoDetailFragment : Fragment() {
         get() = requireArguments().getParcelable<YoutubeVideo>(ARG_VIDEO) as YoutubeVideo
 
     private lateinit var binding: FragmentVideoDetailBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-    }
 
+        OnWatchListener.onWatch(videoData)
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

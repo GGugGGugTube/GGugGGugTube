@@ -14,7 +14,7 @@ import com.example.myapplication.Constants
 import com.example.myapplication.CtItem
 import com.example.myapplication.MainActivity
 import com.example.myapplication.R
-import com.example.myapplication.VideoDetailFragment
+import com.example.myapplication.detail.VideoDetailFragment
 import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.databinding.FragmentSearchResultBinding
 import com.example.myapplication.model.NaverModel
@@ -168,7 +168,6 @@ class SearchResultFragment : Fragment() {
     }
 
     private fun fetchYoutubeResult(query: String) = lifecycleScope.launch {
-        Log.d(TAG, "fetching youtube search response...")
         var searchResponse = async {
             YoutubeNetworkClient.youtubeNetWork.getSearchedPetAndAnimals(query)
         }
@@ -176,18 +175,12 @@ class SearchResultFragment : Fragment() {
         val youtubeSearchResult = mutableListOf<YoutubeVideo>()
         Log.d(TAG, "result size: ${searchResponse.await().items.size}")
         searchResponse.await().items.forEach {
-            Log.d(
-                TAG,
-                "creating YoutubeVideo instances... size:${youtubeSearchResult.size}"
-            )
             Log.d(TAG, it.toString())
 
             youtubeSearchResult.add(
                 YoutubeVideo.createYouTubeVideo(animalData.animalName, it)
             )
         }
-
-        Log.d(TAG, "initiate recyclerviews")
 
         val shorts = youtubeSearchResult.filter { it.isShorts }
         Log.d(TAG, "shorts size: ${shorts.size}")

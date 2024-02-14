@@ -35,10 +35,10 @@ class MyVideoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // 어댑터 초기화
-        adapter = MyVideoAdapter(requireContext())
-        myLikeAdapter = MyVideoAdapter(requireContext())
-        myWatchAdapter = MyVideoAdapter(requireContext())
-        myShortsWatchAdapter = MyVideoAdapter(requireContext())
+        adapter = MyVideoAdapter()
+        myLikeAdapter = MyVideoAdapter()
+        myWatchAdapter = MyVideoAdapter()
+        myShortsWatchAdapter = MyVideoAdapter()
 
         // 리사이클러뷰에 레이아웃 매니저 설정
         binding.reMyLikeList.layoutManager =
@@ -56,13 +56,13 @@ class MyVideoFragment : Fragment() {
         //전체삭제 설정
         binding.tvAllDelete.setOnClickListener {
             // 전체 삭제 기능 호출
-            WatchListUtils.clearWatchList(requireContext())
+            WatchListUtils.clearWatchList()
             //UI 업데이트 하는거
             myWatchAdapter.updateItems(emptyList())
         }
         binding.tvAllDelete2.setOnClickListener {
             // 전체 삭제 기능 호출
-            WatchListUtils.clearWatchList(requireContext())
+            WatchListUtils.clearWatchList()
             //UI 업데이트 하는거
             myWatchAdapter.updateItems(emptyList())
         }
@@ -72,7 +72,7 @@ class MyVideoFragment : Fragment() {
         val itemList = getItemList()
         val myLikeItemList = getMyLikeItemList()
         // 시청한 동영상 목록 가져오기
-        val myWatchItemList = WatchListUtils.getWatchList(requireContext())
+        val myWatchItemList = WatchListUtils.getWatchList()
         val myShortsWatchItemList = getMyShortsWatchItemList()
 
         // 어댑터에 아이템 리스트 설정
