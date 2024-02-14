@@ -53,7 +53,7 @@ class ShowMoreAdapter(private val mContext: Context) :
         fun bind(item: YoutubeVideo) {
             // 기존의 MyVideoAdapter의 내용과 같이 데이터를 바인딩합니다.
             Glide.with(mContext)
-                .load(item.thumbnails)
+                .load(item.thumbnail)
                 .into(binding.ivSmallVideoImage)
 
             binding.tvSmallVideoName.text = item.title

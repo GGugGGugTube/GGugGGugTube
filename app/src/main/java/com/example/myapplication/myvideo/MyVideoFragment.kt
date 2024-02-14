@@ -13,6 +13,7 @@ import com.example.myapplication.databinding.FragmentMyVideoBinding
 import com.example.myapplication.like.LikedUtils.getLikedVideos
 import com.example.myapplication.like.LikedUtils.saveLikedVideos
 import com.example.myapplication.showmore.ShowMoreFragment
+import com.example.myapplication.watchlist.WatchListUtils
 
 class MyVideoFragment : Fragment() {
     private lateinit var binding: FragmentMyVideoBinding // MyVideoFragment의 바인딩 객체
@@ -52,17 +53,35 @@ class MyVideoFragment : Fragment() {
         binding.reMyWatchList.adapter = myWatchAdapter // reMyWatchList에도 어댑터 설정
         binding.reMyShortsWatchList.adapter = myShortsWatchAdapter // reMyShortsWatchList에도 어댑터 설정
 
+        //전체삭제 설정
+        binding.tvAllDelete.setOnClickListener {
+            // 전체 삭제 기능 호출
+            WatchListUtils.clearWatchList(requireContext())
+            //UI 업데이트 하는거
+            myWatchAdapter.updateItems(emptyList())
+        }
+        binding.tvAllDelete2.setOnClickListener {
+            // 전체 삭제 기능 호출
+            WatchListUtils.clearWatchList(requireContext())
+            //UI 업데이트 하는거
+            myWatchAdapter.updateItems(emptyList())
+        }
+
+
         // 아이템 리스트 가져오기
         val itemList = getItemList()
         val myLikeItemList = getMyLikeItemList()
-        val myWatchItemList = getMyWatchItemList()
+        // 시청한 동영상 목록 가져오기
+        val myWatchItemList = WatchListUtils.getWatchList(requireContext())
         val myShortsWatchItemList = getMyShortsWatchItemList()
 
         // 어댑터에 아이템 리스트 설정
         adapter.updateItems(itemList)
         myLikeAdapter.updateItems(myLikeItemList)
+        // 시청한 동영상 목록을 어댑터에 설정
         myWatchAdapter.updateItems(myWatchItemList)
         myShortsWatchAdapter.updateItems(myShortsWatchItemList)
+
 
         //SupportFragmentManager로 FragmentManager를 호출
         binding.tvMoreVideo.setOnClickListener {

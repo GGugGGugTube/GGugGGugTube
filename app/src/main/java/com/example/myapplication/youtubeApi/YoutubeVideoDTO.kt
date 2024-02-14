@@ -2,27 +2,31 @@ package com.example.myapplication.youtubeApi
 
 import com.google.common.primitives.UnsignedInteger
 
-data class YoutubeVideoDTO(
+data class YoutubeVideoResponse(
     val kind: String = "youtube#videoListResponse",
     val etag: String,
     val nextPageToken: String,
     val prevPageToken: String,
     val pageInfo: YoutubeVideoPageInfo,
-    val items: MutableList<YoutubeVideoResourceSnippet> //@Query("part") part = "snippet"
+    val items: MutableList<YoutubeVideoResource> //@Query("part") part = "snippet"
 )
 
 data class YoutubeVideoPageInfo(
     val totalResults: Int,
     val resultsPerPage: Int
 )
-
-//YoutubeVideoResource.snippet
+data class YoutubeVideoResource(
+    val kind:String = "youtube#video",
+    val etag:String,
+    val id:String,
+    val snippet: YoutubeVideoResourceSnippet
+)
 data class YoutubeVideoResourceSnippet(
     val publishedAt: String,
     val channelId: String,
     val title: String,
     val description: String,
-    val thumbnails: YoutubeVideoResourceThumbnail,
+    val thumbnails: YoutubeVideoResourceThumbnails,
     val channelTitle:String,
     val tags: MutableList<String>,
     val categoryId:String,
@@ -32,10 +36,17 @@ data class YoutubeVideoResourceSnippet(
     val defaultAudioLanguage:String
 )
 
+data class YoutubeVideoResourceThumbnails(
+    val default: YoutubeVideoResourceThumbnail,
+    val medium: YoutubeVideoResourceThumbnail,
+    val high: YoutubeVideoResourceThumbnail,
+    val standard: YoutubeVideoResourceThumbnail,
+    val maxres: YoutubeVideoResourceThumbnail? = null
+)
 data class YoutubeVideoResourceThumbnail(
     val url:String,
-    val width:UnsignedInteger,
-    val height:UnsignedInteger
+    val width:Long,
+    val height:Long
 )
 
 data class YoutubeVideoResourceLocalized(

@@ -67,7 +67,7 @@ class HomeFragment : Fragment() {
             .build()
 
         retrofit.create(youtubeNetWork::class.java).also {
-            it.getMostPopularPetAndAnimals("snippet", "mostPopular", "ko", 25, "kr", "15")
+            it.getMostPopularPetAndAnimals("snippet", "mostPopular", "ko", "kr", "15",25)
 
         }
     }
