@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".showMoreFragment"
+    tools:context=".showmore.ShowMoreFragment"
     android:background="@color/BG_color">
 
+    <FrameLayout
+        android:id="@+id/main_frame"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
 
     <TextView
         android:id="@+id/tv_moreTitle"
@@ -22,7 +33,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/iv_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -78,6 +89,176 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/re_moreListDog" />
 
+            <ImageView
+                android:id="@+id/iv_mvLine6"
+                android:layout_width="380dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/re_moreListCat" />
+
+            <ImageView
+                android:id="@+id/iv_mvLine7"
+                android:layout_width="380dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/re_moreListParrot" />
+
+            <ImageView
+                android:id="@+id/iv_mvLine8"
+                android:layout_width="380dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/re_moreListElephant" />
+
+            <ImageView
+                android:id="@+id/iv_mvLine9"
+                android:layout_width="380dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/re_moreListGiraffe" />
+
+            <ImageView
+                android:id="@+id/iv_mvLine10"
+                android:layout_width="380dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/re_moreListPanda" />
+
+            <ImageView
+                android:id="@+id/iv_mvLine11"
+                android:layout_width="380dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/re_moreListCrocodile" />
+
+            <ImageView
+                android:id="@+id/iv_mvLine12"
+                android:layout_width="380dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/re_moreListHamster" />
+
+            <ImageView
+                android:id="@+id/iv_mvLine13"
+                android:layout_width="380dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/re_moreListKangaroo" />
+
+            <ImageView
+                android:id="@+id/iv_mvLine14"
+                android:layout_width="380dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/re_moreListCamel" />
+
+            <ImageView
+                android:id="@+id/iv_mvLine15"
+                android:layout_width="380dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/re_moreListSheep" />
+
+            <ImageView
+                android:id="@+id/iv_mvLine16"
+                android:layout_width="380dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/re_moreListWhale" />
+
+            <ImageView
+                android:id="@+id/iv_mvLine17"
+                android:layout_width="380dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/re_moreListWolf" />
+
+            <ImageView
+                android:id="@+id/iv_mvLine18"
+                android:layout_width="380dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/re_moreListMonkey" />
+
+            <ImageView
+                android:id="@+id/iv_mvLine19"
+                android:layout_width="380dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/re_moreListBear" />
+
+            <ImageView
+                android:id="@+id/iv_mvLine20"
+                android:layout_width="380dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/re_moreListRabbit" />
+
+            <ImageView
+                android:id="@+id/iv_mvLine21"
+                android:layout_width="380dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/re_moreListPenguin" />
+
+            <ImageView
+                android:id="@+id/iv_mvLine22"
+                android:layout_width="380dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/re_moreListOthers" />
+
             <TextView
                 android:id="@+id/tv_moreRemain"
                 android:layout_width="50dp"
@@ -117,6 +298,214 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/iv_mvLine5" />
 
+            <TextView
+                android:id="@+id/tv_moreParrot"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:gravity="center"
+                android:text="앵무새"
+                android:textColor="@color/String"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_mvLine6" />
+
+            <TextView
+                android:id="@+id/tv_moreElephant"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:gravity="center"
+                android:text="코끼리"
+                android:textColor="@color/String"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_mvLine7" />
+
+            <TextView
+                android:id="@+id/tv_moreGiraffe"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:gravity="center"
+                android:text="기린"
+                android:textColor="@color/String"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_mvLine8" />
+
+            <TextView
+                android:id="@+id/tv_morePanda"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:gravity="center"
+                android:text="판다"
+                android:textColor="@color/String"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_mvLine9" />
+
+            <TextView
+                android:id="@+id/tv_moreCrocodile"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:gravity="center"
+                android:text="악어"
+                android:textColor="@color/String"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_mvLine10" />
+
+            <TextView
+                android:id="@+id/tv_moreHamster"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:gravity="center"
+                android:text="햄스터"
+                android:textColor="@color/String"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_mvLine11" />
+
+            <TextView
+                android:id="@+id/tv_moreKangaroo"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:gravity="center"
+                android:text="캥거루"
+                android:textColor="@color/String"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_mvLine12" />
+
+            <TextView
+                android:id="@+id/tv_moreCamel"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:gravity="center"
+                android:text="낙타"
+                android:textColor="@color/String"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_mvLine13" />
+
+            <TextView
+                android:id="@+id/tv_moreSheep"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:gravity="center"
+                android:text="양"
+                android:textColor="@color/String"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_mvLine14" />
+
+            <TextView
+                android:id="@+id/tv_moreWhale"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:gravity="center"
+                android:text="고래"
+                android:textColor="@color/String"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_mvLine15" />
+
+            <TextView
+                android:id="@+id/tv_moreWolf"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:gravity="center"
+                android:text="늑대"
+                android:textColor="@color/String"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_mvLine16" />
+
+            <TextView
+                android:id="@+id/tv_moreMonkey"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:gravity="center"
+                android:text="원숭이"
+                android:textColor="@color/String"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_mvLine17" />
+
+            <TextView
+                android:id="@+id/tv_moreBear"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:gravity="center"
+                android:text="곰"
+                android:textColor="@color/String"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_mvLine18" />
+
+            <TextView
+                android:id="@+id/tv_moreRabbit"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:gravity="center"
+                android:text="토끼"
+                android:textColor="@color/String"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_mvLine19" />
+
+            <TextView
+                android:id="@+id/tv_morePenguin"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:gravity="center"
+                android:text="펭귄"
+                android:textColor="@color/String"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_mvLine20" />
+
+            <TextView
+                android:id="@+id/tv_moreOthers"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:gravity="center"
+                android:text="OTHERS"
+                android:textColor="@color/String"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_mvLine21" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/re_moreListRemain"
                 android:layout_width="match_parent"
@@ -145,6 +534,166 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_moreCat"
+                tools:listitem="@layout/small_video_item" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/re_moreListParrot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_moreParrot"
+                tools:listitem="@layout/small_video_item" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/re_moreListElephant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_moreElephant"
+                tools:listitem="@layout/small_video_item" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/re_moreListGiraffe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_moreGiraffe"
+                tools:listitem="@layout/small_video_item" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/re_moreListPanda"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_morePanda"
+                tools:listitem="@layout/small_video_item" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/re_moreListCrocodile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_moreCrocodile"
+                tools:listitem="@layout/small_video_item" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/re_moreListHamster"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_moreHamster"
+                tools:listitem="@layout/small_video_item" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/re_moreListKangaroo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_moreKangaroo"
+                tools:listitem="@layout/small_video_item" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/re_moreListCamel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_moreCamel"
+                tools:listitem="@layout/small_video_item" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/re_moreListSheep"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_moreSheep"
+                tools:listitem="@layout/small_video_item" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/re_moreListWhale"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_moreWhale"
+                tools:listitem="@layout/small_video_item" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/re_moreListWolf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_moreWolf"
+                tools:listitem="@layout/small_video_item" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/re_moreListMonkey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_moreMonkey"
+                tools:listitem="@layout/small_video_item" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/re_moreListBear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_moreBear"
+                tools:listitem="@layout/small_video_item" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/re_moreListRabbit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_moreRabbit"
+                tools:listitem="@layout/small_video_item" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/re_moreListPenguin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_morePenguin"
+                tools:listitem="@layout/small_video_item" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/re_moreListOthers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_moreOthers"
                 tools:listitem="@layout/small_video_item" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

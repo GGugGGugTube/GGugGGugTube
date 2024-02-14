@@ -13,24 +13,27 @@ class DictionaryAdapter(private val mContext: Context) : RecyclerView.Adapter<Di
     var items = ArrayList<NaverModel>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val binding = DictionaryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            DictionaryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return Holder(binding)
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
+
         Glide.with(mContext)
             .load(items[position].url)
             .into(holder.ivimgge)
+
         holder.tvtitle.text = items[position].title.replace("<b>", "").replace("</b>", "")
         holder.tvdesc.text = items[position].description.replace("<b>", "").replace("</b>", "")
     }
 
-    override fun getItemCount() : Int {
+    override fun getItemCount(): Int {
         return items.size
     }
 
 
-    inner class Holder(binding: DictionaryItemBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class Holder(binding: DictionaryItemBinding) : RecyclerView.ViewHolder(binding.root) {
         var tvtitle = binding.tvDictitle
         var ivimgge = binding.imgDicimage
         var tvdesc = binding.tvDicword

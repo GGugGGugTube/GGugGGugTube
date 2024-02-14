@@ -7,9 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.GridLayout
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.databinding.FragmentHomeBinding
+import com.example.myapplication.youtubeApi.YoutubeNetWorkInterface
+import com.example.myapplication.youtubeApi.YoutubeNetworkClient
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
@@ -42,6 +46,14 @@ class HomeFragment : Fragment() {
         videoadapter = HomeVideoAdapter(mContext)
         binding.reHomeVideo.adapter = videoadapter
         binding.reHomeVideo.layoutManager = LinearLayoutManager(context)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        lifecycleScope.launch{
+            YoutubeNetworkClient.youtubeNetWork.getMostPopularPetAndAnimals()
+        }
     }
 
 }

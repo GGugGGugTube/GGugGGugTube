@@ -11,10 +11,10 @@ import com.example.myapplication.CtItem
 import com.example.myapplication.databinding.FragmentSearchBinding
 import com.example.myapplication.databinding.SearchRecyclerviewItemBinding
 
-class SearchAdapter(val mItem: List<CtItem>): RecyclerView.Adapter<ViewHolder>() {
+class SearchAdapter(val mItem: List<CtItem>) : RecyclerView.Adapter<ViewHolder>() {
 
 
-    companion object{
+    companion object {
         private const val VIEW_TYPE_ANIMAL = 1
         private const val VIEW_TYPE_PLUS = 2
     }
@@ -23,7 +23,7 @@ class SearchAdapter(val mItem: List<CtItem>): RecyclerView.Adapter<ViewHolder>()
         fun onClick(item: CtItem, position: Int)
     }
 
-    interface PlusClick{
+    interface PlusClick {
         fun onClick(view: View, position: Int)
     }
 
@@ -34,12 +34,22 @@ class SearchAdapter(val mItem: List<CtItem>): RecyclerView.Adapter<ViewHolder>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return when (viewType){
+        return when (viewType) {
             VIEW_TYPE_ANIMAL -> {
-                val binding = SearchRecyclerviewItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                val binding = SearchRecyclerviewItemBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
                 AnimalViewHolder(binding)
-            } else -> {
-                val binding = SearchRecyclerviewItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            }
+
+            else -> {
+                val binding = SearchRecyclerviewItemBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
                 PlusViewHolder(binding)
             }
         }
@@ -47,7 +57,7 @@ class SearchAdapter(val mItem: List<CtItem>): RecyclerView.Adapter<ViewHolder>()
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        when(val item = mItem[position]){
+        when (val item = mItem[position]) {
             is CtItem.CategoryItem -> {
                 (holder as AnimalViewHolder).animalicon.setImageResource(item.animalIcon)
                 holder.animalName.text = item.animalName
@@ -56,11 +66,12 @@ class SearchAdapter(val mItem: List<CtItem>): RecyclerView.Adapter<ViewHolder>()
                     animalClick?.onClick(item, position)
                 }
             }
+
             is CtItem.CategoryPlus -> {
                 (holder as PlusViewHolder).plusicon.setImageResource(item.PlusIcon)
                 holder.plusName.text = item.PlusName
 
-                holder.itemView.setOnClickListener{//클릭 이벤트 추가 부분
+                holder.itemView.setOnClickListener {//클릭 이벤트 추가 부분
                     plusClick?.onClick(it, position)
                 }
             }
@@ -79,18 +90,20 @@ class SearchAdapter(val mItem: List<CtItem>): RecyclerView.Adapter<ViewHolder>()
 
 
     override fun getItemViewType(position: Int): Int {
-        return when (mItem[position]){
+        return when (mItem[position]) {
             is CtItem.CategoryItem -> VIEW_TYPE_ANIMAL
             is CtItem.CategoryPlus -> VIEW_TYPE_PLUS
         }
     }
 
-    inner class AnimalViewHolder(val binding: SearchRecyclerviewItemBinding) : RecyclerView.ViewHolder(binding.root){
+    inner class AnimalViewHolder(val binding: SearchRecyclerviewItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         val animalicon = binding.ivSearchitem
         val animalName = binding.tvSearchitemname
     }
 
-    inner class PlusViewHolder(val binding: SearchRecyclerviewItemBinding) : RecyclerView.ViewHolder(binding.root){
+    inner class PlusViewHolder(val binding: SearchRecyclerviewItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         val plusicon = binding.ivSearchitem
         val plusName = binding.tvSearchitemname
     }
