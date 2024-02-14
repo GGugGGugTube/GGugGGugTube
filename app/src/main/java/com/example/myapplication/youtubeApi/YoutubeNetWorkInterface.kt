@@ -8,7 +8,7 @@ const val PET_AND_ANIMALS_CATEGORY_ID: String = "15"
 
 interface YoutubeNetWorkInterface {
     //Pet&Animals 카테고리의 인기 동영상 목록 가져오기
-    @GET("videos?key=AIzaSyB342voTWUdwtQzooloaZTYutUzV3H_xKs")
+    @GET("videos?key=AIzaSyDwJ6e9yH7IIr2deX2kV26T2T5P7254lVE")
     suspend fun getMostPopularPetAndAnimals(
         @Query("part") part: String = "snippet",
         @Query("chart") chart: String = "mostPopular", //차트: 인기 차트
@@ -19,7 +19,7 @@ interface YoutubeNetWorkInterface {
     ): YoutubeVideoResponse
 
     //Pet&Animals 카테고리에서 검색 결과 목록 가져오기
-    @GET("search?key=AIzaSyB342voTWUdwtQzooloaZTYutUzV3H_xKs")
+    @GET("search?key=AIzaSyDwJ6e9yH7IIr2deX2kV26T2T5P7254lVE")
     suspend fun getSearchedPetAndAnimals(
         @Query("q") q: String, //검색어
         @Query("part") part: String = "snippet",
@@ -31,7 +31,7 @@ interface YoutubeNetWorkInterface {
     ):YoutubeVideoSearchResponse
 
     //동영상 통계 정보 가져오기
-    @GET("videos?key=AIzaSyB342voTWUdwtQzooloaZTYutUzV3H_xKs")
+    @GET("videos?key=AIzaSyDwJ6e9yH7IIr2deX2kV26T2T5P7254lVE")
     suspend fun getStatistics(
         @Query("id") id:String, //동영상 ID
         @Query("part") part: String = "statistics"
