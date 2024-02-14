@@ -57,25 +57,23 @@ class HomeFragment : Fragment() {
     }
 
     private fun fetchYoutubeResult() = lifecycleScope.launch {
-        Log.d(TAG, "fetching youtube search response...")
         var searchResponse = async {
             YoutubeNetworkClient.youtubeNetWork.getMostPopularPetAndAnimals()
         }
 
         val youtubeSearchResult = mutableListOf<YoutubeVideo>()
-        Log.d(TAG, "result size: ${searchResponse.await().items.size}")
         searchResponse.await().items.forEach {
-            Log.d(TAG, "creating YoutubeVideo instances... size:${youtubeSearchResult.size}")
             Log.d(TAG, it.toString())
 
             youtubeSearchResult.add(
                 YoutubeVideo.createYouTubeVideo("GGugGGug", it)
             )
-//            Log.d(TAG, "${youtubeSearchResult.last().toString()}")
+            Log.d(TAG, "videoId = ${it.id}")
         }
 
         val youtubeShorts = mutableListOf<YoutubeVideo>()
         val youtubeVideo = mutableListOf<YoutubeVideo>()
+
         youtubeSearchResult.forEach{
             if (it.isShorts)
                 youtubeShorts.add(it)
