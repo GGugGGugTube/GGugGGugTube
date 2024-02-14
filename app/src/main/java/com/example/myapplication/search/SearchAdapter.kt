@@ -6,17 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.example.myapplication.CategoryItemManager
 import com.example.myapplication.CtItem
-import com.example.myapplication.databinding.FragmentSearchBinding
 import com.example.myapplication.databinding.SearchRecyclerviewItemBinding
 
-class SearchAdapter(val mItem: List<CtItem>) : RecyclerView.Adapter<ViewHolder>() {
+class SearchAdapter(var mItem: List<CtItem>) : RecyclerView.Adapter<ViewHolder>() {
 
 
     companion object {
         private const val VIEW_TYPE_ANIMAL = 1
         private const val VIEW_TYPE_PLUS = 2
+    }
+
+    interface ItemLongClick{
+        fun onLongClick(view: View, position: Int)
     }
 
     interface AnimalClick{
@@ -28,6 +30,7 @@ class SearchAdapter(val mItem: List<CtItem>) : RecyclerView.Adapter<ViewHolder>(
     }
 
 
+    var itemLongClick: ItemLongClick? = null
     var animalClick : AnimalClick? = null
     var plusClick : PlusClick? = null
 
@@ -65,6 +68,10 @@ class SearchAdapter(val mItem: List<CtItem>) : RecyclerView.Adapter<ViewHolder>(
                 holder.itemView.setOnClickListener{//클릭 이벤트 추가 부분
                     animalClick?.onClick(item, position)
                 }
+                holder.itemView.setOnLongClickListener() OnLongClickListener@{
+                    itemLongClick?.onLongClick(it, position)
+                    return@OnLongClickListener true
+                }
             }
 
             is CtItem.CategoryPlus -> {
@@ -87,6 +94,10 @@ class SearchAdapter(val mItem: List<CtItem>) : RecyclerView.Adapter<ViewHolder>(
         return mItem.size
     }
 
+    fun changeDataset(newDataSet: List<CtItem>) {
+        mItem = newDataSet
+    }
+
 
 
     override fun getItemViewType(position: Int): Int {
@@ -96,14 +107,12 @@ class SearchAdapter(val mItem: List<CtItem>) : RecyclerView.Adapter<ViewHolder>(
         }
     }
 
-    inner class AnimalViewHolder(val binding: SearchRecyclerviewItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    inner class AnimalViewHolder(val binding: SearchRecyclerviewItemBinding) : RecyclerView.ViewHolder(binding.root) {
         val animalicon = binding.ivSearchitem
         val animalName = binding.tvSearchitemname
     }
 
-    inner class PlusViewHolder(val binding: SearchRecyclerviewItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    inner class PlusViewHolder(val binding: SearchRecyclerviewItemBinding) : RecyclerView.ViewHolder(binding.root) {
         val plusicon = binding.ivSearchitem
         val plusName = binding.tvSearchitemname
     }
