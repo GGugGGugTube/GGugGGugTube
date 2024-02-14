@@ -2,7 +2,8 @@ package com.example.myapplication
 
 class CategoryItemManager {
     companion object{
-        fun getItem(): List<CtItem> = listOf(
+        private var categoryItemList =
+         listOf(
             CtItem.CategoryItem(0, R.drawable.icon_dog, "강아지"),
             CtItem.CategoryItem(1, R.drawable.icon_cat, "고양이"),
             CtItem.CategoryItem(2, R.drawable.icon_parrot, "앵무새"),
@@ -21,6 +22,20 @@ class CategoryItemManager {
             CtItem.CategoryItem(15, R.drawable.icon_rabbit, "토끼"),
             CtItem.CategoryItem(16, R.drawable.icon_penguin, "펭귄"),
             CtItem.CategoryPlus(17, R.drawable.icon_plus, "추가"))
+        private var categoryPlusList =
+            listOf(
+                CtItem.CategoryPlus(categoryItemList.size+1, R.drawable.icon_plus, "추가")
+            )
+
+        fun getItem() : List<CtItem> = categoryItemList
+        fun getPlus() : List<CtItem> = categoryPlusList
+        fun addItem(animalName: String){
+            categoryItemList = categoryItemList + CtItem.CategoryItem(categoryItemList.size, R.drawable.icon_ggug, animalName) + categoryPlusList
+        }
+
+        fun addplus(id: Int){
+
+        }
 
     }
 }
