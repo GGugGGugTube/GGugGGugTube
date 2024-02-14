@@ -21,7 +21,7 @@ class SearchResultAdapter(val mItems: List<YoutubeVideo>) :
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val data = mItems[position]
 
-        holder.itemView.setOnClickListener {
+        holder.heartImageView.setOnClickListener {
             data.isLiked = !data.isLiked
             holder.setHeartImageView(data.isLiked)
             onHeartClickedListener.onHeartClicked(data)
@@ -41,7 +41,7 @@ class SearchResultAdapter(val mItems: List<YoutubeVideo>) :
         private val thumbnailImageView = binding.ivVideoImage
         private val titleTextView = binding.tvVideoName
         private val timeTextView = binding.tvVideoTime
-        private val heartImageView = binding.ivVideoLike
+        val heartImageView = binding.ivVideoLike
 
         fun bind(data: YoutubeVideo) {
             data.thumbnail?.let {
