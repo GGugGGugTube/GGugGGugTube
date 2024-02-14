@@ -1,17 +1,17 @@
 package com.example.myapplication.search
 
-import android.adservices.adselection.RemoveAdSelectionOverrideRequest
-import android.app.AlertDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.myapplication.CategoryItemManager
 import com.example.myapplication.CategoryItemManager.Companion.getItem
-import com.example.myapplication.CtItem
 import com.example.myapplication.databinding.FragmentSearchBinding
+import com.example.myapplication.youtubeApi.YoutubeNetWorkInterface
+import com.example.myapplication.youtubeApi.YoutubeNetworkClient
+import kotlinx.coroutines.launch
 
 
 class SearchFragment : Fragment() {
@@ -52,19 +52,22 @@ class SearchFragment : Fragment() {
 
             }
         }
-
-
         return binding.root
     }
 
     private fun itemView() {
-
         adapter = SearchAdapter(getItem())
         binding.reSearch.adapter = adapter
         gridManager = GridLayoutManager(context, 3)
         binding.reSearch.layoutManager = gridManager
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        lifecycleScope.launch {
+            YoutubeNetworkClient.youtubeNetWork.getSearchedPetAndAnimals("개")
+        }
     }
 
 
