@@ -237,10 +237,4 @@ class ShowMoreFragment : Fragment() {
         // CatList에 표시할 아이템 리스트를 반환하는 함수를 구현
         return listOf()
     }
-//    private fun getLikedVideos(): List<YoutubeVideo> {
-//        // 좋아요된 비디오 목록을 가져와서 반환하는 함수를 구현
-//        // SharedPreferences 또는 데이터베이스에서 가져와야 합니다.
-//        // 여기에 좋아요된 비디오 목록을 가져오는 로직을 추가해주세요.
-//        return emptyList() // 임시로 빈 목록 반환
-//    }
 }
