@@ -30,6 +30,9 @@ android {
         exclude ("META-INF/INDEX.LIST")
         exclude ("META-INF/notice.txt")
         exclude ("META-INF/ASL2.0")
+
+        excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        excludes += "/META-INF/versions/**"
     }
 
     buildTypes {
