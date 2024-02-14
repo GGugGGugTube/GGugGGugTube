@@ -1,6 +1,8 @@
 package com.example.myapplication
 
 import android.os.Parcelable
+import com.example.myapplication.youtubeApi.ShortsUtils
+import com.example.myapplication.youtubeApi.YoutubeVideoResource
 import com.example.myapplication.youtubeApi.YoutubeVideoResourceSnippet
 import com.example.myapplication.youtubeApi.YoutubeVideoSearchResource
 import com.example.myapplication.youtubeApi.YoutubeVideoSearchResourceSnippet
@@ -19,30 +21,35 @@ data class YoutubeVideo(
     companion object {
         fun createYouTubeVideo(
             category: String = "",
-            youtubeSnippet: YoutubeVideoResourceSnippet
+            youtubeVideoResource: YoutubeVideoResource
         ): YoutubeVideo {
-            val title = youtubeSnippet.title
-            val description = youtubeSnippet.description
-            val thumbnail = youtubeSnippet.thumbnails.default.url
-            val publishedAt = youtubeSnippet.publishedAt
+            with(youtubeVideoResource) {
+                val title = this.snippet.title
+                val description = this.snippet.description
+                val thumbnail = this.snippet.thumbnails.default.url
+                val publishedAt = this.snippet.publishedAt
 
-            val category = "" //TODO : 동물 카테고리 저장하기
-            val isShorts = false //TODO: 동영상이 숏츠인지 영상인지 판별하기
-            return YoutubeVideo(title, description, thumbnail, publishedAt, category, isShorts)
+                val category = "" //TODO : 동물 카테고리 저장하기
+                val isShorts = ShortsUtils.isShorts(youtubeVideoResource)
+
+                return YoutubeVideo(title, description, thumbnail, publishedAt, category, isShorts)
+            }
         }
 
         fun createYouTubeVideo(
             category: String = "",
-            youtubeSnippet: YoutubeVideoSearchResourceSnippet
+            youtubeVideoSearchResource: YoutubeVideoSearchResource
         ): YoutubeVideo {
-            val title = youtubeSnippet.title
-            val description = youtubeSnippet.description
-            val thumbnail = youtubeSnippet.thumbnails.default.url
-            val publishedAt = youtubeSnippet.publishedAt
+            with(youtubeVideoSearchResource) {
+                val title = this.snippet.title
+                val description = this.snippet.description
+                val thumbnail = this.snippet.thumbnails.default.url
+                val publishedAt = this.snippet.publishedAt
 
-            val category = category //TODO : 동물 카테고리 저장하기
-            val isShorts = false //TODO: 동영상이 숏츠인지 영상인지 판별하기
-            return YoutubeVideo(title, description, thumbnail, publishedAt, category, isShorts)
+                val category = category //TODO : 동물 카테고리 저장하기
+                val isShorts = ShortsUtils.isShorts(this)
+                return YoutubeVideo(title, description, thumbnail, publishedAt, category, isShorts)
+            }
         }
     }
 }
