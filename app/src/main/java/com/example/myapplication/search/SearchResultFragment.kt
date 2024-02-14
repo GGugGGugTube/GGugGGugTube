@@ -12,24 +12,28 @@ import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.Constants
 import com.example.myapplication.CtItem
+import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.databinding.FragmentSearchResultBinding
 import com.example.myapplication.model.NaverModel
 import com.example.myapplication.naverdictionary.NaverData
 import com.example.myapplication.naverdictionary.NaverRetrofit
 import com.example.myapplication.youtubeApi.YoutubeNetworkClient
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.IllegalArgumentException
 
 
 class SearchResultFragment : Fragment() {
+    private val TAG = "SearchResultFragment"
 
     private lateinit var binding: FragmentSearchResultBinding
     private lateinit var mContext: Context
 
     private lateinit var dictionaryAdapter: DictionaryAdapter
+    private lateinit var shortsAdapter: SearchResultShortsAdapter
+    private lateinit var videoAdapter: SearchResultAdapter
 
     private val animalData: CtItem.CategoryItem
         get() = requireArguments().getParcelable<CtItem>(ARG_ANIMAL) as CtItem.CategoryItem
@@ -47,6 +51,7 @@ class SearchResultFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d(TAG, "onCreateView")
         binding = FragmentSearchResultBinding.inflate(inflater, container, false)
 
         initAnimal()
@@ -58,14 +63,14 @@ class SearchResultFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d(TAG, "onViewCreated")
 
         initBackButton()
-
-        val YoutubeVideoSearchResult = fetchYoutubeResult(animalData.animalName)
+        fetchYoutubeResult(animalData.animalName)
     }
 
     private fun initAnimal() {
-        animalData.animalName.run{
+        animalData.animalName.run {
             binding.tvAnimal.text = this
             fetchNaverResult(this)
         }
@@ -130,7 +135,8 @@ class SearchResultFragment : Fragment() {
             }
         }
     }
-    private fun initBackButton(){
+
+    private fun initBackButton() {
         binding.imgSearchBack.setOnClickListener {
             endSearchResultFragment()
         }
@@ -139,16 +145,47 @@ class SearchResultFragment : Fragment() {
         }
     }
 
-    private fun endSearchResultFragment(){
+    private fun endSearchResultFragment() {
         requireActivity().supportFragmentManager.popBackStack()
     }
 
     private fun fetchYoutubeResult(query: String) = lifecycleScope.launch {
-        //TODO 유튜브 API 검색 결과 받아오기
+        Log.d(TAG, "fetching youtube search response...")
+        var searchResponse = async {
+            YoutubeNetworkClient.youtubeNetWork.getSearchedPetAndAnimals(query)
+        }
+
+        val youtubeSearchResult = mutableListOf<YoutubeVideo>()
+        Log.d(TAG, "result size: ${searchResponse.await().items.size}")
+        searchResponse.await().items.forEach {
+            Log.d(TAG, "creating YoutubeVideo instances... size:${youtubeSearchResult.size}")
+            Log.d(TAG, it.toString())
+
+            youtubeSearchResult.add(
+                YoutubeVideo.createYouTubeVideo(
+                    category = animalData.animalName,
+                    youtubeSnippet = it.snippet
+                )
+            )
+        }
+
+        Log.d(TAG, "initiate recyclerviews")
+        //initShortsRecyclerView() //TODO 숏츠 영상만 필터링하여 넘겨주기
+        initVideoRecyclerView(youtubeSearchResult) //TODO 숏츠 아닌 영상만 필터링하여 넘겨주기
+    }
+
+    private fun initShortsRecyclerView(shorts: List<YoutubeVideo>) {
+        //TODO 숏츠 리싸이클러뷰 설정하기
+    }
+
+    private fun initVideoRecyclerView(videos: List<YoutubeVideo>) {
+        videoAdapter = SearchResultAdapter(videos)
+        binding.reSearchVideo.adapter = videoAdapter
     }
 
     companion object {
         private const val ARG_ANIMAL = "argAnimal"
+
         @JvmStatic
         fun newInstance(ctItem: CtItem) =
             SearchResultFragment().apply {

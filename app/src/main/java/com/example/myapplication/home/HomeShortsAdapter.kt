@@ -26,7 +26,7 @@ class HomeShortsAdapter(private val mContext: Context): RecyclerView.Adapter<Hom
 
         // 썸네일 이미지 로드
         Glide.with(mContext)
-            .load(currentItem.thumbnails)
+            .load(currentItem.thumbnail)
             .into(holder.iv_thum_shorts)
         //동영상 이름
         holder.iv_shorts_name.text = currentItem.title
