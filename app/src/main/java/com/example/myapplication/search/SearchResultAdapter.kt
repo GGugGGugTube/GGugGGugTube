@@ -12,13 +12,11 @@ import com.example.myapplication.like.OnHeartClickedListener
 class SearchResultAdapter(val mItems: List<YoutubeVideo>) :
     RecyclerView.Adapter<SearchResultAdapter.Holder>() {
 
-    private val onHeartClickedListener = OnHeartClickedListener()
-
-    interface VideoClick{
+    interface VideoClick {
         fun onClick(item: YoutubeVideo, position: Int)
     }
 
-    var videoClick : VideoClick? = null
+    var videoClick: VideoClick? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding = VideoItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -26,18 +24,11 @@ class SearchResultAdapter(val mItems: List<YoutubeVideo>) :
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        val data = mItems[position]
-
-        holder.heartImageView.setOnClickListener {
-            data.isLiked = !data.isLiked
-            holder.setHeartImageView(data.isLiked)
-            onHeartClickedListener.onHeartClicked(data)
-        }
-        holder.itemView.setOnClickListener{
+        holder.itemView.setOnClickListener {
             videoClick?.onClick(mItems[position], position)
         }
 
-        holder.bind(data)
+        holder.bind(position)
     }
 
     override fun getItemId(position: Int): Long {
@@ -52,9 +43,11 @@ class SearchResultAdapter(val mItems: List<YoutubeVideo>) :
         private val thumbnailImageView = binding.ivVideoImage
         private val titleTextView = binding.tvVideoName
         private val timeTextView = binding.tvVideoTime
-        val heartImageView = binding.ivVideoLike
+        private val heartImageView = binding.ivVideoLike
 
-        fun bind(data: YoutubeVideo) {
+        fun bind(position:Int) {
+            val data = mItems[position]
+
             data.thumbnail?.let {
                 Glide.with(binding.root.context)
                     .load(it)
@@ -64,9 +57,16 @@ class SearchResultAdapter(val mItems: List<YoutubeVideo>) :
             titleTextView.text = data.title
             timeTextView.text = data.publishedAt
             setHeartImageView(data.isLiked)
+
+            heartImageView.setOnClickListener {
+                data.isLiked = !data.isLiked
+                setHeartImageView(data.isLiked)
+                OnHeartClickedListener.onHeartClicked(data)
+                notifyItemChanged(position)
+            }
         }
 
-        fun setHeartImageView(isLiked: Boolean) {
+        private fun setHeartImageView(isLiked: Boolean) {
             heartImageView.setImageResource(
                 if (isLiked) R.drawable.icon_foot
                 else R.drawable.icon_foot_line

@@ -1,39 +1,35 @@
 package com.example.myapplication.myvideo
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.DateUtils.getDateFromTimestampWithFormat
-
+import com.example.myapplication.MyApplication
+import com.example.myapplication.R
 import com.example.myapplication.YouTubeViewType
 import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.databinding.LongScaleShortsItemBinding
 import com.example.myapplication.databinding.SmallVideoItemBinding
+import com.example.myapplication.like.OnHeartClickedListener
 
-class MyVideoAdapter(private val mContext: Context) :
+class MyVideoAdapter() :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var items = mutableListOf<YoutubeVideo>()
-
-
     override fun getItemViewType(position: Int): Int {
-
-
         return if (items[position].isShorts) {
             YouTubeViewType.VIEW_TYPE_LONG_SCALE_SHORTS.ordinal
-        } else  YouTubeViewType.VIEW_TYPE_LONG_SCALE_SHORTS.ordinal
+        } else YouTubeViewType.VIEW_TYPE_LONG_SCALE_SHORTS.ordinal
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val inflater = LayoutInflater.from(mContext)
+        val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
             YouTubeViewType.VIEW_TYPE_SMALL_VIDEO.ordinal -> {
                 val binding = SmallVideoItemBinding.inflate(inflater, parent, false)
                 SmallVideoViewHolder(binding)
             }
-
 
             YouTubeViewType.VIEW_TYPE_LONG_SCALE_SHORTS.ordinal -> {
                 val binding = LongScaleShortsItemBinding.inflate(inflater, parent, false)
@@ -45,17 +41,11 @@ class MyVideoAdapter(private val mContext: Context) :
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (items.isEmpty()) {
-            // 데이터가 없는 경우의 처리
-            // 예를 들어, 빈 상태를 나타내는 뷰를 보여줄 수 있음
-        } else {
-            when (holder) {
-                is SmallVideoViewHolder -> holder.bind(items[position - 1])
-                is LongScaleShortsViewHolder -> holder.bind(items[position - 1])
+        when (holder) {
+            is SmallVideoViewHolder -> holder.bind(items[position])
+            is LongScaleShortsViewHolder -> holder.bind(items[position])
 
-                // ViewHolder3의 데이터 처리
-
-            }
+            // ViewHolder3의 데이터 처리
         }
     }
 
@@ -67,7 +57,7 @@ class MyVideoAdapter(private val mContext: Context) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: YoutubeVideo) {
             // 썸네일 이미지 로드
-            Glide.with(mContext)
+            Glide.with(MyApplication.appContext!!)
                 .load(item.thumbnail)
                 .into(binding.ivSmallVideoImage)
 
@@ -82,14 +72,18 @@ class MyVideoAdapter(private val mContext: Context) :
             )
 
             binding.ivSmallVideoLike.setOnClickListener {
-                val position = adapterPosition
-                if (position != RecyclerView.NO_POSITION) {
-                    val currentItem = items[position - 1]
-                    currentItem.isLiked = !currentItem.isLiked // 좋아요 상태 변경
-                    notifyItemChanged(position) // 변경 사항을 RecyclerView에 알림
-                    // TODO: 좋아요 상태를 저장하는 로직 추가
-                }
+                item.isLiked = !item.isLiked
+                setHeartImageView(item.isLiked)
+                OnHeartClickedListener.onHeartClicked(item)
+                notifyItemChanged(position)
             }
+        }
+
+        private fun setHeartImageView(liked: Boolean) {
+            binding.ivSmallVideoLike.setImageResource(
+                if (liked) R.drawable.icon_foot
+                else R.drawable.icon_foot_line
+            )
         }
     }
 
@@ -98,7 +92,7 @@ class MyVideoAdapter(private val mContext: Context) :
         fun bind(item: YoutubeVideo) {
             // 기존의 onBindViewHolder 내용과 좋아요 아이콘 관련 로직을 여기에 추가
             // 썸네일 이미지 로드
-            Glide.with(mContext)
+            Glide.with(MyApplication.appContext!!)
                 .load(item.thumbnail)
                 .into(binding.ivLsShortsImage)
 
@@ -114,14 +108,18 @@ class MyVideoAdapter(private val mContext: Context) :
 
             // 좋아요 버튼 관련 로직 추가
             binding.ivLsShortsLike.setOnClickListener {
-                val position = adapterPosition
-                if (position != RecyclerView.NO_POSITION) {
-                    val currentItem = items[position - 1]
-                    currentItem.isLiked = !currentItem.isLiked // 좋아요 상태 변경
-                    notifyItemChanged(position) // 변경 사항을 RecyclerView에 알림
-                    // TODO: 좋아요 상태를 저장하는 로직 추가
-                }
+                item.isLiked = !item.isLiked
+                setHeartImageView(item.isLiked)
+                OnHeartClickedListener.onHeartClicked(item)
+                notifyItemChanged(position)
             }
+        }
+
+        private fun setHeartImageView(liked: Boolean) {
+            binding.ivLsShortsLike.setImageResource(
+                if (liked) R.drawable.icon_foot
+                else R.drawable.icon_foot_line
+            )
         }
     }
 

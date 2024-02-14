@@ -59,6 +59,4 @@ class HomeShortsAdapter(private val mContext: Context): RecyclerView.Adapter<Hom
         }
     }
 
-    //좋아요 기능 구현ㅜ,ㅜ
-
 }

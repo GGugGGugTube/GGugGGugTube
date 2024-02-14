@@ -35,10 +35,10 @@ class MyVideoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // 어댑터 초기화
-        adapter = MyVideoAdapter(requireContext())
-        myLikeAdapter = MyVideoAdapter(requireContext())
-        myWatchAdapter = MyVideoAdapter(requireContext())
-        myShortsWatchAdapter = MyVideoAdapter(requireContext())
+        adapter = MyVideoAdapter()
+        myLikeAdapter = MyVideoAdapter()
+        myWatchAdapter = MyVideoAdapter()
+        myShortsWatchAdapter = MyVideoAdapter()
 
         // 리사이클러뷰에 레이아웃 매니저 설정
         binding.reMyLikeList.layoutManager =
