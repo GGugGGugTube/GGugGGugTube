@@ -11,6 +11,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class YoutubeVideo(
+    val id:String,
     val title: String,
     val description: String,
     val thumbnail: String,
@@ -25,6 +26,7 @@ data class YoutubeVideo(
             youtubeVideoResource: YoutubeVideoResource
         ): YoutubeVideo {
             return with(youtubeVideoResource) {
+                val id = this.id
                 val title = this.snippet.title
                 val description = this.snippet.description
                 val thumbnail = this.snippet.thumbnails.default.url
@@ -33,7 +35,7 @@ data class YoutubeVideo(
                 val category = category
                 val isShorts = ShortsUtils.isShorts(youtubeVideoResource)
 
-                YoutubeVideo(title, description, thumbnail, publishedAt, category, isShorts)
+                YoutubeVideo(id, title, description, thumbnail, publishedAt, category, isShorts)
             }
         }
 
@@ -42,6 +44,7 @@ data class YoutubeVideo(
             youtubeVideoSearchResource: YoutubeVideoSearchResource
         ): YoutubeVideo {
             return with(youtubeVideoSearchResource) {
+                val id = this.id.videoId
                 val title = this.snippet.title
                 val description = this.snippet.description
                 val thumbnail = this.snippet.thumbnails.default.url
@@ -50,7 +53,7 @@ data class YoutubeVideo(
                 val category = category
                 val isShorts = ShortsUtils.isShorts(this)
 
-                YoutubeVideo(title, description, thumbnail, publishedAt, category, isShorts)
+                YoutubeVideo(id, title, description, thumbnail, publishedAt, category, isShorts)
             }
         }
     }
