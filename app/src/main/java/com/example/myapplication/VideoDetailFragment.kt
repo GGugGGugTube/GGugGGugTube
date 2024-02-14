@@ -1,6 +1,5 @@
 package com.example.myapplication
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,8 +9,6 @@ import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.myapplication.databinding.FragmentVideoDetailBinding
-import com.example.myapplication.youtubeApi.YoutubeVideoSearchResource
-import java.net.URL
 
 class VideoDetailFragment : Fragment() {
     private val TAG = "VideoDetailFragment"
@@ -51,15 +48,15 @@ class VideoDetailFragment : Fragment() {
 //            button.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
 //        }
 
-        binding?.btnShare?.setOnClickListener {
-            val url = URL("https://www.youtube.com/watch?v=${YoutubeVideoSearchResource.videoId}")
-
-            val intent = Intent(Intent.ACTION_SEND).apply{
-                type = "text/plane"
-                putExtra(Intent.EXTRA_TEXT, url)
-            }
-            startActivity(Intent.createChooser(intent, url))
-        }
+//        binding?.btnShare?.setOnClickListener {
+//            val url =
+//
+//            val intent = Intent(Intent.ACTION_SEND).apply{
+//                type = "text/plane"
+//                putExtra(Intent.EXTRA_TEXT, url)
+//            }
+//            startActivity(Intent.createChooser(intent, url))
+//        }
 
         initBackButton()
 
