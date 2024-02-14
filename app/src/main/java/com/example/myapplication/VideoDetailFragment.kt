@@ -1,17 +1,15 @@
 package com.example.myapplication
 
-import android.content.Intent
-import android.content.Intent.ACTION_SEND
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.example.myapplication.databinding.FragmentVideoDetailBinding
 
 class VideoDetailFragment : Fragment() {
 
-    private var binding: FragmentVideoDetailBinding? = null
+    private lateinit var binding: FragmentVideoDetailBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -21,7 +19,11 @@ class VideoDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentVideoDetailBinding.inflate(inflater, container, false)
-        return binding?.root
+
+        val mainActivity = activity as MainActivity
+        mainActivity.hideBottomNavigation(true)
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,6 +53,18 @@ class VideoDetailFragment : Fragment() {
 //            }
 //            startActivity(Intent.createChooser(intent, url))
 //        }
+
+        binding.imgDetailBack.setOnClickListener {
+            parentFragmentManager.popBackStack()
+        }
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        val mainActivity = activity as MainActivity
+        mainActivity.hideBottomNavigation(false)
     }
 
     //추후에 Parcelize 되면 추가

@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.Constants
 import com.example.myapplication.CtItem
+import com.example.myapplication.MainActivity
 import com.example.myapplication.databinding.FragmentSearchResultBinding
 import com.example.myapplication.model.NaverModel
 import com.example.myapplication.naverdictionary.NaverData
@@ -45,14 +46,30 @@ class SearchResultFragment : Fragment() {
         initDictionary(inflater, container)
         initViewPagerButton()
 
+        //Bottom Navigation 숨기기
+        val mainActivity = activity as MainActivity
+        mainActivity.hideBottomNavigation(true)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.imgSearchBack.setOnClickListener {
+            parentFragmentManager.popBackStack()
+        }
     }
 
+    // 뒤로가기 누를 시 Bottom Navigation 살리기
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        val mainActivity = activity as MainActivity
+        mainActivity.hideBottomNavigation(false)
+    }
+
+    // 동물 카테고리를 클릭하면 그 동물의 이름 가져다오기
     private fun initAnimal() {
         animalData = arguments?.getParcelable<CtItem>("EXTRA_ANIMAL") as CtItem.CategoryItem?
         binding.tvAnimal?.text = animalData?.animalName
@@ -61,6 +78,7 @@ class SearchResultFragment : Fragment() {
         fenchNaverResult(animal)
     }
 
+    // 동물의 이름을 query로 받아서 네이버 백과사전 API 응답요청
     private fun fenchNaverResult(query: String) {
         NaverRetrofit.naverApiService.naverDic(Constants.NAVER_CLIENT_ID, Constants.NAVER_CLIENT_SECRET, query)
             ?.enqueue(object: Callback<NaverData> {
@@ -95,6 +113,7 @@ class SearchResultFragment : Fragment() {
         }
     }
 
+    // ViewPager2 양 옆의 화살표 작동시키기
     private fun initViewPagerButton() {
         with(binding) {
             imgArrowBack.setOnClickListener {
