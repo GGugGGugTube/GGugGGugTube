@@ -12,8 +12,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.Constants
 import com.example.myapplication.CtItem
-import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.MainActivity
+import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.databinding.FragmentSearchResultBinding
 import com.example.myapplication.model.NaverModel
 import com.example.myapplication.naverdictionary.NaverData
@@ -72,9 +72,6 @@ class SearchResultFragment : Fragment() {
 
         initBackButton()
         fetchYoutubeResult(animalData.animalName)
-        binding.imgSearchBack.setOnClickListener {
-            parentFragmentManager.popBackStack()
-        }
     }
 
     // 뒤로가기 누를 시 Bottom Navigation 살리기
@@ -98,33 +95,32 @@ class SearchResultFragment : Fragment() {
             Constants.NAVER_CLIENT_ID,
             Constants.NAVER_CLIENT_SECRET,
             query
-        )
-            ?.enqueue(object : Callback<NaverData> {
-    // 동물의 이름을 query로 받아서 네이버 백과사전 API 응답요청
-    private fun fenchNaverResult(query: String) {
-        NaverRetrofit.naverApiService.naverDic(Constants.NAVER_CLIENT_ID, Constants.NAVER_CLIENT_SECRET, query)
-            ?.enqueue(object: Callback<NaverData> {
-                override fun onResponse(call: Call<NaverData>, response: Response<NaverData>) {
-                    val body = response.body()
+        )?.enqueue(object : Callback<NaverData> {
+            override fun onResponse(
+                call: Call<NaverData>,
+                response: Response<NaverData>
+            ) {
+                val body = response.body()
 
-                    body?.let {
-                        response.body()!!.items.forEach { item ->
-                            val title = item.title
-                            val description = item.description
-                            val url = item.thumbnail
-                            resItem.add(NaverModel(title, description, url))
-                        }
+                body?.let {
+                    response.body()!!.items.forEach { item ->
+                        val title = item.title
+                        val description = item.description
+                        val url = item.thumbnail
+                        resItem.add(NaverModel(title, description, url))
                     }
-
-                    dictionaryAdapter.items = resItem
-                    dictionaryAdapter.notifyDataSetChanged()
-                    Log.d("네이버api 검사", "응답")
                 }
 
-                override fun onFailure(call: Call<NaverData>, t: Throwable) {
-                    Log.d("네이버api 검사", "응답실패")
-                }
-            })
+                dictionaryAdapter.items = resItem
+                dictionaryAdapter.notifyDataSetChanged()
+                Log.d("네이버api 검사", "응답")
+            }
+
+
+            override fun onFailure(call: Call<NaverData>, t: Throwable) {
+                Log.d("네이버api 검사", "응답실패")
+            }
+        })
     }
 
     private fun initDictionary(inflater: LayoutInflater, container: ViewGroup?) {
@@ -143,7 +139,10 @@ class SearchResultFragment : Fragment() {
 
                 searchDictionary.setCurrentItem(current - 1, true)
                 if (current == 0) {
-                    binding.searchDictionary.setCurrentItem(dictionaryAdapter.itemCount - 1, true)
+                    binding.searchDictionary.setCurrentItem(
+                        dictionaryAdapter.itemCount - 1,
+                        true
+                    )
                 }
             }
 
@@ -180,7 +179,10 @@ class SearchResultFragment : Fragment() {
         val youtubeSearchResult = mutableListOf<YoutubeVideo>()
         Log.d(TAG, "result size: ${searchResponse.await().items.size}")
         searchResponse.await().items.forEach {
-            Log.d(TAG, "creating YoutubeVideo instances... size:${youtubeSearchResult.size}")
+            Log.d(
+                TAG,
+                "creating YoutubeVideo instances... size:${youtubeSearchResult.size}"
+            )
             Log.d(TAG, it.toString())
 
             youtubeSearchResult.add(

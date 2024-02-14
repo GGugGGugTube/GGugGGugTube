@@ -55,6 +55,7 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         with(binding) {
             adapter.animalClick = object : SearchAdapter.AnimalClick {
                 override fun onClick(item: CtItem, position: Int) {
