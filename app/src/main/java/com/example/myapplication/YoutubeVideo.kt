@@ -37,7 +37,7 @@ data class YoutubeVideo(
                 val viewCount = StatisticsUtils.getViewCount(id)
                 Log.d(TAG, "author: $author, viewCount: $viewCount")
                 val description = this.snippet.description
-                val thumbnail = this.snippet.thumbnails.default.url
+                val thumbnail = this.snippet.thumbnails.high.url
                 val publishedAt = this.snippet.publishedAt
                 val category = category
                 val isShorts = ShortsUtils.isShorts(id)
@@ -57,7 +57,7 @@ data class YoutubeVideo(
                 val viewCount = StatisticsUtils.getViewCount(id)
                 Log.d(TAG, "author: $author, viewCount: $viewCount")
                 val description = this.snippet.description
-                val thumbnail = this.snippet.thumbnails.default.url
+                val thumbnail = this.snippet.thumbnails.high.url
                 val publishedAt = this.snippet.publishedAt
                 val category = category
                 val isShorts = ShortsUtils.isShorts(id)

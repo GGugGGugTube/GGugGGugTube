@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import com.example.myapplication.MyApplication
+import com.example.myapplication.NetworkUtils
 import com.google.api.client.extensions.android.AndroidUtils
 import okhttp3.Cache
 import okhttp3.CacheControl
@@ -39,7 +40,7 @@ object YoutubeNetworkClient {
         val offlineInterceptor = Interceptor{chain ->
             var request: Request = chain.request()
 
-            if (!isNetworkAvailable()) {
+            if (!NetworkUtils.isNetworkAvailable()) {
                 val cacheControl =  CacheControl.Builder()
                     .maxStale(7, TimeUnit.DAYS)
                     .build()
@@ -66,21 +67,4 @@ object YoutubeNetworkClient {
         )
         .build()
     val youtubeNetWork = youtubeRetrofit.create(YoutubeNetWorkInterface::class.java)
-
-    private fun isNetworkAvailable(): Boolean {
-        val context = MyApplication.appContext!!
-        val connectivity =
-            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        if (connectivity == null) {
-            return false
-        } else {
-            val info = connectivity.allNetworkInfo
-            for (networkInfo in info) {
-                if (networkInfo.state == NetworkInfo.State.CONNECTED) {
-                    return true
-                }
-            }
-        }
-        return false
-    }
 }

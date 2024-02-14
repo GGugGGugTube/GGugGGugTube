@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">GGugGGugTube</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="no_video_search_result">동영상 검색 결과가 없습니다.</string>
+    <string name="no_video_popular_result">검색 결과 동영상이 없습니다!</string>
+    <string name="no_shorts_popular_result">검색 결과 Shorts 동영상이 없습니다!</string>
+
+    <string name="no_video_search_result">검색 결과 동영상이 없습니다!</string>
+    <string name="no_shorts_search_result">검색 결과 Shorts 동영상이 없습니다!</string>
 </resources>

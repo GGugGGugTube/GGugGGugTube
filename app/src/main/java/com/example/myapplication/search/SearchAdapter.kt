@@ -18,7 +18,7 @@ class SearchAdapter(var mItem: List<CtItem>) : RecyclerView.Adapter<ViewHolder>(
     }
 
     interface ItemLongClick{
-        fun onLongClick(view: View, position: Int)
+        fun onLongClick(id: Int, position: Int)
     }
 
     interface AnimalClick{
@@ -69,7 +69,7 @@ class SearchAdapter(var mItem: List<CtItem>) : RecyclerView.Adapter<ViewHolder>(
                     animalClick?.onClick(item, position)
                 }
                 holder.itemView.setOnLongClickListener() OnLongClickListener@{
-                    itemLongClick?.onLongClick(it, position)
+                    itemLongClick?.onLongClick(item.Id, position)
                     return@OnLongClickListener true
                 }
             }
@@ -97,6 +97,7 @@ class SearchAdapter(var mItem: List<CtItem>) : RecyclerView.Adapter<ViewHolder>(
 
     fun changeDataset(newDataSet: List<CtItem>) {
         mItem = newDataSet
+        notifyDataSetChanged()
     }
 
 
