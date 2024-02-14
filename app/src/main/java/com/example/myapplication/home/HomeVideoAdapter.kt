@@ -12,23 +12,30 @@ import com.example.myapplication.R
 import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.databinding.VideoItemBinding
 import com.example.myapplication.like.OnHeartClickedListener
+import com.example.myapplication.search.SearchResultAdapter
 
 class HomeVideoAdapter(private val mContext: Context) :
     RecyclerView.Adapter<HomeVideoAdapter.ItemViewHolder>() {
 
     var items = ArrayList<YoutubeVideo>()
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int,
-    ): HomeVideoAdapter.ItemViewHolder {
-        val binding =
-            VideoItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+    interface homeVideoClick {
+        fun onClick(item: YoutubeVideo, position: Int)
+    }
+
+    var homevideoClick: homeVideoClick? = null
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int, ): HomeVideoAdapter.ItemViewHolder {
+        val binding = VideoItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
         return ItemViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: HomeVideoAdapter.ItemViewHolder, position: Int) {
         holder.bind(position)
+        holder.itemView.setOnClickListener{
+            homevideoClick?.onClick(items[position], position)
+        }
     }
 
     override fun getItemCount(): Int {
