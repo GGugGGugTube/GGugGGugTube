@@ -10,14 +10,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.DateUtils
 import com.example.myapplication.YoutubeVideo
 import com.bumptech.glide.Glide
-import com.example.myapplication.databinding.VideoitemBinding
+import com.example.myapplication.databinding.VideoItemBinding
 
 class HomeVideoAdapter(private val mContext: Context): RecyclerView.Adapter<HomeVideoAdapter.ItemViewHolder>() {
 
     var items = ArrayList<YoutubeVideo>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int, ): HomeVideoAdapter.ItemViewHolder {
-        val binding = VideoitemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = VideoItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ItemViewHolder(binding)
     }
 
@@ -43,8 +43,8 @@ class HomeVideoAdapter(private val mContext: Context): RecyclerView.Adapter<Home
         return items.size
     }
 
-    inner class ItemViewHolder(binding: VideoitemBinding) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
-        var iv_thum_video: ImageView = binding.ivVideoimage
+    inner class ItemViewHolder(binding: VideoItemBinding) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+        var iv_thum_video: ImageView = binding.ivVideoImage
         var iv_video_like: ImageView = binding.ivVideoLike
         var iv_video_name: TextView = binding.tvVideoName
         var iv_video_time: TextView = binding.tvVideoTime

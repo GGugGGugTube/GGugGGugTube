@@ -44,8 +44,8 @@ class HomeShortsAdapter(private val mContext: Context): RecyclerView.Adapter<Hom
     }
 
     inner class ItemViewHolder(binding: ShortsItemBinding) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
-        var iv_thum_shorts: ImageView = binding.ivShorstimage
-        var iv_shorts_like: ImageView = binding.ivShorstLike
+        var iv_thum_shorts: ImageView = binding.ivShortsImage
+        var iv_shorts_like: ImageView = binding.ivShortsLike
         var iv_shorts_name: TextView = binding.tvShortsName
         var iv_shorts_time: TextView = binding.tvShortsTime
 

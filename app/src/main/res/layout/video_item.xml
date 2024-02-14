@@ -9,7 +9,7 @@
     >
 
     <ImageView
-        android:id="@+id/iv_videoimage"
+        android:id="@+id/iv_video_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="200dp"
@@ -21,14 +21,14 @@
 
     <ImageView
         android:id="@+id/iv_video_like"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:src="@drawable/icon_foot_line"
-        app:layout_constraintEnd_toEndOf="@+id/iv_videoimage"
-        app:layout_constraintTop_toTopOf="@+id/iv_videoimage" />
+        app:layout_constraintEnd_toEndOf="@+id/iv_video_image"
+        app:layout_constraintTop_toTopOf="@+id/iv_video_image" />
 
     <TextView
-        android:id="@+id/tv_videoName"
+        android:id="@+id/tv_video_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
@@ -38,10 +38,10 @@
         android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_videoimage" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_video_image" />
 
     <TextView
-        android:id="@+id/tv_VideoTime"
+        android:id="@+id/tv_video_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="날짜 / 시간"
@@ -51,6 +51,6 @@
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_videoName" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_video_name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
