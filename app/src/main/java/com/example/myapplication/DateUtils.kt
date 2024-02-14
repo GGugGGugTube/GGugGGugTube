@@ -17,14 +17,15 @@ object DateUtils {
         try {
             val format = SimpleDateFormat(fromFormatformat)
             date = format.parse(timestamp)
+
+            Log.d("jbdate", "getDateFromTimestampWithFormat date >> $date")
+
+            val df = SimpleDateFormat(toFormatformat)
+            res = df.format(date)
         } catch (e: ParseException) {
             e.printStackTrace()
         }
 
-        Log.d("jbdate", "getDateFromTimestampWithFormat date >> $date")
-
-        val df = SimpleDateFormat(toFormatformat)
-        res = df.format(date)
         return res
     }
 }
