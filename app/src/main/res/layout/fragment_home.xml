@@ -82,11 +82,23 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
+                android:layout_marginVertical="10dp"
                 app:layout_constraintTop_toBottomOf="@+id/tv_recommendation"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
                 app:lottie_rawRes="@raw/animation_bingle_cat" />
+
+            <TextView
+                android:id="@+id/tv_no_shorts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginVertical="10dp"
+                android:text="@string/no_shorts_popular_result"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/tv_recommendation" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -117,11 +129,23 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
+                android:layout_marginVertical="10dp"
                 app:layout_constraintTop_toBottomOf="@+id/tv_recommendation"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
                 app:lottie_rawRes="@raw/animation_bingle_cat" />
+
+            <TextView
+                android:id="@+id/tv_no_vidoes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginVertical="10dp"
+                android:text="@string/no_video_popular_result"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/tv_recommendation" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
