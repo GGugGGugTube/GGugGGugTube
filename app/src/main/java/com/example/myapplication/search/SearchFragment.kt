@@ -32,13 +32,15 @@ class SearchFragment : Fragment() {
 
         //삭제 다이얼로그
         adapter.itemLongClick = object : SearchAdapter.ItemLongClick {
-            override fun onLongClick(view: View, position: Int) {
+            override fun onLongClick(id: Int, position: Int) {
                 val ad = AlertDialog.Builder(context)
                 ad.setTitle("삭제")
                 ad.setMessage("정말로 삭제하시겠습니까?")
                 ad.setPositiveButton("확인"){dialog,_ ->
+                    CategoryItemManager.removeItem(id)
                     dataList.removeAt(position)
-                    adapter.notifyItemRemoved(position)
+                    adapter.changeDataset(dataList)
+//                    adapter.notifyItemRemoved(position)
                 }
                 ad.setNegativeButton("취소"){dialog,_ ->
                     dialog.dismiss()
@@ -101,6 +103,7 @@ class SearchFragment : Fragment() {
 
             _binding.tvSearchitemname.text = edit?.text
             CategoryItemManager.addItem(edit?.text.toString())
+            dataList.add(CategoryItemManager.getLastItem())
             adapter.changeDataset(CategoryItemManager.getItem())
             adapter.notifyDataSetChanged()
         }

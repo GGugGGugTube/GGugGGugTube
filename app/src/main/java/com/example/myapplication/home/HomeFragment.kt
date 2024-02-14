@@ -119,5 +119,4 @@ class HomeFragment : Fragment() {
         Log.d(TAG, "youtubeShorts = ${youtubeShorts.size}")
         Log.d(TAG, "youtubeVideo = ${youtubeVideo.size}")
     }
-
 }
