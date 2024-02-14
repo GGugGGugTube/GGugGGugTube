@@ -5,12 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.YoutubeVideo
-import com.example.myapplication.databinding.VideoitemBinding
+import com.example.myapplication.databinding.VideoItemBinding
 
 class SearchResultAdapter(val mItems: List<YoutubeVideo>) :
     RecyclerView.Adapter<SearchResultAdapter.Holder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val binding = VideoitemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = VideoItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return Holder(binding)
     }
 
@@ -26,8 +26,8 @@ class SearchResultAdapter(val mItems: List<YoutubeVideo>) :
         return mItems.size
     }
 
-    inner class Holder(val binding: VideoitemBinding) : RecyclerView.ViewHolder(binding.root) {
-        private val thumbnailImageView = binding.ivVideoimage
+    inner class Holder(val binding: VideoItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        private val thumbnailImageView = binding.ivVideoImage
         private val titleTextView = binding.tvVideoName
         private val timeTextView = binding.tvVideoTime
         private val heartImageView = binding.ivVideoLike

@@ -73,10 +73,7 @@ class HomeFragment : Fragment() {
             Log.d(TAG, it.toString())
 
             youtubeSearchResult.add(
-                YoutubeVideo.createYouTubeVideo(
-                    category = "GGugGGug",
-                    youtubeSnippet = it.snippet
-                )
+                YoutubeVideo.createYouTubeVideo("GGugGGug", it)
             )
         }
     }
