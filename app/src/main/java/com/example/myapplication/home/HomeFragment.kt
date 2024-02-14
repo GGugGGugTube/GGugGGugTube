@@ -79,14 +79,19 @@ class HomeFragment : Fragment() {
                 youtubeShorts.add(it)
             else youtubeVideo.add(it)
         }
-
-        shortsadapter.items.addAll(youtubeShorts)
-        videoadapter.items.addAll(youtubeVideo)
-        shortsadapter.notifyDataSetChanged()
-        videoadapter.notifyDataSetChanged()
-
         Log.d(TAG, "youtubeShorts = ${youtubeShorts.size}")
         Log.d(TAG, "youtubeVideo = ${youtubeVideo.size}")
+
+
+        binding.progressbarShorts.visibility = View.GONE
+        binding.reHomeBestShorts.visibility = View.VISIBLE
+        shortsadapter.items.addAll(youtubeShorts)
+        shortsadapter.notifyDataSetChanged()
+
+        binding.progressbarVideo.visibility = View.GONE
+        binding.reHomeVideo.visibility = View.VISIBLE
+        videoadapter.items.addAll(youtubeVideo)
+        videoadapter.notifyDataSetChanged()
     }
 
 }
