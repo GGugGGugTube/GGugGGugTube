@@ -1,12 +1,10 @@
 package com.example.myapplication
 
-import android.content.Intent
-import android.content.Intent.ACTION_SEND
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.example.myapplication.databinding.FragmentVideoDetailBinding
 
 class VideoDetailFragment : Fragment() {
@@ -21,6 +19,10 @@ class VideoDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentVideoDetailBinding.inflate(inflater, container, false)
+
+        val mainActivity = activity as MainActivity
+        mainActivity.hideBottomNavigation(true)
+
         return binding?.root
     }
 
@@ -51,6 +53,13 @@ class VideoDetailFragment : Fragment() {
 //            }
 //            startActivity(Intent.createChooser(intent, url))
 //        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        val mainActivity = activity as MainActivity
+        mainActivity.hideBottomNavigation(false)
     }
 
     //추후에 Parcelize 되면 추가
