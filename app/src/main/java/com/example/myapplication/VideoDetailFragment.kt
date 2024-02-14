@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.myapplication.databinding.FragmentVideoDetailBinding
 import java.net.URL
+import java.text.DecimalFormat
 
 class VideoDetailFragment : Fragment() {
     private val TAG = "VideoDetailFragment"
@@ -65,7 +66,13 @@ class VideoDetailFragment : Fragment() {
     private fun initVideo() {
         with(binding) {
             tvDetailTitle.text = videoData.title
+            tvNameDetail.text = videoData.author
             tvDateDetail.text = videoData.publishedAt
+
+            // 조회수
+            val dec = DecimalFormat("#,###")
+            tvViewcountDetail.text = "${dec.format(videoData.viewCount)}회"
+
             Glide.with(this@VideoDetailFragment)
                 .load(videoData.thumbnail)
                 .into(imgDetailVideo)
