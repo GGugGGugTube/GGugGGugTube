@@ -22,7 +22,6 @@ class SearchFragment : Fragment() {
     private lateinit var _binding: SearchRecyclerviewItemBinding
     private lateinit var adapter: SearchAdapter
     private lateinit var gridManager: GridLayoutManager
-    private var dataList = ArrayList<CtItem>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?, ): View? {
         binding = FragmentSearchBinding.inflate(layoutInflater, container, false)
@@ -32,13 +31,13 @@ class SearchFragment : Fragment() {
 
         //삭제 다이얼로그
         adapter.itemLongClick = object : SearchAdapter.ItemLongClick {
-            override fun onLongClick(view: View, position: Int) {
+            override fun onLongClick(id: Int, position: Int) {
                 val ad = AlertDialog.Builder(context)
                 ad.setTitle("삭제")
                 ad.setMessage("정말로 삭제하시겠습니까?")
                 ad.setPositiveButton("확인"){dialog,_ ->
-                    dataList.removeAt(position)
-                    adapter.notifyItemRemoved(position)
+                    CategoryItemManager.removeItem(id)
+                    adapter.changeDataset(CategoryItemManager.getItem())
                 }
                 ad.setNegativeButton("취소"){dialog,_ ->
                     dialog.dismiss()
@@ -77,14 +76,10 @@ class SearchFragment : Fragment() {
     }
 
     private fun itemView() {
-
-        dataList.addAll(CategoryItemManager.getItem())
-        adapter = SearchAdapter(dataList)
+        adapter = SearchAdapter(CategoryItemManager.getItem())
         binding.reSearch.adapter = adapter
         gridManager = GridLayoutManager(context, 3)
         binding.reSearch.layoutManager = gridManager
-
-
     }
 
     //추가 버튼을 누르면 뜨는 다이얼로그

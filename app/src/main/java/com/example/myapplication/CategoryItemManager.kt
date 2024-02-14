@@ -34,5 +34,11 @@ class CategoryItemManager {
         fun addItem(animalName: String){
             categoryItemList = categoryItemList + CtItem.CategoryItem(categoryItemList.size, R.drawable.icon_ggug, animalName)
         }
+
+        fun getLastItem() : CtItem = Companion.categoryItemList.last()
+
+        fun removeItem(id: Int){
+            categoryItemList =  categoryItemList.filter { it.Id != id }
+        }
     }
 }
