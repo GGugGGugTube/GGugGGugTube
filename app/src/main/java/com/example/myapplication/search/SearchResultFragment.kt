@@ -191,12 +191,19 @@ class SearchResultFragment : Fragment() {
         }
 
         Log.d(TAG, "initiate recyclerviews")
-        //initShortsRecyclerView(youtubeSearchResult.filter { it.isShorts })
-        initVideoRecyclerView(youtubeSearchResult.filter { !it.isShorts })
+
+        val shorts = youtubeSearchResult.filter { it.isShorts }
+        Log.d(TAG, "shorts size: ${shorts.size}")
+        initShortsRecyclerView(shorts)
+
+        val videos = youtubeSearchResult.filter{!it.isShorts}
+        Log.d(TAG, "videos size: ${videos.size}")
+        initVideoRecyclerView(videos)
     }
 
     private fun initShortsRecyclerView(shorts: List<YoutubeVideo>) {
-        //TODO 숏츠 리싸이클러뷰 설정하기
+        shortsAdapter = SearchResultShortsAdapter(shorts)
+        binding.reSearchShorts.adapter = shortsAdapter
     }
 
     private fun initVideoRecyclerView(videos: List<YoutubeVideo>) {

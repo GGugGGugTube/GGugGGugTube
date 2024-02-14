@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.os.Parcelable
+import android.util.Log
 import com.example.myapplication.youtubeApi.ShortsUtils
 import com.example.myapplication.youtubeApi.YoutubeVideoResource
 import com.example.myapplication.youtubeApi.YoutubeVideoResourceSnippet
@@ -19,36 +20,37 @@ data class YoutubeVideo(
     var isLiked: Boolean = false
 ) : Parcelable {
     companion object {
-        fun createYouTubeVideo(
+        suspend fun createYouTubeVideo(
             category: String = "",
             youtubeVideoResource: YoutubeVideoResource
         ): YoutubeVideo {
-            with(youtubeVideoResource) {
+            return with(youtubeVideoResource) {
                 val title = this.snippet.title
                 val description = this.snippet.description
                 val thumbnail = this.snippet.thumbnails.default.url
                 val publishedAt = this.snippet.publishedAt
 
-                val category = "" //TODO : 동물 카테고리 저장하기
+                val category = category
                 val isShorts = ShortsUtils.isShorts(youtubeVideoResource)
 
-                return YoutubeVideo(title, description, thumbnail, publishedAt, category, isShorts)
+                YoutubeVideo(title, description, thumbnail, publishedAt, category, isShorts)
             }
         }
 
-        fun createYouTubeVideo(
+        suspend fun createYouTubeVideo(
             category: String = "",
             youtubeVideoSearchResource: YoutubeVideoSearchResource
         ): YoutubeVideo {
-            with(youtubeVideoSearchResource) {
+            return with(youtubeVideoSearchResource) {
                 val title = this.snippet.title
                 val description = this.snippet.description
                 val thumbnail = this.snippet.thumbnails.default.url
                 val publishedAt = this.snippet.publishedAt
 
-                val category = category //TODO : 동물 카테고리 저장하기
+                val category = category
                 val isShorts = ShortsUtils.isShorts(this)
-                return YoutubeVideo(title, description, thumbnail, publishedAt, category, isShorts)
+
+                YoutubeVideo(title, description, thumbnail, publishedAt, category, isShorts)
             }
         }
     }
