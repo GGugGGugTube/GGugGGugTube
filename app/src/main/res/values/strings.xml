@@ -2,5 +2,6 @@
     <string name="app_name">GGugGGugTube</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="youtube_api_key">AIzaSyDwJ6e9yH7IIr2deX2kV26T2T5P7254lVE</string>
+
+    <string name="no_video_search_result">동영상 검색 결과가 없습니다.</string>
 </resources>
