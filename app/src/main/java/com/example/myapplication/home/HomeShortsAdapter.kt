@@ -11,10 +11,15 @@ import com.example.myapplication.DateUtils.getDateFromTimestampWithFormat
 import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.databinding.ShortsItemBinding
 import com.bumptech.glide.Glide
+import com.example.myapplication.CtItem
 
 class HomeShortsAdapter(private val mContext: Context): RecyclerView.Adapter<HomeShortsAdapter.ItemViewHolder>() {
 
     var items = ArrayList<YoutubeVideo>()
+
+    interface onLikedClick{
+        fun onClick(item: CtItem, position: Int)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int, ): HomeShortsAdapter.ItemViewHolder {
         val binding = ShortsItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -32,11 +37,7 @@ class HomeShortsAdapter(private val mContext: Context): RecyclerView.Adapter<Hom
         holder.iv_shorts_name.text = currentItem.title
 
         //동영상 시간
-        holder.iv_shorts_time.text = getDateFromTimestampWithFormat(
-            currentItem.publishedAt,
-            "yyyy-MM-dd'T'HH:mm:ss.SSS+09:00",
-            "MM-dd HH:mm:ss"
-        )
+        holder.iv_shorts_time.text = currentItem.publishedAt
     }
 
     override fun getItemCount(): Int {
