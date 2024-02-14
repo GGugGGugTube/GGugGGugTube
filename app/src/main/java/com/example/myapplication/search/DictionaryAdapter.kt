@@ -21,8 +21,8 @@ class DictionaryAdapter(private val mContext: Context) : RecyclerView.Adapter<Di
         Glide.with(mContext)
             .load(items[position].url)
             .into(holder.ivimgge)
-        holder.tvtitle.text = items[position].title
-        holder.tvdesc.text = items[position].description
+        holder.tvtitle.text = items[position].title.replace("<b>", "").replace("</b>", "")
+        holder.tvdesc.text = items[position].description.replace("<b>", "").replace("</b>", "")
     }
 
     override fun getItemCount() : Int {
