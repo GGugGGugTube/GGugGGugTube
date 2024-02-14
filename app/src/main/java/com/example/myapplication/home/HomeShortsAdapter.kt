@@ -19,6 +19,12 @@ class HomeShortsAdapter(private val mContext: Context) :
 
     var items = ArrayList<YoutubeVideo>()
 
+    interface homeShortsClick{
+        fun onClick(item: YoutubeVideo, position: Int)
+    }
+
+    var homeshortsclick: homeShortsClick?= null
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
@@ -29,6 +35,9 @@ class HomeShortsAdapter(private val mContext: Context) :
 
     override fun onBindViewHolder(holder: HomeShortsAdapter.ItemViewHolder, position: Int) {
         holder.bind(position)
+        holder.itemView.setOnClickListener{
+            homeshortsclick?.onClick(items[position], position)
+        }
     }
 
     override fun getItemCount(): Int {
