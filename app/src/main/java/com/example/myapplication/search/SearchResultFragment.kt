@@ -186,20 +186,24 @@ class SearchResultFragment : Fragment() {
             Log.d(TAG, it.toString())
 
             youtubeSearchResult.add(
-                YoutubeVideo.createYouTubeVideo(
-                    category = animalData.animalName,
-                    youtubeSnippet = it.snippet
-                )
+                YoutubeVideo.createYouTubeVideo(animalData.animalName, it)
             )
         }
 
         Log.d(TAG, "initiate recyclerviews")
-        //initShortsRecyclerView() //TODO 숏츠 영상만 필터링하여 넘겨주기
-        initVideoRecyclerView(youtubeSearchResult) //TODO 숏츠 아닌 영상만 필터링하여 넘겨주기
+
+        val shorts = youtubeSearchResult.filter { it.isShorts }
+        Log.d(TAG, "shorts size: ${shorts.size}")
+        initShortsRecyclerView(shorts)
+
+        val videos = youtubeSearchResult.filter{!it.isShorts}
+        Log.d(TAG, "videos size: ${videos.size}")
+        initVideoRecyclerView(videos)
     }
 
     private fun initShortsRecyclerView(shorts: List<YoutubeVideo>) {
-        //TODO 숏츠 리싸이클러뷰 설정하기
+        shortsAdapter = SearchResultShortsAdapter(shorts)
+        binding.reSearchShorts.adapter = shortsAdapter
     }
 
     private fun initVideoRecyclerView(videos: List<YoutubeVideo>) {

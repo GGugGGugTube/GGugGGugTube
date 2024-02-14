@@ -69,13 +69,11 @@ class HomeFragment : Fragment() {
             Log.d(TAG, it.toString())
 
             youtubeSearchResult.add(
-                YoutubeVideo.createYouTubeVideo(
-                    category = "GGugGGug",
-                    youtubeSnippet = it.snippet
-                )
+                YoutubeVideo.createYouTubeVideo("GGugGGug", it)
             )
 //            Log.d(TAG, "creating YoutubeVideo instances... size:${it.snippet.title}")
         }
+
         val youtubeShorts = mutableListOf<YoutubeVideo>()
         val youtubeVideo = mutableListOf<YoutubeVideo>()
         youtubeSearchResult.forEach{

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.databinding.ShortsItemBinding
-import com.example.myapplication.databinding.VideoitemBinding
+import com.example.myapplication.databinding.VideoItemBinding
 
 class HomeAdapter(val mContext: Context) : RecyclerView.Adapter<ViewHolder>() {
 
@@ -29,7 +29,7 @@ class HomeAdapter(val mContext: Context) : RecyclerView.Adapter<ViewHolder>() {
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType){
             VIEW_TYPE_VIDEO ->{
-                val binding = VideoitemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                val binding = VideoItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 VideoViewHolder(binding)
             } else ->{
                 val binding = ShortsItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -49,8 +49,8 @@ class HomeAdapter(val mContext: Context) : RecyclerView.Adapter<ViewHolder>() {
         return items.size
     }
 
-    inner class VideoViewHolder(binding: VideoitemBinding) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
-        var iv_thum_video: ImageView = binding.ivVideoimage
+    inner class VideoViewHolder(binding: VideoItemBinding) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+        var iv_thum_video: ImageView = binding.ivVideoImage
         var iv_like: ImageView = binding.ivVideoLike
         var iv_video_name: TextView = binding.tvVideoName
         var iv_video_time: TextView = binding.tvVideoTime
@@ -66,8 +66,8 @@ class HomeAdapter(val mContext: Context) : RecyclerView.Adapter<ViewHolder>() {
     }
 
     inner class ShortsViewHolder(binding: ShortsItemBinding) : RecyclerView.ViewHolder(binding.root), View.OnClickListener{
-        var iv_thum_shorts: ImageView = binding.ivShorstimage
-        var iv_shorts_like: ImageView = binding.ivShorstLike
+        var iv_thum_shorts: ImageView = binding.ivShortsImage
+        var iv_shorts_like: ImageView = binding.ivShortsLike
         var iv_shorts_name: TextView = binding.tvShortsName
         var iv_shorts_time: TextView = binding.tvShortsTime
 
