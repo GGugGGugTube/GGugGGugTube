@@ -21,12 +21,16 @@ class SearchFragment : Fragment() {
     private lateinit var gridManager: GridLayoutManager
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?, ): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? {
         binding = FragmentSearchBinding.inflate(layoutInflater, container, false)
 
         itemView()
 
-        binding.tvEdit.setOnClickListener{
+        binding.tvEdit.setOnClickListener {
             adapter.animalClick = object : SearchAdapter.AnimalClick {
                 override fun onClick(view: View, position: Int) {
 //                    val ad = AlertDialog.Builder(context)
@@ -39,11 +43,11 @@ class SearchFragment : Fragment() {
 //                    ad.setNegativeButton("취소"){dialog, _->
 //                        dialog.dismiss()
 //                        }
-                    }
                 }
             }
+        }
 
-        adapter.plusClick = object : SearchAdapter.PlusClick{
+        adapter.plusClick = object : SearchAdapter.PlusClick {
             override fun onClick(view: View, position: Int) {
 
             }
@@ -62,7 +66,6 @@ class SearchFragment : Fragment() {
 
 
     }
-
 
 
 }

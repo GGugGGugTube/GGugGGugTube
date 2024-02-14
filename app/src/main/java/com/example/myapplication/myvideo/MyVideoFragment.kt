@@ -5,9 +5,14 @@ import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myapplication.R
 import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.databinding.FragmentMyVideoBinding
+import com.example.myapplication.like.LikedUtils.getLikedVideos
+import com.example.myapplication.like.LikedUtils.saveLikedVideos
+import com.example.myapplication.showmore.ShowMoreFragment
 
 class MyVideoFragment : Fragment() {
     private lateinit var binding: FragmentMyVideoBinding // MyVideoFragment의 바인딩 객체
@@ -58,7 +63,28 @@ class MyVideoFragment : Fragment() {
         myLikeAdapter.updateItems(myLikeItemList)
         myWatchAdapter.updateItems(myWatchItemList)
         myShortsWatchAdapter.updateItems(myShortsWatchItemList)
+
+        //SupportFragmentManager로 FragmentManager를 호출
+        binding.tvMoreVideo.setOnClickListener {
+            val fragmentTransaction: FragmentTransaction =
+                requireActivity().supportFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.main_frame, ShowMoreFragment())
+            fragmentTransaction.setReorderingAllowed(true)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
+
+        // 좋아요 처리 설정
+        setupLikedVideosRecyclerView()
+
+        val likedVideos = getLikedVideos(requireContext())
+// 가져온 비디오 목록을 SharedPreferences에 저장하기
+        saveLikedVideos(requireContext(), likedVideos)
+
+// 어댑터에 좋아요된 비디오 목록 설정
+        adapter.updateItems(likedVideos)
     }
+
 
     private fun getItemList(): List<YoutubeVideo> {
         // 리사이클러뷰에 표시할 아이템 리스트를 반환하는 함수를 구현
@@ -79,7 +105,16 @@ class MyVideoFragment : Fragment() {
         // MyShortsWatchList에 표시할 아이템 리스트를 반환하는 함수를 구현
         return listOf()
     }
+
+    private fun setupLikedVideosRecyclerView() {
+        binding.reMyLikeList.layoutManager = LinearLayoutManager(requireContext())
+
+        // 리사이클러뷰에 어댑터 설정
+        binding.reMyLikeList.adapter = adapter
+    }
 }
+
+
 
 
 

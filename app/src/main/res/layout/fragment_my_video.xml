@@ -11,7 +11,7 @@
     <FrameLayout
         android:id="@+id/main_frame"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,11 +20,11 @@
     </FrameLayout>
 
     <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:src="@drawable/icon_ggug"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="15dp"
+        android:layout_marginTop="-8dp"
+        android:layout_marginStart="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -164,12 +164,6 @@
                 app:layout_constraintEnd_toEndOf="@+id/iv_mvLine2" />
 
 
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="100dp"-->
-<!--                android:text="더보기"-->
-<!--                tools:layout_editor_absoluteX="155dp"-->
-<!--                tools:layout_editor_absoluteY="85dp" />-->
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/re_myLikeList"
@@ -274,6 +268,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_myWatchList2"
                 tools:listitem="@layout/shorts_item" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
