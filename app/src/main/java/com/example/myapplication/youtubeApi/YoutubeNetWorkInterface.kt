@@ -29,4 +29,11 @@ interface YoutubeNetWorkInterface {
         @Query("safeSearch") safeSearch: String = "strict", //제한된 컨텐츠 모두 제외
         @Query("maxResults") maxResults: Int = 25 //결과 item 최대 수
     ):YoutubeVideoSearchResponse
+
+    //동영상 통계 정보 가져오기
+    @GET("videos?key=AIzaSyB342voTWUdwtQzooloaZTYutUzV3H_xKs")
+    suspend fun getStatistics(
+        @Query("id") id:String, //동영상 ID
+        @Query("part") part: String = "statistics"
+    ): YoutubeVideoStatisticsResponse
 }
