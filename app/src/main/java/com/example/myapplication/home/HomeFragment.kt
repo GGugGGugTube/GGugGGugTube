@@ -28,11 +28,7 @@ class HomeFragment : Fragment() {
         mContext = context
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?, ): View? {
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
 
         shortsView()
@@ -44,8 +40,8 @@ class HomeFragment : Fragment() {
     private fun shortsView() {
         shortsadapter = HomeShortsAdapter(mContext)
         binding.reHomeBestShorts.adapter = shortsadapter
-        binding.reHomeBestShorts.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        binding.reHomeBestShorts.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
     }
 
     private fun videoView() {
@@ -61,21 +57,36 @@ class HomeFragment : Fragment() {
     }
 
     private fun fetchYoutubeResult() = lifecycleScope.launch {
-        Log.d(TAG, "fetching youtube search response...")
         var searchResponse = async {
             YoutubeNetworkClient.youtubeNetWork.getMostPopularPetAndAnimals()
         }
 
         val youtubeSearchResult = mutableListOf<YoutubeVideo>()
-        Log.d(TAG, "result size: ${searchResponse.await().items.size}")
         searchResponse.await().items.forEach {
-            Log.d(TAG, "creating YoutubeVideo instances... size:${youtubeSearchResult.size}")
             Log.d(TAG, it.toString())
 
             youtubeSearchResult.add(
                 YoutubeVideo.createYouTubeVideo("GGugGGug", it)
             )
+            Log.d(TAG, "videoId = ${it.id}")
         }
+
+        val youtubeShorts = mutableListOf<YoutubeVideo>()
+        val youtubeVideo = mutableListOf<YoutubeVideo>()
+
+        youtubeSearchResult.forEach{
+            if (it.isShorts)
+                youtubeShorts.add(it)
+            else youtubeVideo.add(it)
+        }
+
+        shortsadapter.items.addAll(youtubeShorts)
+        videoadapter.items.addAll(youtubeVideo)
+        shortsadapter.notifyDataSetChanged()
+        videoadapter.notifyDataSetChanged()
+
+        Log.d(TAG, "youtubeShorts = ${youtubeShorts.size}")
+        Log.d(TAG, "youtubeVideo = ${youtubeVideo.size}")
     }
 
 }
