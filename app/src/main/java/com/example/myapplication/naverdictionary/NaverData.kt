@@ -3,11 +3,6 @@ package com.example.myapplication.naverdictionary
 import com.google.gson.annotations.SerializedName
 
 data class NaverData(
-    @SerializedName("channel")
-    val channel: ArrayList<Channel>
-)
-
-data class Channel(
     @SerializedName("last_build_date")
     val lastBuildDate: String,
 
@@ -20,8 +15,8 @@ data class Channel(
     @SerializedName("display")
     val display: Int,
 
-    @SerializedName("item")
-    val item: ArrayList<Items>
+    @SerializedName("items")
+    val items: ArrayList<Items>
 )
 
 data class Items(
@@ -34,7 +29,7 @@ data class Items(
     @SerializedName("description")
     val description: String,
 
-    @SerializedName("naverthumbnail")
+    @SerializedName("thumbnail")
     val thumbnail: String
 )
 
