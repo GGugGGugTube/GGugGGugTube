@@ -1,20 +1,17 @@
 package com.example.myapplication.myvideo
 
 import android.os.Bundle
-import android.text.TextUtils.replace
 import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentTransaction
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.YoutubeVideo
-import com.example.myapplication.YoutubeVideoItem
 import com.example.myapplication.databinding.FragmentMyVideoBinding
+import com.example.myapplication.like.LikedUtils.getLikedVideos
+import com.example.myapplication.like.LikedUtils.saveLikedVideos
 import com.example.myapplication.showmore.ShowMoreFragment
 
 class MyVideoFragment : Fragment() {
@@ -76,9 +73,16 @@ class MyVideoFragment : Fragment() {
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
-        //좋아요 처리 설정중입니다!
-//        val likedVideos = getLikedVideos()
-//        setLikedVideosToRecyclerView(likedVideos)
+
+        // 좋아요 처리 설정
+        setupLikedVideosRecyclerView()
+
+        val likedVideos = getLikedVideos(requireContext())
+// 가져온 비디오 목록을 SharedPreferences에 저장하기
+        saveLikedVideos(requireContext(), likedVideos)
+
+// 어댑터에 좋아요된 비디오 목록 설정
+        adapter.updateItems(likedVideos)
     }
 
 
@@ -101,18 +105,14 @@ class MyVideoFragment : Fragment() {
         // MyShortsWatchList에 표시할 아이템 리스트를 반환하는 함수를 구현
         return listOf()
     }
-//    private fun setLikedVideosToRecyclerView(videos: List<YoutubeVideo>) {
-//        val adapter = MyLikeAdapter(requireContext())
-//        adapter.updateItems(videos)
-//        binding.reMyLikeList.adapter = adapter
-    }
-    private fun getLikedVideos(): List<YoutubeVideo> {
-        // 좋아요를 누른 영상 목록을 가져와서 반환하는 로직을 작성
-        // SharedPreferences 또는 데이터베이스에 저장된 정보를 가져오게 해보자.(추가해야되는부분)
-        // 임시로 빈 리스트 반환함
-        return emptyList()
-    }
 
+    private fun setupLikedVideosRecyclerView() {
+        binding.reMyLikeList.layoutManager = LinearLayoutManager(requireContext())
+
+        // 리사이클러뷰에 어댑터 설정
+        binding.reMyLikeList.adapter = adapter
+    }
+}
 
 
 

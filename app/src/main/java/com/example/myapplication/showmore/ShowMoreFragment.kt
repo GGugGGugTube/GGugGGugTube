@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.databinding.FragmentShowMoreBinding
+import com.example.myapplication.like.LikedUtils
 
 
 class ShowMoreFragment : Fragment() {
@@ -110,6 +111,8 @@ class ShowMoreFragment : Fragment() {
         val rabbitItemList = getRabbitItemList()
         val penguinItemList = getPenguinItemList()
         val othersItemList = getOthersItemList()
+        // 좋아요된 비디오 목록 가져오기
+        val likedVideos = LikedUtils.getLikedVideos(requireContext())
 
         // 어댑터에 아이템 리스트 설정
         adapter.updateItems(remainItemList)
@@ -131,6 +134,13 @@ class ShowMoreFragment : Fragment() {
         adapter.updateItems(rabbitItemList)
         adapter.updateItems(penguinItemList)
         adapter.updateItems(othersItemList)
+        // 어댑터에 좋아요된 비디오 목록 설정
+        adapter.updateItems(likedVideos)
+
+        binding.ivBack.setOnClickListener {
+            // 뒤로가기 버튼 클릭 시 동작
+            parentFragmentManager.popBackStack()
+        }
     }
 
     private fun getRemainItemList(): List<YoutubeVideo> {
@@ -227,4 +237,10 @@ class ShowMoreFragment : Fragment() {
         // CatList에 표시할 아이템 리스트를 반환하는 함수를 구현
         return listOf()
     }
+//    private fun getLikedVideos(): List<YoutubeVideo> {
+//        // 좋아요된 비디오 목록을 가져와서 반환하는 함수를 구현
+//        // SharedPreferences 또는 데이터베이스에서 가져와야 합니다.
+//        // 여기에 좋아요된 비디오 목록을 가져오는 로직을 추가해주세요.
+//        return emptyList() // 임시로 빈 목록 반환
+//    }
 }
