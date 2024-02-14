@@ -51,17 +51,9 @@ class SearchResultFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        binding.imgSearchBack.setOnClickListener {
-//            val transaction: FragmentTransaction =
-//                requireActivity().supportFragmentManager.beginTransaction()
-//                    .setCustomAnimations(
-//                        R.anim.horizon_enter_front,
-//                        R.anim.none,
-//                        R.anim.none,
-//                        R.anim.horizon_exit_front)
-//                    .add(R.id.fragmentContainer, fragment, tag)
-//            transaction.addToBackStack(tag).commitAllowingStateLoss()
-//        }
+        binding.imgSearchBack.setOnClickListener {
+            parentFragmentManager.popBackStack()
+        }
     }
 
     private fun initAnimal() {
