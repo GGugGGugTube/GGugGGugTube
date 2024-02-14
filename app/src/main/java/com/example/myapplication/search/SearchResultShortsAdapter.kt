@@ -4,8 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.myapplication.R
 import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.databinding.ShortsItemBinding
+import com.example.myapplication.like.OnHeartClickedListener
 
 class SearchResultShortsAdapter(val mItems: List<YoutubeVideo>) :
     RecyclerView.Adapter<SearchResultShortsAdapter.Holder>() {
@@ -41,6 +43,21 @@ class SearchResultShortsAdapter(val mItems: List<YoutubeVideo>) :
 
             titleTextView.text = data.title
             timeTextView.text = data.publishedAt
+            setHeartImageView(data.isLiked)
+
+            heartImageView.setOnClickListener {
+                data.isLiked = !data.isLiked
+                setHeartImageView(data.isLiked)
+                OnHeartClickedListener.onHeartClicked(data)
+                notifyItemChanged(position)
+            }
+        }
+
+        private fun setHeartImageView(isLiked: Boolean) {
+            heartImageView.setImageResource(
+                if (isLiked) R.drawable.icon_foot
+                else R.drawable.icon_foot_line
+            )
         }
     }
 }
