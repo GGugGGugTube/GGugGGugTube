@@ -96,9 +96,9 @@ class MyVideoFragment : Fragment() {
         // 좋아요 처리 설정
         setupLikedVideosRecyclerView()
 
-        val likedVideos = getLikedVideos(requireContext())
+        val likedVideos = getLikedVideos()
 // 가져온 비디오 목록을 SharedPreferences에 저장하기
-        saveLikedVideos(requireContext(), likedVideos)
+        saveLikedVideos(likedVideos)
 
 // 어댑터에 좋아요된 비디오 목록 설정
         adapter.updateItems(likedVideos)

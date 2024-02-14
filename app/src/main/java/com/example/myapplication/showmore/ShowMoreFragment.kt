@@ -112,7 +112,7 @@ class ShowMoreFragment : Fragment() {
         val penguinItemList = getPenguinItemList()
         val othersItemList = getOthersItemList()
         // 좋아요된 비디오 목록 가져오기
-        val likedVideos = LikedUtils.getLikedVideos(requireContext())
+        val likedVideos = LikedUtils.getLikedVideos()
 
         // 어댑터에 아이템 리스트 설정
         adapter.updateItems(remainItemList)

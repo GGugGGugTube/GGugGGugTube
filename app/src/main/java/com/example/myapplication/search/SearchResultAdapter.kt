@@ -4,11 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.myapplication.R
 import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.databinding.VideoItemBinding
+import com.example.myapplication.like.OnHeartClickedListener
 
 class SearchResultAdapter(val mItems: List<YoutubeVideo>) :
     RecyclerView.Adapter<SearchResultAdapter.Holder>() {
+
+    private val onHeartClickedListener = OnHeartClickedListener()
 
     interface VideoClick{
         fun onClick(item: YoutubeVideo, position: Int)
@@ -22,11 +26,18 @@ class SearchResultAdapter(val mItems: List<YoutubeVideo>) :
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.bind(mItems[position])
+        val data = mItems[position]
 
+        holder.heartImageView.setOnClickListener {
+            data.isLiked = !data.isLiked
+            holder.setHeartImageView(data.isLiked)
+            onHeartClickedListener.onHeartClicked(data)
+        }
         holder.itemView.setOnClickListener{
             videoClick?.onClick(mItems[position], position)
         }
+
+        holder.bind(data)
     }
 
     override fun getItemId(position: Int): Long {
@@ -41,10 +52,10 @@ class SearchResultAdapter(val mItems: List<YoutubeVideo>) :
         private val thumbnailImageView = binding.ivVideoImage
         private val titleTextView = binding.tvVideoName
         private val timeTextView = binding.tvVideoTime
-        private val heartImageView = binding.ivVideoLike
+        val heartImageView = binding.ivVideoLike
 
         fun bind(data: YoutubeVideo) {
-            data.thumbnail?.let{
+            data.thumbnail?.let {
                 Glide.with(binding.root.context)
                     .load(it)
                     .into(thumbnailImageView)
@@ -52,6 +63,14 @@ class SearchResultAdapter(val mItems: List<YoutubeVideo>) :
 
             titleTextView.text = data.title
             timeTextView.text = data.publishedAt
+            setHeartImageView(data.isLiked)
+        }
+
+        fun setHeartImageView(isLiked: Boolean) {
+            heartImageView.setImageResource(
+                if (isLiked) R.drawable.icon_foot
+                else R.drawable.icon_foot_line
+            )
         }
     }
 }
