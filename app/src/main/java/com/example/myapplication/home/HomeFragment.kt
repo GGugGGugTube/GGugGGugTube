@@ -83,12 +83,12 @@ class HomeFragment : Fragment() {
         Log.d(TAG, "youtubeVideo = ${youtubeVideo.size}")
 
 
-        binding.progressbarShorts.visibility = View.GONE
+        binding.animationBingleShorts.visibility = View.GONE
         binding.reHomeBestShorts.visibility = View.VISIBLE
         shortsadapter.items.addAll(youtubeShorts)
         shortsadapter.notifyDataSetChanged()
 
-        binding.progressbarVideo.visibility = View.GONE
+        binding.animationBingleVideo.visibility = View.GONE
         binding.reHomeVideo.visibility = View.VISIBLE
         videoadapter.items.addAll(youtubeVideo)
         videoadapter.notifyDataSetChanged()
