@@ -6,15 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/BG_color"
-    tools:context=".home.HomeFragment"
-    app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+    app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+    tools:context=".home.HomeFragment">
 
     <ImageView
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:src="@drawable/icon_ggug"
-        android:layout_marginTop="5dp"
         android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/icon_ggug"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,10 +45,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="80dp"
-        android:layout_marginBottom="80dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_line"
         app:layout_scrollFlags="scroll">
 
@@ -75,10 +71,34 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_recommendation"
                 tools:listitem="@layout/shorts_item" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animation_bingle_shorts"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginVertical="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_recommendation"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/animation_bingle_cat" />
+
+            <TextView
+                android:id="@+id/tv_no_shorts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginVertical="10dp"
+                android:text="@string/no_shorts_popular_result"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/tv_recommendation" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -96,10 +116,36 @@
                 android:id="@+id/re_home_video"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="15dp"
                 android:orientation="vertical"
+                android:visibility="gone"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/video_item" />
+
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animation_bingle_video"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginVertical="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_recommendation"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/animation_bingle_cat" />
+
+            <TextView
+                android:id="@+id/tv_no_vidoes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginVertical="10dp"
+                android:text="@string/no_video_popular_result"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/tv_recommendation" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

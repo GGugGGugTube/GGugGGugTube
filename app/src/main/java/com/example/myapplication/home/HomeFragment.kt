@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,7 +34,11 @@ class HomeFragment : Fragment() {
         mContext = context
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?, ): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? {
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
 
         shortsView()
@@ -45,7 +50,8 @@ class HomeFragment : Fragment() {
     private fun shortsView() {
         shortsadapter = HomeShortsAdapter(mContext)
         binding.reHomeBestShorts.adapter = shortsadapter
-        binding.reHomeBestShorts.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        binding.reHomeBestShorts.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
     }
 
@@ -105,18 +111,32 @@ class HomeFragment : Fragment() {
         val youtubeShorts = mutableListOf<YoutubeVideo>()
         val youtubeVideo = mutableListOf<YoutubeVideo>()
 
-        youtubeSearchResult.forEach{
+        youtubeSearchResult.forEach {
             if (it.isShorts)
                 youtubeShorts.add(it)
             else youtubeVideo.add(it)
         }
-
-        shortsadapter.items.addAll(youtubeShorts)
-        videoadapter.items.addAll(youtubeVideo)
-        shortsadapter.notifyDataSetChanged()
-        videoadapter.notifyDataSetChanged()
-
         Log.d(TAG, "youtubeShorts = ${youtubeShorts.size}")
         Log.d(TAG, "youtubeVideo = ${youtubeVideo.size}")
+
+
+        binding.animationBingleShorts.visibility = View.GONE
+        binding.animationBingleVideo.visibility = View.GONE
+
+        if (youtubeShorts.isEmpty()) {
+            binding.tvNoShorts.isVisible = true
+        } else {
+            binding.reHomeBestShorts.isVisible = true
+            shortsadapter.items.addAll(youtubeShorts)
+            shortsadapter.notifyDataSetChanged()
+        }
+
+        if (youtubeVideo.isEmpty()) {
+            binding.tvNoVidoes.isVisible = true
+        } else {
+            binding.reHomeVideo.isVisible = true
+            videoadapter.items.addAll(youtubeVideo)
+            videoadapter.notifyDataSetChanged()
+        }
     }
 }
