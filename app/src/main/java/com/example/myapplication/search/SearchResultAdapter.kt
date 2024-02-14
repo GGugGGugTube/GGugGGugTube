@@ -13,6 +13,13 @@ class SearchResultAdapter(val mItems: List<YoutubeVideo>) :
     RecyclerView.Adapter<SearchResultAdapter.Holder>() {
 
     private val onHeartClickedListener = OnHeartClickedListener()
+
+    interface VideoClick{
+        fun onClick(item: YoutubeVideo, position: Int)
+    }
+
+    var videoClick : VideoClick? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding = VideoItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return Holder(binding)
@@ -26,6 +33,10 @@ class SearchResultAdapter(val mItems: List<YoutubeVideo>) :
             holder.setHeartImageView(data.isLiked)
             onHeartClickedListener.onHeartClicked(data)
         }
+        holder.itemView.setOnClickListener{
+            videoClick?.onClick(mItems[position], position)
+        }
+
         holder.bind(data)
     }
 
