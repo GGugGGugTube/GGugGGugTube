@@ -9,7 +9,7 @@ import com.example.myapplication.databinding.FragmentVideoDetailBinding
 
 class VideoDetailFragment : Fragment() {
 
-    private var binding: FragmentVideoDetailBinding? = null
+    private lateinit var binding: FragmentVideoDetailBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -23,7 +23,7 @@ class VideoDetailFragment : Fragment() {
         val mainActivity = activity as MainActivity
         mainActivity.hideBottomNavigation(true)
 
-        return binding?.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,6 +53,11 @@ class VideoDetailFragment : Fragment() {
 //            }
 //            startActivity(Intent.createChooser(intent, url))
 //        }
+
+        binding.imgDetailBack.setOnClickListener {
+            parentFragmentManager.popBackStack()
+        }
+
     }
 
     override fun onDestroyView() {
