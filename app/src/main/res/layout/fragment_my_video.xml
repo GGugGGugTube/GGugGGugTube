@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".myvideo.MyVideoFragment"
-    android:background="@color/BG_color">
+    android:background="@color/BG_color"
+    tools:context=".myvideo.MyVideoFragment">
 
     <FrameLayout
         android:id="@+id/main_frame"
@@ -22,9 +21,9 @@
     <ImageView
         android:layout_width="90dp"
         android:layout_height="90dp"
-        android:src="@drawable/icon_ggug"
-        android:layout_marginTop="-8dp"
         android:layout_marginStart="0dp"
+        android:layout_marginTop="-8dp"
+        android:src="@drawable/icon_ggug"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -54,16 +53,16 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginEnd="20dp"
         android:src="@drawable/setting"
+        app:layout_constraintBottom_toTopOf="@id/iv_mvLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
-        android:layout_width="wrap_content"
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/BG_color"
         app:layout_constraintBottom_toTopOf="@+id/nav_main"
@@ -163,8 +162,6 @@
                 app:layout_constraintBottom_toBottomOf="@+id/tv_myLikeVideo"
                 app:layout_constraintEnd_toEndOf="@+id/iv_mvLine2" />
 
-
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/re_myLikeList"
                 android:layout_width="match_parent"
@@ -172,7 +169,6 @@
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_myLikeVideo"
                 tools:listitem="@layout/long_scale_shorts_item" />
 
@@ -272,7 +268,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
