@@ -11,13 +11,11 @@ import com.example.myapplication.CtItem
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentSearchBinding
 
-
 class SearchFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchBinding
     private lateinit var adapter: SearchAdapter
     private lateinit var gridManager: GridLayoutManager
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,10 +55,12 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         with(binding) {
             adapter.animalClick = object : SearchAdapter.AnimalClick {
                 override fun onClick(item: CtItem, position: Int) {
                     val resultFragment = SearchResultFragment.newInstance(item)
+
                     requireActivity().supportFragmentManager.beginTransaction().apply {
                         replace(R.id.main_frame, resultFragment)
                         setReorderingAllowed(true)

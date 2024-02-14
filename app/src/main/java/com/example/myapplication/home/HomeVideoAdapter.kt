@@ -26,7 +26,7 @@ class HomeVideoAdapter(private val mContext: Context): RecyclerView.Adapter<Home
 
         // 썸네일 이미지 로드
         Glide.with(mContext)
-            .load(currentItem.thumbnails)
+            .load(currentItem.thumbnail)
             .into(holder.iv_thum_video)
         //동영상 이름
         holder.iv_video_name.text = currentItem.title

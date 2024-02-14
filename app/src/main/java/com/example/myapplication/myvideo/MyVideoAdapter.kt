@@ -68,7 +68,7 @@ class MyVideoAdapter(private val mContext: Context) :
         fun bind(item: YoutubeVideo) {
             // 썸네일 이미지 로드
             Glide.with(mContext)
-                .load(item.thumbnails)
+                .load(item.thumbnail)
                 .into(binding.ivSmallVideoImage)
 
             // 비디오 제목 설정
@@ -99,7 +99,7 @@ class MyVideoAdapter(private val mContext: Context) :
             // 기존의 onBindViewHolder 내용과 좋아요 아이콘 관련 로직을 여기에 추가
             // 썸네일 이미지 로드
             Glide.with(mContext)
-                .load(item.thumbnails)
+                .load(item.thumbnail)
                 .into(binding.ivLsShortsImage)
 
             // 비디오 제목 설정

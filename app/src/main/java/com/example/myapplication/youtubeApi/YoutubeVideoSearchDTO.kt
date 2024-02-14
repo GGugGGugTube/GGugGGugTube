@@ -1,6 +1,7 @@
 package com.example.myapplication.youtubeApi
 
 import com.google.api.services.youtube.model.LiveBroadcast
+import com.google.api.services.youtube.model.Playlist
 import com.google.common.primitives.UnsignedInteger
 
 data class YoutubeVideoSearchResponse(
@@ -10,7 +11,7 @@ data class YoutubeVideoSearchResponse(
     val prevPageToken: String,
     val regionCode: String,
     val pageInfo: YoutubeVideoSearchPageInfo,
-    val items: MutableList<YoutubeVideoSearchResourceSnippet> //@Query("part") part = "snippet"
+    val items: MutableList<YoutubeVideoSearchResource> //@Query("part") part = "snippet"
 )
 
 data class YoutubeVideoSearchPageInfo(
@@ -18,19 +19,37 @@ data class YoutubeVideoSearchPageInfo(
     val resultsPerPage: Int,
 )
 
-//YoutubeVideoSearchResource.snippet
+data class YoutubeVideoSearchResource(
+    val kind:String = "youtube#searchResult",
+    val etag:String,
+    val id: YoutubeVideoSearchResourceId,
+    val snippet: YoutubeVideoSearchResourceSnippet
+)
+
+data class YoutubeVideoSearchResourceId(
+    val kind:String,
+    val videoId:String,
+    val channelId: String,
+    val playlistId:String
+)
 data class YoutubeVideoSearchResourceSnippet(
     val publishedAt: String,
     val channelId: String,
     val title: String,
     val description: String,
-    val thumbnails: YoutubeVideoSearchResourceThumbnail,
+    val thumbnails: YoutubeVideoSearchResourceThumbnails,
     val channelTitle: String,
     val liveBroadcastContent:String
 )
 
+data class YoutubeVideoSearchResourceThumbnails(
+    val default: YoutubeVideoSearchResourceThumbnail,
+    val medium: YoutubeVideoSearchResourceThumbnail,
+    val high: YoutubeVideoSearchResourceThumbnail
+)
+
 data class YoutubeVideoSearchResourceThumbnail(
-    val url: String,
-    val width: UnsignedInteger,
-    val height: UnsignedInteger
+    val url:String,
+    val width:Long,
+    val height:Long
 )

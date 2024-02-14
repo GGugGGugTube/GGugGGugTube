@@ -1,6 +1,7 @@
 package com.example.myapplication.youtubeApi
 
 import retrofit2.http.GET
+import retrofit2.http.HEAD
 import retrofit2.http.Query
 
 const val PET_AND_ANIMALS_CATEGORY_ID: String = "15"
