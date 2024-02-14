@@ -4,18 +4,29 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.myapplication.R
 import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.databinding.VideoItemBinding
+import com.example.myapplication.like.OnHeartClickedListener
 
 class SearchResultAdapter(val mItems: List<YoutubeVideo>) :
     RecyclerView.Adapter<SearchResultAdapter.Holder>() {
+
+    private val onHeartClickedListener = OnHeartClickedListener()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding = VideoItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return Holder(binding)
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.bind(mItems[position])
+        val data = mItems[position]
+
+        holder.itemView.setOnClickListener {
+            data.isLiked = !data.isLiked
+            holder.setHeartImageView(data.isLiked)
+            onHeartClickedListener.onHeartClicked(data)
+        }
+        holder.bind(data)
     }
 
     override fun getItemId(position: Int): Long {
@@ -33,7 +44,7 @@ class SearchResultAdapter(val mItems: List<YoutubeVideo>) :
         private val heartImageView = binding.ivVideoLike
 
         fun bind(data: YoutubeVideo) {
-            data.thumbnail?.let{
+            data.thumbnail?.let {
                 Glide.with(binding.root.context)
                     .load(it)
                     .into(thumbnailImageView)
@@ -41,6 +52,14 @@ class SearchResultAdapter(val mItems: List<YoutubeVideo>) :
 
             titleTextView.text = data.title
             timeTextView.text = data.publishedAt
+            setHeartImageView(data.isLiked)
+        }
+
+        fun setHeartImageView(isLiked: Boolean) {
+            heartImageView.setImageResource(
+                if (isLiked) R.drawable.icon_foot
+                else R.drawable.icon_foot_line
+            )
         }
     }
 }
