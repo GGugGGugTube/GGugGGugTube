@@ -1,5 +1,9 @@
 package com.example.myapplication
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class YoutubeVideo(
     val title: String,
     val description: String,
@@ -8,9 +12,7 @@ data class YoutubeVideo(
     val category: String,
     val isShorts: Boolean,
     var isLiked: Boolean = false
-
-
-)  {
+): Parcelable {
     companion object {
         fun createYouTubeVideo(youtubeSnippet: YoutubeSnippet): YoutubeVideo {
             val title = youtubeSnippet.title
