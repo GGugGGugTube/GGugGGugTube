@@ -2,7 +2,7 @@ package com.example.myapplication.youtubeApi
 
 import com.google.common.primitives.UnsignedInteger
 
-data class YoutubeVideoDTO(
+data class YoutubeVideoResponse(
     val kind: String = "youtube#videoListResponse",
     val etag: String,
     val nextPageToken: String,
