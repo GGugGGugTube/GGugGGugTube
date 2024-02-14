@@ -161,7 +161,7 @@
                     android:layout_marginTop="15dp"
                     android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/videoitem" />
+                    tools:listitem="@layout/video_item" />
 
                 <TextView
                     android:id="@+id/tv_no_video_search_result2"
