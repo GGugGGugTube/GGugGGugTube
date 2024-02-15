@@ -1,4 +1,4 @@
-package com.example.myapplication.showmore
+package com.example.myapplication.myvideo
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,18 +13,16 @@ import com.example.myapplication.like.LikedUtils
 import com.example.myapplication.like.OnHeartClickedListener
 import com.example.myapplication.search.CategoryItemManager
 
-class LikedAdapter(
-    private val category: CtItem.CategoryItem,
-    private val parentAdapter: ShowMoreAdapter
-) :
-    RecyclerView.Adapter<LikedAdapter.Holder>() {
+class MyLikedVideoAdapter() :
+    RecyclerView.Adapter<MyLikedVideoAdapter.Holder>() {
     private val TAG = "LikedAdapter"
 
-    private var likedItems = LikedUtils.getAnimalLikedVideos(category)
+    private var likedItems = LikedUtils.getLikedVideos()
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): LikedAdapter.Holder {
+    ): MyLikedVideoAdapter.Holder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = SmallVideoItemBinding.inflate(inflater, parent, false)
         return Holder(binding)
@@ -38,10 +36,9 @@ class LikedAdapter(
         return likedItems.size
     }
 
-    private fun refreshDataset() {
-        likedItems = LikedUtils.getAnimalLikedVideos(category)
+    fun refreshRecyclerView(){
+        likedItems = LikedUtils.getLikedVideos()
         notifyDataSetChanged()
-        parentAdapter.notifyDataSetChanged()
     }
 
     inner class Holder(private val binding: SmallVideoItemBinding) :
@@ -52,7 +49,6 @@ class LikedAdapter(
         private val heartImageView = binding.ivSmallVideoLike
 
         fun bind(item: YoutubeVideo) {
-            // 기존의 MyVideoAdapter의 내용과 같이 데이터를 바인딩합니다.
             Glide.with(MyApplication.appContext!!)
                 .load(item.thumbnail)
                 .into(videoImageView)
@@ -60,12 +56,9 @@ class LikedAdapter(
             videoNameTextView.text = item.title
             videoTimeTextView.text = item.publishedAt
             heartImageView.setOnClickListener {
-                Log.d(TAG, "heart clicked, animal:${category.animalName}")
-                Log.d(TAG, "item: ${item.toString()}")
-
                 item.isLiked = false
                 OnHeartClickedListener.onHeartClicked(item)
-                refreshDataset()
+                refreshRecyclerView()
             }
         }
     }

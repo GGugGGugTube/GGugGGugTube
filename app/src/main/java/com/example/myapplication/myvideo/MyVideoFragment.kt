@@ -13,7 +13,7 @@ import com.example.myapplication.watchlist.OnWatchListener
 import com.example.myapplication.watchlist.WatchListUtils
 
 class MyVideoFragment : Fragment() {
-    private lateinit var binding: FragmentMyVideoBinding // MyVideoFragment의 바인딩 객체
+    private lateinit var binding: FragmentMyVideoBinding
 
     private lateinit var myLikeAdapter: MyLikedVideoAdapter
     private lateinit var myWatchAdapter: MyWatchedVideoAdapter
@@ -23,7 +23,6 @@ class MyVideoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // 프래그먼트의 바인딩 초기화
         binding = FragmentMyVideoBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -43,9 +42,6 @@ class MyVideoFragment : Fragment() {
     private fun initLikedRecyclerView() {
         myLikeAdapter = MyLikedVideoAdapter()
         binding.reMyLikeList.adapter = myLikeAdapter
-
-        val myLikeItemList = LikedUtils.getLikedVideos()
-        myLikeAdapter.updateItems(myLikeItemList)
     }
 
     private fun initWatchRecyclerView() {
