@@ -216,6 +216,18 @@ class SearchResultFragment : Fragment() {
     private fun initShortsRecyclerView(shorts: List<YoutubeVideo>) {
         shortsAdapter = SearchResultShortsAdapter(shorts)
         binding.reSearchShorts.adapter = shortsAdapter
+
+        shortsAdapter.shortsClick = object : SearchResultShortsAdapter.ShortsClick {
+            override fun onClick(item: YoutubeVideo, position: Int) {
+                val detailFragment = VideoDetailFragment.newInstance(item)
+
+                requireActivity().supportFragmentManager.beginTransaction().apply {
+                    replace(R.id.main_frame, detailFragment)
+                    setReorderingAllowed(true)
+                    addToBackStack(null)
+                }.commit()
+            }
+        }
     }
 
     private fun initVideoRecyclerView(videos: List<YoutubeVideo>) {
