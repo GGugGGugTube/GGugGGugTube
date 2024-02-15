@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.example.myapplication.MainActivity
 import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.databinding.FragmentVideoDetailBinding
 import com.example.myapplication.watchlist.OnWatchListener
@@ -34,14 +35,13 @@ class VideoDetailFragment : Fragment() {
         binding = FragmentVideoDetailBinding.inflate(inflater, container, false)
 
         initVideo()
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Log.d(TAG, "onViewCreated")
+        (activity as MainActivity).hideBottomNavigation(true)
 
 //        binding?.btnLike?.setOnClickListener {
 //            val drawable = {
@@ -95,6 +95,7 @@ class VideoDetailFragment : Fragment() {
 
     private fun endVideoDetailFragment() {
         requireActivity().supportFragmentManager.popBackStack()
+        (activity as MainActivity).hideBottomNavigation(false)
     }
 
     //Parcelize
