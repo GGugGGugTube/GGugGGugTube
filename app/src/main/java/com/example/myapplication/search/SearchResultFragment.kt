@@ -2,13 +2,16 @@ package com.example.myapplication.search
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.Constants
 import com.example.myapplication.CtItem
@@ -61,8 +64,6 @@ class SearchResultFragment : Fragment() {
         initDictionary(inflater, container)
         initViewPagerButton()
 
-
-
         //Bottom Navigation 숨기기
         val mainActivity = activity as MainActivity
         mainActivity.hideBottomNavigation(true)
@@ -76,7 +77,7 @@ class SearchResultFragment : Fragment() {
 
         initBackButton()
         fetchYoutubeResult(animalData.animalName)
-
+        initUpButton()
     }
 
 
@@ -105,8 +106,7 @@ class SearchResultFragment : Fragment() {
                         val title = item.title
                         val description = item.description
                         val url = item.thumbnail
-                        val link = item.link
-                        resItem.add(NaverModel(title, description, url, link))
+                        resItem.add(NaverModel(title, description, url))
                     }
                 }
 
@@ -127,19 +127,8 @@ class SearchResultFragment : Fragment() {
             dictionaryAdapter = DictionaryAdapter(mContext)
             searchDictionary.adapter = dictionaryAdapter
             searchDictionary.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-
-            dictionaryAdapter.naverClick = object : DictionaryAdapter.NaverClick {
-                override fun onClick(item: NaverModel, position: Int) {
-
-                }
-            }
         }
     }
-
-//    private fun openURLInWebsite(uri: String) {
-//        val intent = Intent(Intent.ACTION_VIEW, )
-//        StartActivity(intent)
-//    }
 
     // ViewPager2 양 옆의 화살표 작동시키기
     private fun initViewPagerButton() {
@@ -193,17 +182,30 @@ class SearchResultFragment : Fragment() {
             Log.d(TAG, it.toString())
 
             youtubeSearchResult.add(
-                YoutubeVideo.createYouTubeVideo(animalData.animalName, it)
+                YoutubeVideo.createYouTubeVideo(animalData.Id, it)
             )
         }
 
+        binding.animationBingleShorts.visibility = View.GONE
+        binding.animationBingleVideo.visibility = View.GONE
+
         val shorts = youtubeSearchResult.filter { it.isShorts }
         Log.d(TAG, "shorts size: ${shorts.size}")
-        initShortsRecyclerView(shorts)
+        if (shorts.isEmpty()) {
+            binding.tvNoShorts.isVisible = true
+        } else {
+            initShortsRecyclerView(shorts)
+            binding.reSearchShorts.isVisible = true
+        }
 
-        val videos = youtubeSearchResult.filter{!it.isShorts}
+        val videos = youtubeSearchResult.filter { !it.isShorts }
         Log.d(TAG, "videos size: ${videos.size}")
-        initVideoRecyclerView(videos)
+        if (videos.isEmpty()) {
+            binding.tvNoVideo.isVisible = true
+        } else {
+            initVideoRecyclerView(videos)
+            binding.reSearchVideo.isVisible = true
+        }
     }
 
     private fun initShortsRecyclerView(shorts: List<YoutubeVideo>) {
@@ -227,6 +229,25 @@ class SearchResultFragment : Fragment() {
             }
         }
     }
+    private fun initUpButton(){
+        binding.reSearchVideo.setOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+
+                if(newState == RecyclerView.SCROLL_STATE_IDLE){
+                    Handler().postDelayed(Runnable {
+                        binding.fabUp.isVisible = false
+                    }, 2500)
+                }
+                else binding.fabUp.isVisible = true
+            }
+        })
+
+        binding.fabUp.setOnClickListener {
+            binding.nestedScrollView.smoothScrollTo(0,0)
+        }
+    }
+
     companion object {
         private const val ARG_ANIMAL = "argAnimal"
 

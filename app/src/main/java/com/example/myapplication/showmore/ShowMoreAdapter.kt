@@ -1,62 +1,57 @@
 package com.example.myapplication.showmore
 
-import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.myapplication.DateUtils.getDateFromTimestampWithFormat
-import com.example.myapplication.YoutubeVideo
-import com.example.myapplication.databinding.SmallVideoItemBinding
+import com.example.myapplication.CtItem
+import com.example.myapplication.databinding.ShowMoreItemBinding
+import com.example.myapplication.like.LikedUtils
 
-class ShowMoreAdapter(private val mContext: Context) :
-    RecyclerView.Adapter<ShowMoreAdapter.SmallVideoViewHolder>() {
+class ShowMoreAdapter(private val categoryItems: List<CtItem.CategoryItem>) :
+    RecyclerView.Adapter<ShowMoreAdapter.Holder>() {
 
-    private var items = mutableListOf<YoutubeVideo>()
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowMoreAdapter.SmallVideoViewHolder {
-        val inflater = LayoutInflater.from(mContext)
-        val binding = SmallVideoItemBinding.inflate(inflater, parent, false)
-        return SmallVideoViewHolder(binding)
+    private val TAG = "ShowMoreAdapter"
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowMoreAdapter.Holder {
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = ShowMoreItemBinding.inflate(inflater, parent, false)
+        return Holder(binding)
     }
 
-    override fun onBindViewHolder(holder: SmallVideoViewHolder, position: Int) {
-        holder.bind(items[position])
+    override fun onBindViewHolder(holder: Holder, position: Int) {
+        val currentCategory = categoryItems[position]
+
+        if (LikedUtils.getAnimalLikedVideos(currentCategory).isEmpty()) {
+            holder.itemView. visibility = View.GONE
+            holder.itemView.layoutParams = RecyclerView.LayoutParams(0, 0)
+        } else {
+            holder.itemView.visibility = View.VISIBLE
+            holder.itemView.layoutParams = RecyclerView.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+        }
+
+        holder.bind(categoryItems[position])
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        return categoryItems.size
     }
 
-    inner class SmallVideoViewHolder(private val binding: SmallVideoItemBinding) :
+    inner class Holder(private val binding: ShowMoreItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: YoutubeVideo) {
-            // 기존의 MyVideoAdapter의 내용과 같이 데이터를 바인딩합니다.
-            Glide.with(mContext)
-                .load(item.thumbnail)
-                .into(binding.ivSmallVideoImage)
+        private val animalIconImageView = binding.ivAnimalIcon
+        private val animalNameTextView = binding.tvAnimalName
+        private val animalLikedRecyclerView = binding.reAnimalLiked
 
-            binding.ivSmallVideoImage.scaleType =
-                if (item.isShorts) ImageView.ScaleType.CENTER_INSIDE
-                else ImageView.ScaleType.CENTER_CROP
-
-            binding.tvSmallVideoName.text = item.title
-            binding.tvSmallVideoTime.text = getDateFromTimestampWithFormat(
-                item.publishedAt,
-                "yyyy-MM-dd'T'HH:mm:ss.SSS+09:00",
-                "MM-dd HH:mm:ss"
-            )
-
-            binding.ivSmallVideoLike.setOnClickListener {
-                //TODO 좋아요 삭제
-            }
+        fun bind(category: CtItem.CategoryItem) {
+            animalIconImageView.setImageResource(category.animalIcon)
+            animalNameTextView.text = category.animalName
+            Log.d(TAG, "animalName: ${category.animalName}")
+            animalLikedRecyclerView.adapter =
+                LikedAdapter(LikedUtils.getAnimalLikedVideos(category))
         }
-    }
-
-    fun updateItems(newItems: List<YoutubeVideo>) {
-        items.clear() // 기존 아이템 리스트 초기화
-        items.addAll(newItems) // 새로운 아이템 리스트 추가
-        notifyDataSetChanged() // 변경 사항을 RecyclerView에 알림
     }
 }

@@ -170,7 +170,7 @@
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@+id/tv_myLikeVideo"
-                tools:listitem="@layout/long_scale_shorts_item" />
+                tools:listitem="@layout/small_video_item"/>
 
             <ImageView
                 android:id="@+id/iv_mvLine2"
