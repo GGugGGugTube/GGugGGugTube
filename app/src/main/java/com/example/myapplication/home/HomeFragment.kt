@@ -157,7 +157,7 @@ class HomeFragment : Fragment() {
         })
 
         binding.fabUp.setOnClickListener {
-            binding.reHomeVideo.smoothScrollToPosition(0)
+            binding.nestedScrollView.smoothScrollTo(0,0)
         }
     }
 }

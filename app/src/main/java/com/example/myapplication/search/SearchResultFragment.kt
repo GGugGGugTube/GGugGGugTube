@@ -184,7 +184,7 @@ class SearchResultFragment : Fragment() {
             Log.d(TAG, it.toString())
 
             youtubeSearchResult.add(
-                YoutubeVideo.createYouTubeVideo(animalData.animalName, it)
+                YoutubeVideo.createYouTubeVideo(animalData.Id, it)
             )
         }
 
