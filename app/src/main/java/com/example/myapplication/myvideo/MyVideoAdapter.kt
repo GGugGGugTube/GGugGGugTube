@@ -15,7 +15,7 @@ import com.example.myapplication.like.OnHeartClickedListener
 
 class MyVideoAdapter() :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
+    private var currentPosition = RecyclerView.NO_POSITION
     private var items = mutableListOf<YoutubeVideo>()
     override fun getItemViewType(position: Int): Int {
         return if (items[position].isShorts) {
@@ -75,7 +75,8 @@ class MyVideoAdapter() :
                 item.isLiked = !item.isLiked
                 setHeartImageView(item.isLiked)
                 OnHeartClickedListener.onHeartClicked(item)
-                notifyItemChanged(position)
+                notifyItemRemoved(adapterPosition)
+
             }
         }
 
@@ -90,8 +91,6 @@ class MyVideoAdapter() :
     inner class LongScaleShortsViewHolder(private val binding: LongScaleShortsItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: YoutubeVideo) {
-            // 기존의 onBindViewHolder 내용과 좋아요 아이콘 관련 로직을 여기에 추가
-            // 썸네일 이미지 로드
             Glide.with(MyApplication.appContext!!)
                 .load(item.thumbnail)
                 .into(binding.ivLsShortsImage)
@@ -111,7 +110,8 @@ class MyVideoAdapter() :
                 item.isLiked = !item.isLiked
                 setHeartImageView(item.isLiked)
                 OnHeartClickedListener.onHeartClicked(item)
-                notifyItemChanged(position)
+                notifyItemRemoved(adapterPosition)
+
             }
         }
 
@@ -129,6 +129,7 @@ class MyVideoAdapter() :
         items.addAll(newItems) // 새로운 아이템 리스트 추가
         notifyDataSetChanged() // 변경 사항을 RecyclerView에 알림
     }
+
 }
 
 

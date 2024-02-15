@@ -1,83 +1,57 @@
 package com.example.myapplication.showmore
 
-import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.myapplication.DateUtils.getDateFromTimestampWithFormat
-import com.example.myapplication.YouTubeViewType
-import com.example.myapplication.YoutubeVideo
-import com.example.myapplication.databinding.SmallVideoItemBinding
+import com.example.myapplication.CtItem
+import com.example.myapplication.databinding.ShowMoreItemBinding
+import com.example.myapplication.like.LikedUtils
 
-class ShowMoreAdapter(private val mContext: Context) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ShowMoreAdapter(private val categoryItems: List<CtItem.CategoryItem>) :
+    RecyclerView.Adapter<ShowMoreAdapter.Holder>() {
 
-    private var items = mutableListOf<YoutubeVideo>()
-
-    override fun getItemViewType(position: Int): Int {
-        return if (items[position].isShorts) {
-            YouTubeViewType.VIEW_TYPE_LONG_SCALE_SHORTS.ordinal
-        } else YouTubeViewType.VIEW_TYPE_LONG_SCALE_SHORTS.ordinal
+    private val TAG = "ShowMoreAdapter"
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowMoreAdapter.Holder {
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = ShowMoreItemBinding.inflate(inflater, parent, false)
+        return Holder(binding)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val inflater = LayoutInflater.from(mContext)
-        return when (viewType) {
-            YouTubeViewType.VIEW_TYPE_SMALL_VIDEO.ordinal -> {
-                val binding = SmallVideoItemBinding.inflate(inflater, parent, false)
-                SmallVideoViewHolder(binding)
-            }
+    override fun onBindViewHolder(holder: Holder, position: Int) {
+        val currentCategory = categoryItems[position]
 
-            else -> throw IllegalArgumentException("Invalid view type")
-        }
-    }
-
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (items.isEmpty()) {
-            // 데이터가 없는 경우의 처리
-            // 예를 들어, 빈 상태를 나타내는 뷰를 보여줄 수 있음
+        if (LikedUtils.getAnimalLikedVideos(currentCategory).isEmpty()) {
+            holder.itemView. visibility = View.GONE
+            holder.itemView.layoutParams = RecyclerView.LayoutParams(0, 0)
         } else {
-            when (holder) {
-                is SmallVideoViewHolder -> holder.bind(items[position])
-            }
+            holder.itemView.visibility = View.VISIBLE
+            holder.itemView.layoutParams = RecyclerView.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
         }
+
+        holder.bind(categoryItems[position])
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        return categoryItems.size
     }
 
-    inner class SmallVideoViewHolder(private val binding: SmallVideoItemBinding) :
+    inner class Holder(private val binding: ShowMoreItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: YoutubeVideo) {
-            // 기존의 MyVideoAdapter의 내용과 같이 데이터를 바인딩합니다.
-            Glide.with(mContext)
-                .load(item.thumbnail)
-                .into(binding.ivSmallVideoImage)
+        private val animalIconImageView = binding.ivAnimalIcon
+        private val animalNameTextView = binding.tvAnimalName
+        private val animalLikedRecyclerView = binding.reAnimalLiked
 
-            binding.tvSmallVideoName.text = item.title
-            binding.tvSmallVideoTime.text = getDateFromTimestampWithFormat(
-                item.publishedAt,
-                "yyyy-MM-dd'T'HH:mm:ss.SSS+09:00",
-                "MM-dd HH:mm:ss"
-            )
-
-            binding.ivSmallVideoLike.setOnClickListener {
-                val position = adapterPosition
-                if (position != RecyclerView.NO_POSITION) {
-                    val currentItem = items[position]
-                    currentItem.isLiked = !currentItem.isLiked // 좋아요 상태 변경
-                    notifyItemChanged(position) // 변경 사항을 RecyclerView에 알림
-                    // TODO: 좋아요 상태를 저장하는 로직 추가
-                }
-            }
+        fun bind(category: CtItem.CategoryItem) {
+            animalIconImageView.setImageResource(category.animalIcon)
+            animalNameTextView.text = category.animalName
+            Log.d(TAG, "animalName: ${category.animalName}")
+            animalLikedRecyclerView.adapter =
+                LikedAdapter(LikedUtils.getAnimalLikedVideos(category))
         }
-    }
-
-    fun updateItems(newItems: List<YoutubeVideo>) {
-        items.clear() // 기존 아이템 리스트 초기화
-        items.addAll(newItems) // 새로운 아이템 리스트 추가
-        notifyDataSetChanged() // 변경 사항을 RecyclerView에 알림
     }
 }

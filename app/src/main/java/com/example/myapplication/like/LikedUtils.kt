@@ -1,6 +1,7 @@
 package com.example.myapplication.like
 
 import android.content.Context
+import com.example.myapplication.CtItem
 import com.example.myapplication.MyApplication
 import com.example.myapplication.YoutubeVideo
 import com.google.gson.Gson
@@ -35,4 +36,7 @@ object LikedUtils {
             emptyList()
         }
     }
+
+    fun getAnimalLikedVideos(animal: CtItem.CategoryItem):List<YoutubeVideo> =
+        getLikedVideos().filter { it.categoryId ==  animal.Id}
 }
