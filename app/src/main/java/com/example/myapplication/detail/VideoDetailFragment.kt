@@ -71,7 +71,7 @@ class VideoDetailFragment : Fragment() {
         with(binding) {
             tvDetailTitle.text = videoData.title
             tvNameDetail.text = videoData.author
-            tvDateDetail.text = videoData.publishedAt
+            tvDateDetail.text = videoData.publishedAt.replace("T", " ").replace("Z", "")
 
             // 조회수
             val dec = DecimalFormat("#,###")
