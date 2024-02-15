@@ -1,20 +1,18 @@
 package com.example.myapplication.showmore
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.activity.addCallback
-import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.fragment.app.Fragment
 import com.example.myapplication.databinding.FragmentShowMoreBinding
 import com.example.myapplication.search.CategoryItemManager
 
 
 class ShowMoreFragment : Fragment() {
     private lateinit var binding: FragmentShowMoreBinding
-    private lateinit var showMoreAdapter:ShowMoreAdapter
+    private lateinit var showMoreAdapter: ShowMoreAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,13 +30,12 @@ class ShowMoreFragment : Fragment() {
         initBackButton()
     }
 
-    private fun initShowMoreRecyclerView(){
+    private fun initShowMoreRecyclerView() {
         showMoreAdapter = ShowMoreAdapter(CategoryItemManager.getCategoryItems())
         binding.reShowMore.adapter = showMoreAdapter
-        binding.reShowMore.addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
     }
 
-    private fun initBackButton(){
+    private fun initBackButton() {
         binding.ivBack.setOnClickListener {
             parentFragmentManager.popBackStack()
         }

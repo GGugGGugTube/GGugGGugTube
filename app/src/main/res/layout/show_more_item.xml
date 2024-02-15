@@ -20,7 +20,7 @@
         android:id="@+id/tv_animal_name"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="-15dp"
         android:gravity="center"
         android:text="동물 이름"
         android:textColor="@color/String"
@@ -35,9 +35,19 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_animal_name"
         tools:listitem="@layout/small_video_item" />
+
+    <ImageView
+        android:id="@+id/iv_mvLine"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/line"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/re_animal_liked"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
