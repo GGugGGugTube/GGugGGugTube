@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.myvideo
 
 enum class YouTubeViewType {
     VIEW_TYPE_SMALL_VIDEO,

@@ -6,16 +6,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.MyApplication
 import com.example.myapplication.R
-import com.example.myapplication.YouTubeViewType
 import com.example.myapplication.YoutubeVideo
-import com.example.myapplication.databinding.LongScaleShortsItemBinding
+import com.example.myapplication.databinding.SmallShortsItemBinding
 import com.example.myapplication.databinding.SmallVideoItemBinding
-import com.example.myapplication.like.LikedUtils
 import com.example.myapplication.like.OnHeartClickedListener
 
 class MyWatchedVideoAdapter() :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var currentPosition = RecyclerView.NO_POSITION
     private var items = mutableListOf<YoutubeVideo>()
     override fun getItemViewType(position: Int): Int {
         return if (items[position].isShorts) {
@@ -32,8 +29,8 @@ class MyWatchedVideoAdapter() :
             }
 
             YouTubeViewType.VIEW_TYPE_SHORTS.ordinal -> {
-                val binding = LongScaleShortsItemBinding.inflate(inflater, parent, false)
-                LongScaleShortsViewHolder(binding)
+                val binding = SmallShortsItemBinding.inflate(inflater, parent, false)
+                SmallShortsViewHolder(binding)
             }
 
             else -> throw IllegalArgumentException("Invalid view type")
@@ -43,7 +40,7 @@ class MyWatchedVideoAdapter() :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is SmallVideoViewHolder -> holder.bind(items[position])
-            is LongScaleShortsViewHolder -> holder.bind(items[position])
+            is SmallShortsViewHolder -> holder.bind(items[position])
 
             // ViewHolder3의 데이터 처리
         }
@@ -71,7 +68,6 @@ class MyWatchedVideoAdapter() :
                 item.isLiked = !item.isLiked
                 setHeartImageView(item.isLiked)
                 OnHeartClickedListener.onHeartClicked(item)
-//                notifyItemChanged(items.indexOf(item))
                 notifyDataSetChanged()
             }
         }
@@ -84,30 +80,29 @@ class MyWatchedVideoAdapter() :
         }
     }
 
-    inner class LongScaleShortsViewHolder(private val binding: LongScaleShortsItemBinding) :
+    inner class SmallShortsViewHolder(private val binding: SmallShortsItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: YoutubeVideo) {
             Glide.with(MyApplication.appContext!!)
                 .load(item.thumbnail)
-                .into(binding.ivLsShortsImage)
+                .into(binding.ivSmallShortsImage)
 
             // 비디오 제목 설정
-            binding.tvLsShortsVideoName.text = item.title
+            binding.tvSmallShortsName.text = item.title
 
             // 비디오 시간 설정
-            binding.tvLsShortsVideoTime.text = item.publishedAt
+            binding.tvSmallShortsTime.text = item.publishedAt
 
             // 좋아요 버튼 관련 로직 추가
-            binding.ivLsShortsLike.setOnClickListener {
+            binding.ivSmallShortsLike.setOnClickListener {
                 item.isLiked = !item.isLiked
                 setHeartImageView(item.isLiked)
                 OnHeartClickedListener.onHeartClicked(item)
-//                notifyItemChanged(items.indexOf(item))
                 notifyDataSetChanged()
             }
         }
         private fun setHeartImageView(isLiked: Boolean) {
-            binding.ivLsShortsLike.setImageResource(
+            binding.ivSmallShortsLike.setImageResource(
                 if (isLiked) R.drawable.icon_foot
                 else R.drawable.icon_foot_line
             )
