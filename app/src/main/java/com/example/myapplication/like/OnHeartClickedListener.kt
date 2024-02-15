@@ -10,10 +10,12 @@ object OnHeartClickedListener {
         Log.d(TAG, "before_likedVideos.size = ${likedVideos.size}")
 
         if (youtubeVideo.isLiked) {
-            if (!likedVideos.contains(youtubeVideo)) likedVideos.add(youtubeVideo)
+            likedVideos.find { it.id == youtubeVideo.id }?: likedVideos.add(youtubeVideo)
+        } else{
+            likedVideos.find{it.id == youtubeVideo.id}?.let{
+                likedVideos.remove(it)
+            }
         }
-
-        else likedVideos.remove(youtubeVideo)
 
         LikedUtils.saveLikedVideos(likedVideos)
         Log.d(TAG, "after_likedVideos.size = ${likedVideos.size}")

@@ -1,17 +1,26 @@
 package com.example.myapplication.showmore
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.myapplication.CtItem
 import com.example.myapplication.MyApplication
 import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.databinding.SmallVideoItemBinding
+import com.example.myapplication.like.LikedUtils
+import com.example.myapplication.like.OnHeartClickedListener
+import com.example.myapplication.search.CategoryItemManager
 
-class LikedAdapter(private var likedItems: List<YoutubeVideo>) :
+class LikedAdapter(
+    private val category: CtItem.CategoryItem,
+    private val parentAdapter: ShowMoreAdapter
+) :
     RecyclerView.Adapter<LikedAdapter.Holder>() {
+    private val TAG = "LikedAdapter"
 
+    private var likedItems = LikedUtils.getAnimalLikedVideos(category)
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -29,6 +38,12 @@ class LikedAdapter(private var likedItems: List<YoutubeVideo>) :
         return likedItems.size
     }
 
+    private fun refreshDataset() {
+        likedItems = LikedUtils.getAnimalLikedVideos(category)
+        notifyDataSetChanged()
+        parentAdapter.notifyDataSetChanged()
+    }
+
     inner class Holder(private val binding: SmallVideoItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         val videoImageView = binding.ivSmallVideoImage
@@ -44,9 +59,13 @@ class LikedAdapter(private var likedItems: List<YoutubeVideo>) :
 
             videoNameTextView.text = item.title
             videoTimeTextView.text = item.publishedAt
-
             heartImageView.setOnClickListener {
-                //TODO 좋아요 삭제
+                Log.d(TAG, "heart clicked, animal:${category.animalName}")
+                Log.d(TAG, "item: ${item.toString()}")
+
+                item.isLiked = false
+                OnHeartClickedListener.onHeartClicked(item)
+                refreshDataset()
             }
         }
     }

@@ -10,6 +10,7 @@ import com.example.myapplication.YouTubeViewType
 import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.databinding.LongScaleShortsItemBinding
 import com.example.myapplication.databinding.SmallVideoItemBinding
+import com.example.myapplication.like.LikedUtils
 import com.example.myapplication.like.OnHeartClickedListener
 
 class MyVideoAdapter() :
@@ -98,19 +99,10 @@ class MyVideoAdapter() :
 
             // 좋아요 버튼 관련 로직 추가
             binding.ivLsShortsLike.setOnClickListener {
-                item.isLiked = !item.isLiked
-                setHeartImageView(item.isLiked)
+                item.isLiked = false
                 OnHeartClickedListener.onHeartClicked(item)
-                notifyItemRemoved(adapterPosition)
-
+                updateItems(LikedUtils.getLikedVideos())
             }
-        }
-
-        private fun setHeartImageView(liked: Boolean) {
-            binding.ivLsShortsLike.setImageResource(
-                if (liked) R.drawable.icon_foot
-                else R.drawable.icon_foot_line
-            )
         }
     }
 
