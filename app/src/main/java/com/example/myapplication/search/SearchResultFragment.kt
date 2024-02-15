@@ -14,15 +14,13 @@ import com.example.myapplication.Constants
 import com.example.myapplication.CtItem
 import com.example.myapplication.MainActivity
 import com.example.myapplication.R
-import com.example.myapplication.detail.VideoDetailFragment
 import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.databinding.FragmentSearchResultBinding
-import com.example.myapplication.like.LikedConstants
+import com.example.myapplication.detail.VideoDetailFragment
 import com.example.myapplication.model.NaverModel
 import com.example.myapplication.naverdictionary.NaverData
 import com.example.myapplication.naverdictionary.NaverRetrofit
 import com.example.myapplication.youtubeApi.YoutubeNetworkClient
-import com.google.gson.Gson
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -62,6 +60,8 @@ class SearchResultFragment : Fragment() {
         initAnimal()
         initDictionary(inflater, container)
         initViewPagerButton()
+
+
 
         //Bottom Navigation 숨기기
         val mainActivity = activity as MainActivity
@@ -105,7 +105,8 @@ class SearchResultFragment : Fragment() {
                         val title = item.title
                         val description = item.description
                         val url = item.thumbnail
-                        resItem.add(NaverModel(title, description, url))
+                        val link = item.link
+                        resItem.add(NaverModel(title, description, url, link))
                     }
                 }
 
@@ -126,8 +127,19 @@ class SearchResultFragment : Fragment() {
             dictionaryAdapter = DictionaryAdapter(mContext)
             searchDictionary.adapter = dictionaryAdapter
             searchDictionary.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+
+            dictionaryAdapter.naverClick = object : DictionaryAdapter.NaverClick {
+                override fun onClick(item: NaverModel, position: Int) {
+
+                }
+            }
         }
     }
+
+//    private fun openURLInWebsite(uri: String) {
+//        val intent = Intent(Intent.ACTION_VIEW, )
+//        StartActivity(intent)
+//    }
 
     // ViewPager2 양 옆의 화살표 작동시키기
     private fun initViewPagerButton() {
