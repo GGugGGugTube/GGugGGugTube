@@ -8,6 +8,9 @@ import com.google.gson.reflect.TypeToken
 
 object WatchListUtils {
 
+    fun isSavedInWatchList(videoId: String): Boolean =
+        (getWatchList().find { it.id == videoId } != null)
+
     fun saveWatchList(videos: List<YoutubeVideo>) {
         val context = MyApplication.appContext!!
 
@@ -27,7 +30,7 @@ object WatchListUtils {
         saveWatchList(newWatchList)
     }
 
-   private fun getWatchList(): List<YoutubeVideo> {
+    private fun getWatchList(): List<YoutubeVideo> {
         val context = MyApplication.appContext!!
 
         val prefs =
@@ -43,18 +46,8 @@ object WatchListUtils {
             emptyList()
         }
     }
+
     fun getVideoWatchList(): List<YoutubeVideo> = getWatchList().filter { !it.isShorts }
     fun getShortsWatchList(): List<YoutubeVideo> = getWatchList().filter { it.isShorts }
-
-//    fun clearWatchList() {
-//        val context = MyApplication.appContext!!
-//
-//        val prefs =
-//            context.getSharedPreferences(
-//                WatchListConstants.WATCH_LIST_PREFS_NAME,
-//                Context.MODE_PRIVATE
-//            )
-//        prefs.edit().remove(WatchListConstants.WATCH_LIST_PREF_KEY).apply()
-//    }
 }
 

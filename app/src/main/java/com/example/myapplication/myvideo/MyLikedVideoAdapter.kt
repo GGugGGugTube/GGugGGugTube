@@ -5,18 +5,22 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.myapplication.CtItem
 import com.example.myapplication.MyApplication
 import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.databinding.SmallVideoItemBinding
 import com.example.myapplication.like.LikedUtils
 import com.example.myapplication.like.OnHeartClickedListener
-import com.example.myapplication.search.CategoryItemManager
+
+interface OnHeartClickedInMyLikedListener{
+    fun onHeartClicked()
+}
 
 class MyLikedVideoAdapter() :
-    RecyclerView.Adapter<MyLikedVideoAdapter.Holder>() {
+    RecyclerView.Adapter<MyLikedVideoAdapter.Holder>(),
+    OnHeartClickedInMyWatchedListener {
     private val TAG = "LikedAdapter"
 
+    var onHeartClickedInMyLikedListeners: List<OnHeartClickedInMyLikedListener>? = null
     private var likedItems = LikedUtils.getLikedVideos()
 
     override fun onCreateViewHolder(
@@ -36,9 +40,14 @@ class MyLikedVideoAdapter() :
         return likedItems.size
     }
 
-    fun refreshRecyclerView(){
+    fun refreshRecyclerView() {
         likedItems = LikedUtils.getLikedVideos()
         notifyDataSetChanged()
+    }
+
+    override fun onHeartClicked() {
+        Log.d(TAG, "onHeartClickedInMyWatched")
+        refreshRecyclerView()
     }
 
     inner class Holder(private val binding: SmallVideoItemBinding) :
@@ -58,6 +67,9 @@ class MyLikedVideoAdapter() :
             heartImageView.setOnClickListener {
                 item.isLiked = false
                 OnHeartClickedListener.onHeartClicked(item)
+                onHeartClickedInMyLikedListeners?.forEach {
+                    it.onHeartClicked()
+                }
                 refreshRecyclerView()
             }
         }

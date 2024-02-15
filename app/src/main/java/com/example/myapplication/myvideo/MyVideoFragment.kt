@@ -15,9 +15,9 @@ import com.example.myapplication.watchlist.WatchListUtils
 class MyVideoFragment : Fragment() {
     private lateinit var binding: FragmentMyVideoBinding
 
-    private lateinit var myLikeAdapter: MyLikedVideoAdapter
-    private lateinit var myWatchAdapter: MyWatchedVideoAdapter
-    private lateinit var myShortsWatchAdapter: MyWatchedVideoAdapter
+    private val myLikeAdapter = MyLikedVideoAdapter()
+    private val myWatchAdapter = MyWatchedVideoAdapter()
+    private val myShortsWatchAdapter = MyWatchedVideoAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,19 +40,22 @@ class MyVideoFragment : Fragment() {
     }
 
     private fun initLikedRecyclerView() {
-        myLikeAdapter = MyLikedVideoAdapter()
+        myLikeAdapter.onHeartClickedInMyLikedListeners = listOf(
+            myWatchAdapter, myShortsWatchAdapter
+        )
         binding.reMyLikeList.adapter = myLikeAdapter
     }
 
     private fun initWatchRecyclerView() {
-        myWatchAdapter = MyWatchedVideoAdapter()
+        myWatchAdapter.onHeartClickedInMyWatchedListener = myLikeAdapter
         binding.reMyWatchList.adapter = myWatchAdapter
+
         val myWatchItemList = WatchListUtils.getVideoWatchList()
         myWatchAdapter.updateItems(myWatchItemList)
     }
 
     private fun initShortsWatchRecyclerView() {
-        myShortsWatchAdapter = MyWatchedVideoAdapter()
+        myShortsWatchAdapter.onHeartClickedInMyWatchedListener = myLikeAdapter
         binding.reMyShortsWatchList.adapter = myShortsWatchAdapter
 
         val myShortsWatchItemList = WatchListUtils.getShortsWatchList()
