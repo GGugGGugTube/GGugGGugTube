@@ -1,6 +1,7 @@
 package com.example.myapplication.detail
 
 import android.content.Intent
+import android.os.Build
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.activity.addCallback
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.myapplication.MainActivity
@@ -33,6 +35,7 @@ class VideoDetailFragment : Fragment() {
 
         OnWatchListener.onWatch(videoData)
     }
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -56,11 +59,13 @@ class VideoDetailFragment : Fragment() {
     }
 
     // 영상 정보 표시
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun initVideo() {
         with(binding) {
             tvDetailTitle.text = videoData.title
             tvNameDetail.text = videoData.author
-            tvDateDetail.text = videoData.publishedAt.replace("T", " ").replace("Z", "")
+
+            tvDateDetail.text = videoData.publishedAt
 
             // 조회수
             val dec = DecimalFormat("#,###")

@@ -16,8 +16,6 @@ class SearchResultAdapter(val mItems: List<YoutubeVideo>) :
         fun onClick(item: YoutubeVideo, position: Int)
     }
 
-
-
     var videoClick: VideoClick? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
