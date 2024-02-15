@@ -144,8 +144,6 @@ class ShowMoreFragment : Fragment() {
             // 뒤로가기 버튼 클릭 시 동작
             parentFragmentManager.popBackStack()
         }
-
-        initUpButton()
     }
 
     private fun getRemainItemList(): List<YoutubeVideo> {
