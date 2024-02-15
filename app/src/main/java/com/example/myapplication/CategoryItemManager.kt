@@ -7,6 +7,9 @@ object CategoryItemManager {
     const val DEFAULT_CATEGORY_ID:Int = 0
     const val PLUS_CATEGORY_ID:Int = -1
 
+    private val defaultCtItem = CtItem.CategoryItem(DEFAULT_CATEGORY_ID, R.drawable.icon_ggug, "꾹꾹")
+    private val plusCtItem = CtItem.CategoryPlus(PLUS_CATEGORY_ID, R.drawable.icon_plus, "추가하기")
+
     private var categoryItemList =
         listOf(
             CtItem.CategoryItem(1, R.drawable.icon_dog, "강아지"),
@@ -28,7 +31,8 @@ object CategoryItemManager {
             CtItem.CategoryItem(17, R.drawable.icon_penguin, "펭귄")
         )
 
-    fun getItem(): List<CtItem> = categoryItemList + CtItem.CategoryPlus(PLUS_CATEGORY_ID, R.drawable.icon_plus, "추가하기")
+    fun getCategoryItems():List<CtItem.CategoryItem> = listOf(defaultCtItem) + categoryItemList
+    fun getAllItems(): List<CtItem> = categoryItemList + plusCtItem
     fun addItem(animalName: String) {
         categoryItemList = categoryItemList + CtItem.CategoryItem(
             categoryItemList.size,
