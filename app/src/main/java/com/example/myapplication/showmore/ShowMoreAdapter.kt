@@ -1,5 +1,6 @@
 package com.example.myapplication.showmore
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,8 @@ import com.example.myapplication.like.LikedUtils
 
 class ShowMoreAdapter(private val categoryItems: List<CtItem.CategoryItem>) :
     RecyclerView.Adapter<ShowMoreAdapter.Holder>() {
+
+    private val TAG = "ShowMoreAdapter"
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowMoreAdapter.Holder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ShowMoreItemBinding.inflate(inflater, parent, false)
@@ -46,6 +49,7 @@ class ShowMoreAdapter(private val categoryItems: List<CtItem.CategoryItem>) :
         fun bind(category: CtItem.CategoryItem) {
             animalIconImageView.setImageResource(category.animalIcon)
             animalNameTextView.text = category.animalName
+            Log.d(TAG, "animalName: ${category.animalName}")
             animalLikedRecyclerView.adapter =
                 LikedAdapter(LikedUtils.getAnimalLikedVideos(category))
         }

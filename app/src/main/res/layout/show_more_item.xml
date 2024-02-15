@@ -20,12 +20,13 @@
         android:id="@+id/tv_animal_name"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:layout_marginStart="-15dp"
-        android:gravity="center"
         android:text="동물 이름"
+        android:layout_marginStart="2dp"
+        android:gravity="center_vertical"
         android:textColor="@color/String"
-        android:textSize="24dp"
+        android:textSize="22dp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/re_animal_liked"
         app:layout_constraintStart_toEndOf="@id/iv_animal_icon"
         app:layout_constraintTop_toTopOf="parent" />
 
