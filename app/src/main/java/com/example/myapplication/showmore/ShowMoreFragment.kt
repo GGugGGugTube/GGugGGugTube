@@ -1,11 +1,14 @@
 package com.example.myapplication.showmore
 
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.databinding.FragmentShowMoreBinding
 import com.example.myapplication.like.LikedUtils
@@ -141,6 +144,8 @@ class ShowMoreFragment : Fragment() {
             // 뒤로가기 버튼 클릭 시 동작
             parentFragmentManager.popBackStack()
         }
+
+        initUpButton()
     }
 
     private fun getRemainItemList(): List<YoutubeVideo> {

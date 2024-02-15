@@ -2,6 +2,7 @@ package com.example.myapplication.search
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.Constants
 import com.example.myapplication.CtItem
@@ -75,7 +77,7 @@ class SearchResultFragment : Fragment() {
 
         initBackButton()
         fetchYoutubeResult(animalData.animalName)
-
+        initUpButton()
     }
 
     // 동물 카테고리를 클릭하면 그 동물의 이름 가져다오기
@@ -224,6 +226,24 @@ class SearchResultFragment : Fragment() {
                     addToBackStack(null)
                 }.commit()
             }
+        }
+    }
+    private fun initUpButton(){
+        binding.reSearchVideo.setOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+
+                if(newState == RecyclerView.SCROLL_STATE_IDLE){
+                    Handler().postDelayed(Runnable {
+                        binding.fabUp.isVisible = false
+                    }, 2500)
+                }
+                else binding.fabUp.isVisible = true
+            }
+        })
+
+        binding.fabUp.setOnClickListener {
+            binding.nestedScrollView.smoothScrollTo(0,0)
         }
     }
 
