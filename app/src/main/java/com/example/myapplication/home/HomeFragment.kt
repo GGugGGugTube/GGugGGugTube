@@ -99,14 +99,14 @@ class HomeFragment : Fragment() {
     private fun fetchYoutubeResult() = lifecycleScope.launch {
         var searchResponse = async {
             YoutubeNetworkClient.youtubeNetWork.getMostPopularPetAndAnimals()
-        }
+        }.await()
 
         val youtubeSearchResult = mutableListOf<YoutubeVideo>()
-        searchResponse.await().items.forEach {
+        searchResponse.items.forEach {
             Log.d(TAG, it.toString())
 
             youtubeSearchResult.add(
-                YoutubeVideo.createYouTubeVideo(youtubeVideoResource = it)
+               async{YoutubeVideo.createYouTubeVideo(youtubeVideoResource = it)}.await()
             )
             Log.d(TAG, "videoId = ${it.id}")
         }
