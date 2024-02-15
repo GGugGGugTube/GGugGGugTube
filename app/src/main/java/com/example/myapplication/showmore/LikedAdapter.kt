@@ -5,14 +5,19 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.myapplication.CtItem
 import com.example.myapplication.DateUtils.getDateFromTimestampWithFormat
 import com.example.myapplication.MyApplication
+import com.example.myapplication.R
 import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.databinding.SmallVideoItemBinding
+import com.example.myapplication.like.LikedUtils
+import com.example.myapplication.like.OnHeartClickedListener
 
-class LikedAdapter(private var likedItems: List<YoutubeVideo>) :
+class LikedAdapter(private val category: CtItem.CategoryItem) :
     RecyclerView.Adapter<LikedAdapter.Holder>() {
 
+    private var likedItems = LikedUtils.getAnimalLikedVideos(category)
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -28,6 +33,11 @@ class LikedAdapter(private var likedItems: List<YoutubeVideo>) :
 
     override fun getItemCount(): Int {
         return likedItems.size
+    }
+
+    private fun refreshDataset(){
+        likedItems = LikedUtils.getAnimalLikedVideos(category)
+        notifyDataSetChanged()
     }
 
     inner class Holder(private val binding: SmallVideoItemBinding) :
@@ -49,9 +59,10 @@ class LikedAdapter(private var likedItems: List<YoutubeVideo>) :
                 "yyyy-MM-dd'T'HH:mm:ss.SSS+09:00",
                 "MM-dd HH:mm:ss"
             )
-
             heartImageView.setOnClickListener {
-                //TODO 좋아요 삭제
+                item.isLiked = false
+                OnHeartClickedListener.onHeartClicked(item)
+                refreshDataset()
             }
         }
     }
