@@ -2,13 +2,11 @@ package com.example.myapplication.home
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.myapplication.DateUtils
 import com.example.myapplication.R
 import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.databinding.ShortsItemBinding
@@ -61,11 +59,8 @@ class HomeShortsAdapter(private val mContext: Context) :
             iv_shorts_name.text = currentItem.title
 
             //동영상 시간
-            iv_shorts_time.text = DateUtils.getDateFromTimestampWithFormat(
-                currentItem.publishedAt,
-                "yyyy-MM-dd'T'HH:mm:ss.SSS+09:00",
-                "MM-dd HH:mm:ss"
-            )
+            iv_shorts_time.text = currentItem.publishedAt
+
             setHeartImageView(currentItem.isLiked)
 
             iv_shorts_like.setOnClickListener {

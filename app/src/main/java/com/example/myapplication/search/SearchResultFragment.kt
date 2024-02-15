@@ -20,12 +20,10 @@ import com.example.myapplication.R
 import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.databinding.FragmentSearchResultBinding
 import com.example.myapplication.detail.VideoDetailFragment
-import com.example.myapplication.like.LikedConstants
 import com.example.myapplication.model.NaverModel
 import com.example.myapplication.naverdictionary.NaverData
 import com.example.myapplication.naverdictionary.NaverRetrofit
 import com.example.myapplication.youtubeApi.YoutubeNetworkClient
-import com.google.gson.Gson
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -176,15 +174,15 @@ class SearchResultFragment : Fragment() {
     private fun fetchYoutubeResult(query: String) = lifecycleScope.launch {
         var searchResponse = async {
             YoutubeNetworkClient.youtubeNetWork.getSearchedPetAndAnimals(query)
-        }
+        }.await()
 
         val youtubeSearchResult = mutableListOf<YoutubeVideo>()
-        Log.d(TAG, "result size: ${searchResponse.await().items.size}")
-        searchResponse.await().items.forEach {
+        Log.d(TAG, "result size: ${searchResponse.items.size}")
+        searchResponse.items.forEach {
             Log.d(TAG, it.toString())
 
             youtubeSearchResult.add(
-                YoutubeVideo.createYouTubeVideo(animalData.Id, it)
+                async{YoutubeVideo.createYouTubeVideo(animalData.Id, it)}.await()
             )
         }
 
