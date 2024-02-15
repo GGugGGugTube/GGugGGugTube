@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.activity.addCallback
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.myapplication.databinding.FragmentShowMoreBinding
 import com.example.myapplication.search.CategoryItemManager
 
@@ -33,6 +35,7 @@ class ShowMoreFragment : Fragment() {
     private fun initShowMoreRecyclerView(){
         showMoreAdapter = ShowMoreAdapter(CategoryItemManager.getCategoryItems())
         binding.reShowMore.adapter = showMoreAdapter
+        binding.reShowMore.addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
     }
 
     private fun initBackButton(){

@@ -1,22 +1,15 @@
 package com.example.myapplication.showmore
 
-import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.myapplication.CtItem
-import com.example.myapplication.DateUtils.getDateFromTimestampWithFormat
-import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.databinding.ShowMoreItemBinding
-import com.example.myapplication.databinding.SmallVideoItemBinding
 import com.example.myapplication.like.LikedUtils
 
-class ShowMoreAdapter(private val categoryItems:List<CtItem.CategoryItem>) :
+class ShowMoreAdapter(private val categoryItems: List<CtItem.CategoryItem>) :
     RecyclerView.Adapter<ShowMoreAdapter.Holder>() {
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowMoreAdapter.Holder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ShowMoreItemBinding.inflate(inflater, parent, false)
@@ -24,6 +17,19 @@ class ShowMoreAdapter(private val categoryItems:List<CtItem.CategoryItem>) :
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
+        val currentCategory = categoryItems[position]
+
+        if (LikedUtils.getAnimalLikedVideos(currentCategory).isEmpty()) {
+            holder.itemView. visibility = View.GONE
+            holder.itemView.layoutParams = RecyclerView.LayoutParams(0, 0)
+        } else {
+            holder.itemView.visibility = View.VISIBLE
+            holder.itemView.layoutParams = RecyclerView.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+        }
+
         holder.bind(categoryItems[position])
     }
 
@@ -33,12 +39,15 @@ class ShowMoreAdapter(private val categoryItems:List<CtItem.CategoryItem>) :
 
     inner class Holder(private val binding: ShowMoreItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        val animalNameTextView = binding.tvAnimalName
-        val animalLikedRecyclerView = binding.reAnimalLiked
+        private val animalIconImageView = binding.ivAnimalIcon
+        private val animalNameTextView = binding.tvAnimalName
+        private val animalLikedRecyclerView = binding.reAnimalLiked
 
-        fun bind(category:CtItem.CategoryItem) {
+        fun bind(category: CtItem.CategoryItem) {
+            animalIconImageView.setImageResource(category.animalIcon)
             animalNameTextView.text = category.animalName
-            animalLikedRecyclerView.adapter = LikedAdapter(LikedUtils.getAnimalLikedVideos(category))
+            animalLikedRecyclerView.adapter =
+                LikedAdapter(LikedUtils.getAnimalLikedVideos(category))
         }
     }
 }

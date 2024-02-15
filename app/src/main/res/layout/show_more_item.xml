@@ -6,17 +6,27 @@
     android:layout_height="wrap_content"
     android:paddingBottom="10dp">
 
+    <ImageView
+        android:id="@+id/iv_animal_icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="5dp"
+        android:src="@drawable/icon_ggug"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
     <TextView
         android:id="@+id/tv_animal_name"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="5dp"
         android:gravity="center"
         android:text="동물 이름"
         android:textColor="@color/String"
         android:textSize="24dp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_animal_icon"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
