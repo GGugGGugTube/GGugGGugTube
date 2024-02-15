@@ -17,7 +17,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-
         binding.navMain.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.homeFragment -> {
