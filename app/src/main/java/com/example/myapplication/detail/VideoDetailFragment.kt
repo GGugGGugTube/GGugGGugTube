@@ -1,15 +1,16 @@
 package com.example.myapplication.detail
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
-import com.example.myapplication.DateUtils
 import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.databinding.FragmentVideoDetailBinding
 import com.example.myapplication.watchlist.OnWatchListener
@@ -28,6 +29,7 @@ class VideoDetailFragment : Fragment() {
 
         OnWatchListener.onWatch(videoData)
     }
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -68,14 +70,13 @@ class VideoDetailFragment : Fragment() {
     }
 
     // 영상 정보 표시
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun initVideo() {
         with(binding) {
             tvDetailTitle.text = videoData.title
             tvNameDetail.text = videoData.author
 
-            tvDateDetail.text = DateUtils.getDateFromTimestampWithFormat(
-                videoData.publishedAt, "yyyy-MM-dd'T'HH:mm:ss'Z'", "yyyy-MM-dd HH:mm:ss"
-            )
+            tvDateDetail.text = videoData.publishedAt
 
             // 조회수
             val dec = DecimalFormat("#,###")

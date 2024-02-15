@@ -1,7 +1,8 @@
 package com.example.myapplication
 
+import android.os.Build
 import android.os.Parcelable
-import android.util.Log
+import androidx.annotation.RequiresApi
 import com.example.myapplication.search.CategoryItemManager
 import com.example.myapplication.youtubeApi.ShortsUtils
 import com.example.myapplication.youtubeApi.StatisticsUtils
@@ -26,6 +27,7 @@ data class YoutubeVideo(
 ) : Parcelable {
     companion object {
         private val TAG = "YoutubeVideo"
+        @RequiresApi(Build.VERSION_CODES.O)
         suspend fun createYouTubeVideo(
             categoryId: Int = CategoryItemManager.DEFAULT_CATEGORY_ID,
             youtubeVideoResource: YoutubeVideoResource
@@ -55,6 +57,7 @@ data class YoutubeVideo(
             }
         }
 
+        @RequiresApi(Build.VERSION_CODES.O)
         suspend fun createYouTubeVideo(
             categoryID: Int = CategoryItemManager.DEFAULT_CATEGORY_ID,
             youtubeVideoSearchResource: YoutubeVideoSearchResource
@@ -84,6 +87,7 @@ data class YoutubeVideo(
             }
         }
 
+        @RequiresApi(Build.VERSION_CODES.O)
         private fun formatPublishedAt(publishedAt: String) = LocalDateTime
             .parse(publishedAt, DateTimeFormatter.ISO_DATE_TIME)
             .format(DateTimeFormatter.ofPattern("yyyy-MM-dd / HH:mm"))
