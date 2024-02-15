@@ -43,10 +43,6 @@ class LikedAdapter(private var likedItems: List<YoutubeVideo>) :
                 .load(item.thumbnail)
                 .into(videoImageView)
 
-            videoImageView.scaleType =
-                if (item.isShorts) ImageView.ScaleType.CENTER_INSIDE
-                else ImageView.ScaleType.CENTER_CROP
-
             videoNameTextView.text = item.title
             videoTimeTextView.text = getDateFromTimestampWithFormat(
                 item.publishedAt,
