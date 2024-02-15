@@ -20,7 +20,7 @@ class MyVideoAdapter() :
     private var shortsItems = mutableListOf<YoutubeVideo>()
     override fun getItemViewType(position: Int): Int {
         return if (position < items.size && items[position].isShorts) {
-            YouTubeViewType.VIEW_TYPE_LONG_SCALE_SHORTS.ordinal
+            YouTubeViewType.VIEW_TYPE_SHORTS.ordinal
         } else YouTubeViewType.VIEW_TYPE_SMALL_VIDEO.ordinal
     }
 
@@ -32,7 +32,7 @@ class MyVideoAdapter() :
                 SmallVideoViewHolder(binding)
             }
 
-            YouTubeViewType.VIEW_TYPE_LONG_SCALE_SHORTS.ordinal -> {
+            YouTubeViewType.VIEW_TYPE_SHORTS.ordinal -> {
                 val binding = LongScaleShortsItemBinding.inflate(inflater, parent, false)
                 LongScaleShortsViewHolder(binding)
             }
