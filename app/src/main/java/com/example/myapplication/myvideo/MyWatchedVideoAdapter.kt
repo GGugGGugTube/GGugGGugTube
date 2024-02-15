@@ -13,14 +13,14 @@ import com.example.myapplication.databinding.SmallVideoItemBinding
 import com.example.myapplication.like.LikedUtils
 import com.example.myapplication.like.OnHeartClickedListener
 
-class MyVideoAdapter() :
+class MyWatchedVideoAdapter() :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var currentPosition = RecyclerView.NO_POSITION
     private var items = mutableListOf<YoutubeVideo>()
     override fun getItemViewType(position: Int): Int {
         return if (items[position].isShorts) {
-            YouTubeViewType.VIEW_TYPE_LONG_SCALE_SHORTS.ordinal
-        } else YouTubeViewType.VIEW_TYPE_LONG_SCALE_SHORTS.ordinal
+            YouTubeViewType.VIEW_TYPE_SHORTS.ordinal
+        } else YouTubeViewType.VIEW_TYPE_SMALL_VIDEO.ordinal
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -31,7 +31,7 @@ class MyVideoAdapter() :
                 SmallVideoViewHolder(binding)
             }
 
-            YouTubeViewType.VIEW_TYPE_LONG_SCALE_SHORTS.ordinal -> {
+            YouTubeViewType.VIEW_TYPE_SHORTS.ordinal -> {
                 val binding = LongScaleShortsItemBinding.inflate(inflater, parent, false)
                 LongScaleShortsViewHolder(binding)
             }
@@ -71,8 +71,8 @@ class MyVideoAdapter() :
                 item.isLiked = !item.isLiked
                 setHeartImageView(item.isLiked)
                 OnHeartClickedListener.onHeartClicked(item)
-                notifyItemRemoved(adapterPosition)
-
+//                notifyItemChanged(items.indexOf(item))
+                notifyDataSetChanged()
             }
         }
 
@@ -99,10 +99,18 @@ class MyVideoAdapter() :
 
             // 좋아요 버튼 관련 로직 추가
             binding.ivLsShortsLike.setOnClickListener {
-                item.isLiked = false
+                item.isLiked = !item.isLiked
+                setHeartImageView(item.isLiked)
                 OnHeartClickedListener.onHeartClicked(item)
-                updateItems(LikedUtils.getLikedVideos())
+//                notifyItemChanged(items.indexOf(item))
+                notifyDataSetChanged()
             }
+        }
+        private fun setHeartImageView(isLiked: Boolean) {
+            binding.ivLsShortsLike.setImageResource(
+                if (isLiked) R.drawable.icon_foot
+                else R.drawable.icon_foot_line
+            )
         }
     }
 
