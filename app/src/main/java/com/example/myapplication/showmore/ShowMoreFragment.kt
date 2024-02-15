@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
+import com.example.myapplication.MainActivity
 import com.example.myapplication.databinding.FragmentShowMoreBinding
 import com.example.myapplication.search.CategoryItemManager
 
@@ -25,6 +26,7 @@ class ShowMoreFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as MainActivity).hideBottomNavigation(true)
 
         initShowMoreRecyclerView()
         initBackButton()
@@ -37,10 +39,15 @@ class ShowMoreFragment : Fragment() {
 
     private fun initBackButton() {
         binding.ivBack.setOnClickListener {
-            parentFragmentManager.popBackStack()
+            endShowMoreFragment()
         }
         requireActivity().onBackPressedDispatcher.addCallback {
-            parentFragmentManager.popBackStack()
+            endShowMoreFragment()
         }
+    }
+
+    private fun endShowMoreFragment(){
+        parentFragmentManager.popBackStack()
+        (activity as MainActivity).hideBottomNavigation(false)
     }
 }
