@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.CtItem
-import com.example.myapplication.DateUtils.getDateFromTimestampWithFormat
 import com.example.myapplication.MyApplication
 import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.databinding.SmallVideoItemBinding
@@ -59,11 +58,7 @@ class LikedAdapter(
                 .into(videoImageView)
 
             videoNameTextView.text = item.title
-            videoTimeTextView.text = getDateFromTimestampWithFormat(
-                item.publishedAt,
-                "yyyy-MM-dd'T'HH:mm:ss.SSS+09:00",
-                "MM-dd HH:mm:ss"
-            )
+            videoTimeTextView.text = item.publishedAt
             heartImageView.setOnClickListener {
                 Log.d(TAG, "heart clicked, animal:${category.animalName}")
                 Log.d(TAG, "item: ${item.toString()}")
