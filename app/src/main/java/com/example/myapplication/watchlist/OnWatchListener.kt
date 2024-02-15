@@ -5,21 +5,26 @@ import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.like.LikedUtils
 
 object OnWatchListener {
-    private val TAG = "OnWatchListener"
 
     fun onWatch(youtubeVideo: YoutubeVideo) {
-        val watchedVideos = WatchListUtils.getWatchList().toMutableList()
-        Log.d(TAG, "before_watchedVideos.size = ${watchedVideos.size}")
-
-        if(!watchedVideos.contains(youtubeVideo))
-            watchedVideos.add(youtubeVideo)
-
-        LikedUtils.saveLikedVideos(watchedVideos)
-        Log.d(TAG, "after_watchedVideos.size = ${watchedVideos.size}")
+        if (!youtubeVideo.isShorts) {
+            val watchedVideos = WatchListUtils.getVideoWatchList().toMutableList()
+            watchedVideos.find { it.id == youtubeVideo.id } ?: watchedVideos.add(youtubeVideo)
+            WatchListUtils.saveWatchList(watchedVideos)
+        } else {
+            val watchedShorts = WatchListUtils.getShortsWatchList().toMutableList()
+            watchedShorts.find { it.id == youtubeVideo.id } ?: watchedShorts.add(youtubeVideo)
+            WatchListUtils.saveWatchList(watchedShorts)
+        }
     }
 
-    fun onWatchClear(){
-        WatchListUtils.clearWatchList()
+    fun onWatchClearVideo() {
+        WatchListUtils.removeWatchList(WatchListUtils.getVideoWatchList())
+    }
+
+    fun onWatchClearShorts() {
+        WatchListUtils.removeWatchList(WatchListUtils.getShortsWatchList())
     }
 }
+
 
