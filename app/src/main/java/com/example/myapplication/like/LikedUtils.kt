@@ -9,7 +9,6 @@ import com.google.gson.reflect.TypeToken
 
 
 object LikedUtils {
-
     fun isSavedInLikedVideos(videoId:String): Boolean =
         (getLikedVideos().find { it.id == videoId } != null)
 
