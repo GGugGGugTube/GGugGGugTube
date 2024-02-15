@@ -1,21 +1,25 @@
 package com.example.myapplication.showmore
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.CtItem
 import com.example.myapplication.DateUtils.getDateFromTimestampWithFormat
 import com.example.myapplication.MyApplication
-import com.example.myapplication.R
 import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.databinding.SmallVideoItemBinding
 import com.example.myapplication.like.LikedUtils
 import com.example.myapplication.like.OnHeartClickedListener
+import com.example.myapplication.search.CategoryItemManager
 
-class LikedAdapter(private val category: CtItem.CategoryItem) :
+class LikedAdapter(
+    private val category: CtItem.CategoryItem,
+    private val parentAdapter: ShowMoreAdapter
+) :
     RecyclerView.Adapter<LikedAdapter.Holder>() {
+    private val TAG = "LikedAdapter"
 
     private var likedItems = LikedUtils.getAnimalLikedVideos(category)
     override fun onCreateViewHolder(
@@ -35,9 +39,10 @@ class LikedAdapter(private val category: CtItem.CategoryItem) :
         return likedItems.size
     }
 
-    private fun refreshDataset(){
+    private fun refreshDataset() {
         likedItems = LikedUtils.getAnimalLikedVideos(category)
         notifyDataSetChanged()
+        parentAdapter.notifyDataSetChanged()
     }
 
     inner class Holder(private val binding: SmallVideoItemBinding) :
@@ -60,6 +65,9 @@ class LikedAdapter(private val category: CtItem.CategoryItem) :
                 "MM-dd HH:mm:ss"
             )
             heartImageView.setOnClickListener {
+                Log.d(TAG, "heart clicked, animal:${category.animalName}")
+                Log.d(TAG, "item: ${item.toString()}")
+
                 item.isLiked = false
                 OnHeartClickedListener.onHeartClicked(item)
                 refreshDataset()

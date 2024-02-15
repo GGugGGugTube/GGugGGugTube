@@ -50,7 +50,7 @@ class ShowMoreAdapter(private val categoryItems: List<CtItem.CategoryItem>) :
             animalIconImageView.setImageResource(category.animalIcon)
             animalNameTextView.text = category.animalName
             Log.d(TAG, "animalName: ${category.animalName}")
-            animalLikedRecyclerView.adapter = LikedAdapter(category)
+            animalLikedRecyclerView.adapter = LikedAdapter(category, this@ShowMoreAdapter)
         }
     }
 }
