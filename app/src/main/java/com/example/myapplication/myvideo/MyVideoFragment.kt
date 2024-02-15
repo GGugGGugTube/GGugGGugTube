@@ -80,7 +80,7 @@ class MyVideoFragment : Fragment() {
         myLikeAdapter.updateItems(myLikeItemList)
         // 시청한 동영상 목록을 어댑터에 설정
         myWatchAdapter.updateItems(myWatchItemList)
-        myShortsWatchAdapter.updateItems(myShortsWatchItemList)
+        myShortsWatchAdapter.updateShortsItems(myShortsWatchItemList)
 
 
         //SupportFragmentManager로 FragmentManager를 호출
