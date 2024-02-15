@@ -174,15 +174,15 @@ class SearchResultFragment : Fragment() {
     private fun fetchYoutubeResult(query: String) = lifecycleScope.launch {
         var searchResponse = async {
             YoutubeNetworkClient.youtubeNetWork.getSearchedPetAndAnimals(query)
-        }
+        }.await()
 
         val youtubeSearchResult = mutableListOf<YoutubeVideo>()
-        Log.d(TAG, "result size: ${searchResponse.await().items.size}")
-        searchResponse.await().items.forEach {
+        Log.d(TAG, "result size: ${searchResponse.items.size}")
+        searchResponse.items.forEach {
             Log.d(TAG, it.toString())
 
             youtubeSearchResult.add(
-                YoutubeVideo.createYouTubeVideo(animalData.Id, it)
+                async{YoutubeVideo.createYouTubeVideo(animalData.Id, it)}.await()
             )
         }
 

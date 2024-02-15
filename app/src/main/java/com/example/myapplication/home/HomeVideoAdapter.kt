@@ -7,12 +7,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.myapplication.DateUtils
 import com.example.myapplication.R
 import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.databinding.VideoItemBinding
 import com.example.myapplication.like.OnHeartClickedListener
-import com.example.myapplication.search.SearchResultAdapter
 
 class HomeVideoAdapter(private val mContext: Context) :
     RecyclerView.Adapter<HomeVideoAdapter.ItemViewHolder>() {
@@ -60,11 +58,8 @@ class HomeVideoAdapter(private val mContext: Context) :
             iv_video_name.text = currentItem.title
 
             //동영상 시간
-            iv_video_time.text = DateUtils.getDateFromTimestampWithFormat(
-                currentItem.publishedAt,
-                "yyyy-MM-dd'T'HH:mm:ss.SSS+09:00",
-                "MM-dd HH:mm:ss"
-            )
+            iv_video_time.text = currentItem.publishedAt
+
             setHeartImageView(currentItem.isLiked)
 
             iv_video_like.setOnClickListener{
