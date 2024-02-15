@@ -2,32 +2,30 @@ package com.example.myapplication
 
 import android.os.Parcelable
 import android.util.Log
+import com.example.myapplication.search.CategoryItemManager
 import com.example.myapplication.youtubeApi.ShortsUtils
 import com.example.myapplication.youtubeApi.StatisticsUtils
-import com.example.myapplication.youtubeApi.YoutubeNetworkClient
 import com.example.myapplication.youtubeApi.YoutubeVideoResource
-import com.example.myapplication.youtubeApi.YoutubeVideoResourceSnippet
 import com.example.myapplication.youtubeApi.YoutubeVideoSearchResource
-import com.example.myapplication.youtubeApi.YoutubeVideoSearchResourceSnippet
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class YoutubeVideo(
-    val id:String,
+    val id: String,
     val title: String,
-    val author:String, //동영상 작성자
+    val author: String, //동영상 작성자
     val viewCount: Int, //동영상 조회수
     val description: String, //동영상 상세 정보
     val thumbnail: String,
     val publishedAt: String,
-    val category: String,
+    val categoryId: Int,
     val isShorts: Boolean,
     var isLiked: Boolean = false
 ) : Parcelable {
     companion object {
         private val TAG = "YoutubeVideo"
         suspend fun createYouTubeVideo(
-            category: String = "",
+            categoryId: Int = CategoryItemManager.DEFAULT_CATEGORY_ID,
             youtubeVideoResource: YoutubeVideoResource
         ): YoutubeVideo {
             return with(youtubeVideoResource) {
@@ -39,15 +37,25 @@ data class YoutubeVideo(
                 val description = this.snippet.description
                 val thumbnail = this.snippet.thumbnails.high.url
                 val publishedAt = this.snippet.publishedAt
-                val category = category
+                val categoryId = categoryId
                 val isShorts = ShortsUtils.isShorts(id)
 
-                YoutubeVideo(id, title, author, viewCount, description, thumbnail, publishedAt, category, isShorts)
+                YoutubeVideo(
+                    id,
+                    title,
+                    author,
+                    viewCount,
+                    description,
+                    thumbnail,
+                    publishedAt,
+                    categoryId,
+                    isShorts
+                )
             }
         }
 
         suspend fun createYouTubeVideo(
-            category: String = "",
+            categoryID: Int = CategoryItemManager.DEFAULT_CATEGORY_ID,
             youtubeVideoSearchResource: YoutubeVideoSearchResource
         ): YoutubeVideo {
             return with(youtubeVideoSearchResource) {
@@ -55,14 +63,23 @@ data class YoutubeVideo(
                 val title = this.snippet.title
                 val author = this.snippet.channelTitle
                 val viewCount = StatisticsUtils.getViewCount(id)
-                Log.d(TAG, "author: $author, viewCount: $viewCount")
                 val description = this.snippet.description
                 val thumbnail = this.snippet.thumbnails.high.url
                 val publishedAt = this.snippet.publishedAt
-                val category = category
+                val categoryId = categoryID
                 val isShorts = ShortsUtils.isShorts(id)
 
-                YoutubeVideo(id, title, author, viewCount, description, thumbnail, publishedAt, category, isShorts)
+                YoutubeVideo(
+                    id,
+                    title,
+                    author,
+                    viewCount,
+                    description,
+                    thumbnail,
+                    publishedAt,
+                    categoryId,
+                    isShorts
+                )
             }
         }
     }

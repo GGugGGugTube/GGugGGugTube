@@ -12,9 +12,8 @@
     <ImageView
         android:id="@+id/iv_video_image"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_height="210dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/icon_ggug"
         android:background="@color/BG_Black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

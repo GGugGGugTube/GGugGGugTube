@@ -37,7 +37,7 @@ class SearchFragment : Fragment() {
                 ad.setMessage("정말로 삭제하시겠습니까?")
                 ad.setPositiveButton("확인"){dialog,_ ->
                     CategoryItemManager.removeItem(id)
-                    adapter.changeDataset(CategoryItemManager.getItem())
+                    adapter.changeDataset(CategoryItemManager.getAllItems())
                 }
                 ad.setNegativeButton("취소"){dialog,_ ->
                     dialog.dismiss()
@@ -76,7 +76,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun itemView() {
-        adapter = SearchAdapter(CategoryItemManager.getItem())
+        adapter = SearchAdapter(CategoryItemManager.getAllItems())
         binding.reSearch.adapter = adapter
         gridManager = GridLayoutManager(context, 3)
         binding.reSearch.layoutManager = gridManager
@@ -96,7 +96,7 @@ class SearchFragment : Fragment() {
 
             _binding.tvSearchitemname.text = edit?.text
             CategoryItemManager.addItem(edit?.text.toString())
-            adapter.changeDataset(CategoryItemManager.getItem())
+            adapter.changeDataset(CategoryItemManager.getAllItems())
             adapter.notifyDataSetChanged()
         }
 

@@ -10,7 +10,7 @@
     <ImageView
         android:id="@+id/iv_lsShortsBackImage"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="100dp"
         android:background="#CCD0D9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,56 +66,56 @@
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--    <?xml version="1.0" encoding="utf-8"?>-->
-<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--xmlns:tools="http://schemas.android.com/tools"-->
-<!--android:background="@color/BG_Item"-->
-<!--android:layout_width="match_parent"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:layout_marginBottom="10dp"-->
-<!--    >-->
+    <!--    <?xml version="1.0" encoding="utf-8"?>-->
+    <!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:background="@color/BG_Item"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginBottom="10dp"-->
+    <!--    >-->
 
-<!--<ImageView-->
-<!--    android:id="@+id/iv_longShortsImage"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="230dp"-->
-<!--    android:background="@color/BG_Black"-->
-<!--    app:layout_constraintEnd_toEndOf="parent"-->
-<!--    app:layout_constraintStart_toStartOf="parent"-->
-<!--    app:layout_constraintTop_toTopOf="parent" />-->
+    <!--<ImageView-->
+    <!--    android:id="@+id/iv_longShortsImage"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="230dp"-->
+    <!--    android:background="@color/BG_Black"-->
+    <!--    app:layout_constraintEnd_toEndOf="parent"-->
+    <!--    app:layout_constraintStart_toStartOf="parent"-->
+    <!--    app:layout_constraintTop_toTopOf="parent" />-->
 
-<!--<ImageView-->
-<!--    android:layout_width="35dp"-->
-<!--    android:layout_height="35dp"-->
-<!--    android:src="@drawable/icon_foot_line"-->
-<!--    app:layout_constraintEnd_toEndOf="@+id/iv_longShortsImage"-->
-<!--    app:layout_constraintTop_toTopOf="@+id/iv_longShortsImage" />-->
+    <!--<ImageView-->
+    <!--    android:layout_width="35dp"-->
+    <!--    android:layout_height="35dp"-->
+    <!--    android:src="@drawable/icon_foot_line"-->
+    <!--    app:layout_constraintEnd_toEndOf="@+id/iv_longShortsImage"-->
+    <!--    app:layout_constraintTop_toTopOf="@+id/iv_longShortsImage" />-->
 
-<!--<TextView-->
-<!--    android:id="@+id/tv_longShortsName"-->
-<!--    android:layout_width="wrap_content"-->
-<!--    android:layout_height="wrap_content"-->
-<!--    android:layout_marginTop="2dp"-->
-<!--    android:layout_marginStart="5dp"-->
-<!--    android:text="동영상 이름"-->
-<!--    android:textSize="18sp"-->
-<!--    android:textColor="@color/white"-->
-<!--    android:textStyle="bold"-->
-<!--    app:layout_constraintStart_toStartOf="parent"-->
-<!--    app:layout_constraintTop_toBottomOf="@+id/iv_longShortsImage" />-->
+    <!--<TextView-->
+    <!--    android:id="@+id/tv_longShortsName"-->
+    <!--    android:layout_width="wrap_content"-->
+    <!--    android:layout_height="wrap_content"-->
+    <!--    android:layout_marginTop="2dp"-->
+    <!--    android:layout_marginStart="5dp"-->
+    <!--    android:text="동영상 이름"-->
+    <!--    android:textSize="18sp"-->
+    <!--    android:textColor="@color/white"-->
+    <!--    android:textStyle="bold"-->
+    <!--    app:layout_constraintStart_toStartOf="parent"-->
+    <!--    app:layout_constraintTop_toBottomOf="@+id/iv_longShortsImage" />-->
 
-<!--<TextView-->
-<!--    android:id="@+id/tv_longShortsTime"-->
-<!--    android:layout_width="wrap_content"-->
-<!--    android:layout_height="wrap_content"-->
-<!--    android:text="날짜 / 시간"-->
-<!--    android:layout_marginTop="5dp"-->
-<!--    android:layout_marginStart="5dp"-->
-<!--    android:layout_marginBottom="5dp"-->
-<!--    android:textColor="@color/white"-->
-<!--    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--    app:layout_constraintStart_toStartOf="parent"-->
-<!--    app:layout_constraintTop_toBottomOf="@+id/tv_longShortsName" />-->
+    <!--<TextView-->
+    <!--    android:id="@+id/tv_longShortsTime"-->
+    <!--    android:layout_width="wrap_content"-->
+    <!--    android:layout_height="wrap_content"-->
+    <!--    android:text="날짜 / 시간"-->
+    <!--    android:layout_marginTop="5dp"-->
+    <!--    android:layout_marginStart="5dp"-->
+    <!--    android:layout_marginBottom="5dp"-->
+    <!--    android:textColor="@color/white"-->
+    <!--    app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--    app:layout_constraintStart_toStartOf="parent"-->
+    <!--    app:layout_constraintTop_toBottomOf="@+id/tv_longShortsName" />-->
 
-<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
+    <!--</androidx.constraintlayout.widget.ConstraintLayout>-->
