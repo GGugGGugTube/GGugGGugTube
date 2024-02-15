@@ -8,6 +8,8 @@ import com.example.myapplication.youtubeApi.StatisticsUtils
 import com.example.myapplication.youtubeApi.YoutubeVideoResource
 import com.example.myapplication.youtubeApi.YoutubeVideoSearchResource
 import kotlinx.parcelize.Parcelize
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 @Parcelize
 data class YoutubeVideo(
@@ -33,10 +35,9 @@ data class YoutubeVideo(
                 val title = this.snippet.title
                 val author = this.snippet.channelTitle
                 val viewCount = StatisticsUtils.getViewCount(id)
-                Log.d(TAG, "author: $author, viewCount: $viewCount")
                 val description = this.snippet.description
                 val thumbnail = this.snippet.thumbnails.high.url
-                val publishedAt = this.snippet.publishedAt
+                val publishedAt = formatPublishedAt(this.snippet.publishedAt)
                 val categoryId = categoryId
                 val isShorts = ShortsUtils.isShorts(id)
 
@@ -65,7 +66,7 @@ data class YoutubeVideo(
                 val viewCount = StatisticsUtils.getViewCount(id)
                 val description = this.snippet.description
                 val thumbnail = this.snippet.thumbnails.high.url
-                val publishedAt = this.snippet.publishedAt
+                val publishedAt = formatPublishedAt(this.snippet.publishedAt)
                 val categoryId = categoryID
                 val isShorts = ShortsUtils.isShorts(id)
 
@@ -82,5 +83,9 @@ data class YoutubeVideo(
                 )
             }
         }
+
+        private fun formatPublishedAt(publishedAt: String) = LocalDateTime
+            .parse(publishedAt, DateTimeFormatter.ISO_DATE_TIME)
+            .format(DateTimeFormatter.ofPattern("yyyy-MM-dd / HH:mm"))
     }
 }

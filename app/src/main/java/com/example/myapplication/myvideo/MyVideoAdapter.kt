@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.myapplication.DateUtils.getDateFromTimestampWithFormat
 import com.example.myapplication.MyApplication
 import com.example.myapplication.R
 import com.example.myapplication.YouTubeViewType
@@ -65,11 +64,7 @@ class MyVideoAdapter() :
             binding.tvSmallVideoName.text = item.title
 
             // 비디오 시간 설정
-            binding.tvSmallVideoTime.text = getDateFromTimestampWithFormat(
-                item.publishedAt,
-                "yyyy-MM-dd'T'HH:mm:ss.SSS+09:00",
-                "MM-dd HH:mm:ss"
-            )
+            binding.tvSmallVideoTime.text = item.publishedAt
 
             binding.ivSmallVideoLike.setOnClickListener {
                 item.isLiked = !item.isLiked
@@ -99,11 +94,7 @@ class MyVideoAdapter() :
             binding.tvLsShortsVideoName.text = item.title
 
             // 비디오 시간 설정
-            binding.tvLsShortsVideoTime.text = getDateFromTimestampWithFormat(
-                item.publishedAt,
-                "yyyy-MM-dd'T'HH:mm:ss.SSS+09:00",
-                "MM-dd HH:mm:ss"
-            )
+            binding.tvLsShortsVideoTime.text = item.publishedAt
 
             // 좋아요 버튼 관련 로직 추가
             binding.ivLsShortsLike.setOnClickListener {
