@@ -103,7 +103,7 @@ class HomeFragment : Fragment() {
             Log.d(TAG, it.toString())
 
             youtubeSearchResult.add(
-                YoutubeVideo.createYouTubeVideo("GGugGGug", it)
+                YoutubeVideo.createYouTubeVideo(youtubeVideoResource = it)
             )
             Log.d(TAG, "videoId = ${it.id}")
         }

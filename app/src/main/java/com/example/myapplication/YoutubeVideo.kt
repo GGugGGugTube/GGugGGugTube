@@ -2,20 +2,18 @@ package com.example.myapplication
 
 import android.os.Parcelable
 import android.util.Log
+import com.example.myapplication.search.CategoryItemManager
 import com.example.myapplication.youtubeApi.ShortsUtils
 import com.example.myapplication.youtubeApi.StatisticsUtils
-import com.example.myapplication.youtubeApi.YoutubeNetworkClient
 import com.example.myapplication.youtubeApi.YoutubeVideoResource
-import com.example.myapplication.youtubeApi.YoutubeVideoResourceSnippet
 import com.example.myapplication.youtubeApi.YoutubeVideoSearchResource
-import com.example.myapplication.youtubeApi.YoutubeVideoSearchResourceSnippet
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class YoutubeVideo(
-    val id:String,
+    val id: String,
     val title: String,
-    val author:String, //동영상 작성자
+    val author: String, //동영상 작성자
     val viewCount: Int, //동영상 조회수
     val description: String, //동영상 상세 정보
     val thumbnail: String,
@@ -27,7 +25,7 @@ data class YoutubeVideo(
     companion object {
         private val TAG = "YoutubeVideo"
         suspend fun createYouTubeVideo(
-            category: String = "",
+            category: String = CategoryItemManager.defaultCategory,
             youtubeVideoResource: YoutubeVideoResource
         ): YoutubeVideo {
             return with(youtubeVideoResource) {
@@ -42,12 +40,22 @@ data class YoutubeVideo(
                 val category = category
                 val isShorts = ShortsUtils.isShorts(id)
 
-                YoutubeVideo(id, title, author, viewCount, description, thumbnail, publishedAt, category, isShorts)
+                YoutubeVideo(
+                    id,
+                    title,
+                    author,
+                    viewCount,
+                    description,
+                    thumbnail,
+                    publishedAt,
+                    category,
+                    isShorts
+                )
             }
         }
 
         suspend fun createYouTubeVideo(
-            category: String = "",
+            category: String = CategoryItemManager.defaultCategory,
             youtubeVideoSearchResource: YoutubeVideoSearchResource
         ): YoutubeVideo {
             return with(youtubeVideoSearchResource) {
@@ -62,7 +70,17 @@ data class YoutubeVideo(
                 val category = category
                 val isShorts = ShortsUtils.isShorts(id)
 
-                YoutubeVideo(id, title, author, viewCount, description, thumbnail, publishedAt, category, isShorts)
+                YoutubeVideo(
+                    id,
+                    title,
+                    author,
+                    viewCount,
+                    description,
+                    thumbnail,
+                    publishedAt,
+                    category,
+                    isShorts
+                )
             }
         }
     }
