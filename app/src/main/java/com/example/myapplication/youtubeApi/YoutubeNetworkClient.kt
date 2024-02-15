@@ -54,8 +54,8 @@ object YoutubeNetworkClient {
 
         return OkHttpClient.Builder()
             .cache(cache)
-            .addInterceptor(cacheInterceptor)
             .addInterceptor(offlineInterceptor)
+            .addInterceptor(cacheInterceptor)
             .build()
     }
 
