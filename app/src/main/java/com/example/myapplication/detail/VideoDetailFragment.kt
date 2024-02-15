@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.example.myapplication.DateUtils
 import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.databinding.FragmentVideoDetailBinding
 import com.example.myapplication.watchlist.OnWatchListener
@@ -71,7 +72,10 @@ class VideoDetailFragment : Fragment() {
         with(binding) {
             tvDetailTitle.text = videoData.title
             tvNameDetail.text = videoData.author
-            tvDateDetail.text = videoData.publishedAt.replace("T", " ").replace("Z", "")
+
+            tvDateDetail.text = DateUtils.getDateFromTimestampWithFormat(
+                videoData.publishedAt, "yyyy-MM-dd'T'HH:mm:ss'Z'", "yyyy-MM-dd HH:mm:ss"
+            )
 
             // 조회수
             val dec = DecimalFormat("#,###")

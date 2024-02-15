@@ -1,14 +1,13 @@
 package com.example.myapplication.youtubeApi
 
 import retrofit2.http.GET
-import retrofit2.http.HEAD
 import retrofit2.http.Query
 
 const val PET_AND_ANIMALS_CATEGORY_ID: String = "15"
 
 interface YoutubeNetWorkInterface {
     //Pet&Animals 카테고리의 인기 동영상 목록 가져오기
-    @GET("videos?key=AIzaSyDwJ6e9yH7IIr2deX2kV26T2T5P7254lVE")
+    @GET("videos?key=AIzaSyCnHIRmuwm2zyVzUZJ4M6C9LirnLxxi1mM")
     suspend fun getMostPopularPetAndAnimals(
         @Query("part") part: String = "snippet",
         @Query("chart") chart: String = "mostPopular", //차트: 인기 차트
@@ -19,7 +18,7 @@ interface YoutubeNetWorkInterface {
     ): YoutubeVideoResponse
 
     //Pet&Animals 카테고리에서 검색 결과 목록 가져오기
-    @GET("search?key=AIzaSyDwJ6e9yH7IIr2deX2kV26T2T5P7254lVE")
+    @GET("search?key=AIzaSyCnHIRmuwm2zyVzUZJ4M6C9LirnLxxi1mM")
     suspend fun getSearchedPetAndAnimals(
         @Query("q") q: String, //검색어
         @Query("part") part: String = "snippet",
@@ -31,7 +30,7 @@ interface YoutubeNetWorkInterface {
     ):YoutubeVideoSearchResponse
 
     //동영상 통계 정보 가져오기
-    @GET("videos?key=AIzaSyDwJ6e9yH7IIr2deX2kV26T2T5P7254lVE")
+    @GET("videos?key=AIzaSyCnHIRmuwm2zyVzUZJ4M6C9LirnLxxi1mM")
     suspend fun getStatistics(
         @Query("id") id:String, //동영상 ID
         @Query("part") part: String = "statistics"
