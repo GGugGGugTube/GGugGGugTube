@@ -29,11 +29,9 @@ class DictionaryAdapter(private val mContext: Context) : RecyclerView.Adapter<Di
         Glide.with(mContext)
             .load(items[position].url)
             .into(holder.ivimgge)
-//        holder.itemView.setOnClickListener {
-//            naverClick?.onClick(items[position], position) {
-//                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("${items[position].link}"))
-//            }
-//        }
+        holder.itemView.setOnClickListener {
+            naverClick?.onClick(items[position], position)
+        }
 
         holder.tvtitle.text = items[position].title.replace("<b>", "").replace("</b>", "")
         holder.tvdesc.text = items[position].description.replace("<b>", "").replace("</b>", "")

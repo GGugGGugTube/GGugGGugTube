@@ -11,6 +11,13 @@ import com.example.myapplication.like.OnHeartClickedListener
 
 class SearchResultShortsAdapter(val mItems: List<YoutubeVideo>) :
     RecyclerView.Adapter<SearchResultShortsAdapter.Holder>() {
+
+    interface ShortsClick {
+        fun onClick (item: YoutubeVideo, position: Int)
+    }
+
+    var shortsClick: ShortsClick? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding = ShortsItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return Holder(binding)
@@ -18,6 +25,10 @@ class SearchResultShortsAdapter(val mItems: List<YoutubeVideo>) :
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.bind(mItems[position])
+
+        holder.itemView.setOnClickListener {
+            shortsClick?.onClick(mItems[position], position)
+        }
     }
 
     override fun getItemId(position: Int): Long {
