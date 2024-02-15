@@ -18,14 +18,14 @@ data class YoutubeVideo(
     val description: String, //동영상 상세 정보
     val thumbnail: String,
     val publishedAt: String,
-    val category: String,
+    val categoryId: Int,
     val isShorts: Boolean,
     var isLiked: Boolean = false
 ) : Parcelable {
     companion object {
         private val TAG = "YoutubeVideo"
         suspend fun createYouTubeVideo(
-            category: String = CategoryItemManager.defaultCategory,
+            categoryId: Int = CategoryItemManager.DEFAULT_CATEGORY_ID,
             youtubeVideoResource: YoutubeVideoResource
         ): YoutubeVideo {
             return with(youtubeVideoResource) {
@@ -37,7 +37,7 @@ data class YoutubeVideo(
                 val description = this.snippet.description
                 val thumbnail = this.snippet.thumbnails.high.url
                 val publishedAt = this.snippet.publishedAt
-                val category = category
+                val categoryId = categoryId
                 val isShorts = ShortsUtils.isShorts(id)
 
                 YoutubeVideo(
@@ -48,14 +48,14 @@ data class YoutubeVideo(
                     description,
                     thumbnail,
                     publishedAt,
-                    category,
+                    categoryId,
                     isShorts
                 )
             }
         }
 
         suspend fun createYouTubeVideo(
-            category: String = CategoryItemManager.defaultCategory,
+            categoryID: Int = CategoryItemManager.DEFAULT_CATEGORY_ID,
             youtubeVideoSearchResource: YoutubeVideoSearchResource
         ): YoutubeVideo {
             return with(youtubeVideoSearchResource) {
@@ -63,11 +63,10 @@ data class YoutubeVideo(
                 val title = this.snippet.title
                 val author = this.snippet.channelTitle
                 val viewCount = StatisticsUtils.getViewCount(id)
-                Log.d(TAG, "author: $author, viewCount: $viewCount")
                 val description = this.snippet.description
                 val thumbnail = this.snippet.thumbnails.high.url
                 val publishedAt = this.snippet.publishedAt
-                val category = category
+                val categoryId = categoryID
                 val isShorts = ShortsUtils.isShorts(id)
 
                 YoutubeVideo(
@@ -78,7 +77,7 @@ data class YoutubeVideo(
                     description,
                     thumbnail,
                     publishedAt,
-                    category,
+                    categoryId,
                     isShorts
                 )
             }
