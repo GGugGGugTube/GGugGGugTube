@@ -3,6 +3,8 @@ package com.example.myapplication
 import android.os.Build
 import android.os.Parcelable
 import androidx.annotation.RequiresApi
+import android.util.Log
+import com.example.myapplication.like.LikedUtils
 import com.example.myapplication.search.CategoryItemManager
 import com.example.myapplication.youtubeApi.ShortsUtils
 import com.example.myapplication.youtubeApi.StatisticsUtils
@@ -23,7 +25,7 @@ data class YoutubeVideo(
     val publishedAt: String,
     val categoryId: Int,
     val isShorts: Boolean,
-    var isLiked: Boolean = false
+    var isLiked: Boolean
 ) : Parcelable {
     companion object {
         private val TAG = "YoutubeVideo"
@@ -41,7 +43,9 @@ data class YoutubeVideo(
                 val thumbnail = this.snippet.thumbnails.high.url
                 val publishedAt = formatPublishedAt(this.snippet.publishedAt)
                 val categoryId = categoryId
+
                 val isShorts = ShortsUtils.isShorts(id)
+                val isLiked = LikedUtils.isSavedInLikedVideos(id)
 
                 YoutubeVideo(
                     id,
@@ -52,7 +56,8 @@ data class YoutubeVideo(
                     thumbnail,
                     publishedAt,
                     categoryId,
-                    isShorts
+                    isShorts,
+                    isLiked
                 )
             }
         }
@@ -71,7 +76,9 @@ data class YoutubeVideo(
                 val thumbnail = this.snippet.thumbnails.high.url
                 val publishedAt = formatPublishedAt(this.snippet.publishedAt)
                 val categoryId = categoryID
+
                 val isShorts = ShortsUtils.isShorts(id)
+                val isLiked = LikedUtils.isSavedInLikedVideos(id)
 
                 YoutubeVideo(
                     id,
@@ -82,7 +89,8 @@ data class YoutubeVideo(
                     thumbnail,
                     publishedAt,
                     categoryId,
-                    isShorts
+                    isShorts,
+                    isLiked
                 )
             }
         }
