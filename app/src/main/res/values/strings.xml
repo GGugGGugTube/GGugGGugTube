@@ -6,4 +6,6 @@
 
     <string name="no_video_search_result">검색 결과 동영상이 없습니다!</string>
     <string name="no_shorts_search_result">검색 결과 Shorts 동영상이 없습니다!</string>
+
+    <string name="comment_hint">댓글을 남겨주세요.</string>
 </resources>
