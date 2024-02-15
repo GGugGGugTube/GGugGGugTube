@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".search.SearchResultFragment"
-    app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+    app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+    tools:context=".search.SearchResultFragment">
 
     <ImageView
         android:id="@+id/img_search_back"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="15dp"
-        android:src="@drawable/back"
+        android:src="@drawable/ic_back"
         app:layout_constraintBottom_toTopOf="@id/iv_line"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,10 +25,10 @@
         android:textColor="@color/String"
         android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/iv_line"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/iv_line"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/iv_line"
@@ -38,9 +38,10 @@
         android:src="@drawable/line"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -85,7 +86,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_margin="10dp"
-                android:src="@drawable/back"
+                android:src="@drawable/ic_back"
                 app:layout_constraintBottom_toTopOf="@id/linear_search"
                 app:layout_constraintEnd_toStartOf="@id/search_dictionary"
                 app:layout_constraintStart_toStartOf="parent"
@@ -96,7 +97,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_margin="10dp"
-                android:src="@drawable/forward"
+                android:src="@drawable/ic_forward"
                 app:layout_constraintBottom_toTopOf="@id/linear_search"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/search_dictionary"
@@ -127,21 +128,34 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal"
+                    android:visibility="gone"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_recommendation"
                     tools:listitem="@layout/shorts_item" />
 
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animation_bingle_shorts"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginVertical="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_recommendation"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/animation_bingle_cat" />
+
                 <TextView
-                    android:id="@+id/tv_no_video_search_result1"
-                    android:layout_width="match_parent"
+                    android:id="@+id/tv_no_shorts"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="15dp"
-                    android:text="@string/no_video_search_result"
-                    android:textSize="14sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginVertical="10dp"
+                    android:text="@string/no_shorts_search_result"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
                     android:visibility="gone"
-                    tools:visibility="visible" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_recommendation" />
 
                 <TextView
                     android:id="@+id/tv_search_video"
@@ -162,22 +176,46 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:orientation="vertical"
+                    android:visibility="gone"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/video_item" />
 
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animation_bingle_video"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginVertical="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_recommendation"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/animation_bingle_cat" />
+
                 <TextView
-                    android:id="@+id/tv_no_video_search_result2"
-                    android:layout_width="match_parent"
+                    android:id="@+id/tv_no_video"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginVertical="10dp"
                     android:text="@string/no_video_search_result"
-                    android:textSize="14sp"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
                     android:visibility="gone"
-                    tools:visibility="visible" />
-
+                    app:layout_constraintTop_toBottomOf="@+id/tv_recommendation" />
             </LinearLayout>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="100dp"
+        android:backgroundTint="@color/white"
+        android:src="@drawable/ic_up"
+        android:visibility="invisible"
+        app:borderWidth="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

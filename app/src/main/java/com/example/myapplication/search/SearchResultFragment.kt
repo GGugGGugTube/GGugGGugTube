@@ -2,21 +2,24 @@ package com.example.myapplication.search
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.Constants
 import com.example.myapplication.CtItem
 import com.example.myapplication.MainActivity
 import com.example.myapplication.R
-import com.example.myapplication.detail.VideoDetailFragment
 import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.databinding.FragmentSearchResultBinding
+import com.example.myapplication.detail.VideoDetailFragment
 import com.example.myapplication.like.LikedConstants
 import com.example.myapplication.model.NaverModel
 import com.example.myapplication.naverdictionary.NaverData
@@ -76,7 +79,7 @@ class SearchResultFragment : Fragment() {
 
         initBackButton()
         fetchYoutubeResult(animalData.animalName)
-
+        initUpButton()
     }
 
 
@@ -185,13 +188,26 @@ class SearchResultFragment : Fragment() {
             )
         }
 
+        binding.animationBingleShorts.visibility = View.GONE
+        binding.animationBingleVideo.visibility = View.GONE
+
         val shorts = youtubeSearchResult.filter { it.isShorts }
         Log.d(TAG, "shorts size: ${shorts.size}")
-        initShortsRecyclerView(shorts)
+        if (shorts.isEmpty()) {
+            binding.tvNoShorts.isVisible = true
+        } else {
+            initShortsRecyclerView(shorts)
+            binding.reSearchShorts.isVisible = true
+        }
 
-        val videos = youtubeSearchResult.filter{!it.isShorts}
+        val videos = youtubeSearchResult.filter { !it.isShorts }
         Log.d(TAG, "videos size: ${videos.size}")
-        initVideoRecyclerView(videos)
+        if (videos.isEmpty()) {
+            binding.tvNoVideo.isVisible = true
+        } else {
+            initVideoRecyclerView(videos)
+            binding.reSearchVideo.isVisible = true
+        }
     }
 
     private fun initShortsRecyclerView(shorts: List<YoutubeVideo>) {
@@ -215,6 +231,25 @@ class SearchResultFragment : Fragment() {
             }
         }
     }
+    private fun initUpButton(){
+        binding.reSearchVideo.setOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+
+                if(newState == RecyclerView.SCROLL_STATE_IDLE){
+                    Handler().postDelayed(Runnable {
+                        binding.fabUp.isVisible = false
+                    }, 2500)
+                }
+                else binding.fabUp.isVisible = true
+            }
+        })
+
+        binding.fabUp.setOnClickListener {
+            binding.nestedScrollView.smoothScrollTo(0,0)
+        }
+    }
+
     companion object {
         private const val ARG_ANIMAL = "argAnimal"
 

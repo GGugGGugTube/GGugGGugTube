@@ -18,33 +18,40 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        binding.navMain.setOnItemSelectedListener { item->
-            when(item.itemId) {
+        binding.navMain.setOnItemSelectedListener { item ->
+            when (item.itemId) {
                 R.id.homeFragment -> {
                     setFrag(0)
                 }
+
                 R.id.searchFragment -> {
                     setFrag(1)
                 }
+
                 R.id.myvideoFragment -> {
                     setFrag(2)
-                } else ->{
+                }
+
+                else -> {
                     false
                 }
             }
         }
         binding.navMain.selectedItemId = R.id.homeFragment
     }
-    private fun setFrag(fragNum : Int) : Boolean {
+
+    private fun setFrag(fragNum: Int): Boolean {
         val ft = supportFragmentManager.beginTransaction()
 
-        when(fragNum) {
-            0 ->{
+        when (fragNum) {
+            0 -> {
                 ft.replace(R.id.main_frame, HomeFragment()).commit()
             }
+
             1 -> {
                 ft.replace(R.id.main_frame, SearchFragment()).commit()
             }
+
             2 -> {
                 ft.replace(R.id.main_frame, MyVideoFragment()).commit()
             }
@@ -53,8 +60,8 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    fun hideBottomNavigation (state:Boolean) {
-        if(state) binding.navMain.visibility = View.GONE
-        else binding.navMain.visibility= View.VISIBLE
+    fun hideBottomNavigation(state: Boolean) {
+        if (state) binding.navMain.visibility = View.GONE
+        else binding.navMain.visibility = View.VISIBLE
     }
 }

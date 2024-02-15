@@ -3,6 +3,7 @@ package com.example.myapplication.home
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.YoutubeVideo
 import com.example.myapplication.databinding.FragmentHomeBinding
@@ -43,6 +45,7 @@ class HomeFragment : Fragment() {
 
         shortsView()
         videoView()
+        initUpButton()
 
         return binding.root
     }
@@ -137,6 +140,24 @@ class HomeFragment : Fragment() {
             binding.reHomeVideo.isVisible = true
             videoadapter.items.addAll(youtubeVideo)
             videoadapter.notifyDataSetChanged()
+        }
+    }
+    private fun initUpButton(){
+        binding.reHomeVideo.setOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+
+                if(newState == RecyclerView.SCROLL_STATE_IDLE){
+                    Handler().postDelayed(Runnable {
+                        binding.fabUp.isVisible = false
+                    }, 2500)
+                }
+                else binding.fabUp.isVisible = true
+            }
+        })
+
+        binding.fabUp.setOnClickListener {
+            binding.nestedScrollView.smoothScrollTo(0,0)
         }
     }
 }

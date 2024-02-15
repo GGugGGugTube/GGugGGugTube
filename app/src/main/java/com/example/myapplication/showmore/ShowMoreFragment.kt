@@ -1,11 +1,15 @@
 package com.example.myapplication.showmore
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.MainActivity
 import com.example.myapplication.databinding.FragmentShowMoreBinding
 import com.example.myapplication.search.CategoryItemManager
 
@@ -25,9 +29,11 @@ class ShowMoreFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as MainActivity).hideBottomNavigation(true)
 
         initShowMoreRecyclerView()
         initBackButton()
+        initUpButton()
     }
 
     private fun initShowMoreRecyclerView() {
@@ -37,10 +43,34 @@ class ShowMoreFragment : Fragment() {
 
     private fun initBackButton() {
         binding.ivBack.setOnClickListener {
-            parentFragmentManager.popBackStack()
+            endShowMoreFragment()
         }
         requireActivity().onBackPressedDispatcher.addCallback {
-            parentFragmentManager.popBackStack()
+            endShowMoreFragment()
         }
     }
+
+    private fun endShowMoreFragment() {
+        parentFragmentManager.popBackStack()
+        (activity as MainActivity).hideBottomNavigation(false)
+    }
+
+    private fun initUpButton() {
+        binding.reShowMore.setOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    Handler().postDelayed(Runnable {
+                        binding.fabUp.isVisible = false
+                    }, 2500)
+                } else binding.fabUp.isVisible = true
+            }
+        })
+
+        binding.fabUp.setOnClickListener {
+            binding.reShowMore.smoothScrollToPosition(0)
+        }
+    }
+
 }
