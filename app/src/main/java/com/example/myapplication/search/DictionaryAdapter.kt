@@ -7,16 +7,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.databinding.DictionaryItemBinding
 import com.example.myapplication.model.NaverModel
-
+interface OnNaverClickedListener {
+    fun onNaverClicked (item: NaverModel)
+}
 class DictionaryAdapter(private val mContext: Context) : RecyclerView.Adapter<DictionaryAdapter.Holder>() {
-
     var items = ArrayList<NaverModel>()
 
-    interface NaverClick {
-        fun onClick (item: NaverModel, position: Int)
-    }
-
-    var naverClick : NaverClick? = null
+    var onNaverClickedListener : OnNaverClickedListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding =
@@ -27,10 +24,11 @@ class DictionaryAdapter(private val mContext: Context) : RecyclerView.Adapter<Di
     override fun onBindViewHolder(holder: Holder, position: Int) {
 
         Glide.with(mContext)
-            .load(items[position].url)
+            .load(items[position].thumbnail)
             .into(holder.ivimgge)
+
         holder.itemView.setOnClickListener {
-            naverClick?.onClick(items[position], position)
+            onNaverClickedListener?.onNaverClicked(items[position])
         }
 
         holder.tvtitle.text = items[position].title.replace("<b>", "").replace("</b>", "")

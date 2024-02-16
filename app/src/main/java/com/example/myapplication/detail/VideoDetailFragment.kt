@@ -30,6 +30,8 @@ class VideoDetailFragment : Fragment() {
     private var _binding: FragmentVideoDetailBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var commentAdapter:CommentAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -56,24 +58,23 @@ class VideoDetailFragment : Fragment() {
 
         initBackButton()
 
+        initCommentRecyclerView()
+        initReplyButton()
     }
 
-    // 영상 정보 표시
     @RequiresApi(Build.VERSION_CODES.O)
     private fun initVideo() {
         with(binding) {
-            tvDetailTitle.text = videoData.title
-            tvNameDetail.text = videoData.author
-
-            tvDateDetail.text = videoData.publishedAt
-
-            // 조회수
-            val dec = DecimalFormat("#,###")
-            tvViewcountDetail.text = "${dec.format(videoData.viewCount)}회"
-
             Glide.with(this@VideoDetailFragment)
                 .load(videoData.thumbnail)
-                .into(imgDetailVideo)
+                .into(ivVideo)
+
+            tvTitle.text = videoData.title
+            tvAuthor.text = videoData.author
+            tvDate.text = videoData.publishedAt
+
+            val dec = DecimalFormat("#,###")
+            tvViewcount.text = "${dec.format(videoData.viewCount)}회"
         }
     }
 
@@ -113,7 +114,7 @@ class VideoDetailFragment : Fragment() {
     }
 
     private fun initBackButton() {
-        binding.imgDetailBack.setOnClickListener {
+        binding.ivBack.setOnClickListener {
             endVideoDetailFragment()
         }
         requireActivity().onBackPressedDispatcher.addCallback {
@@ -124,6 +125,23 @@ class VideoDetailFragment : Fragment() {
     private fun endVideoDetailFragment() {
         requireActivity().supportFragmentManager.popBackStack()
         (activity as MainActivity).hideBottomNavigation(false)
+    }
+
+    private fun initReplyButton(){
+        binding.btnReply.setOnClickListener {
+            if(binding.etComment.text.isNullOrBlank())
+                return@setOnClickListener
+
+            val newComment = Comment(videoData.id, binding.etComment.text.toString())
+            CommentUtils.saveComment(newComment)
+            commentAdapter.updateItems(CommentUtils.getVideoComments(videoData.id))
+        }
+    }
+
+    private fun initCommentRecyclerView(){
+        commentAdapter = CommentAdapter()
+        commentAdapter.updateItems(CommentUtils.getVideoComments(videoData.id))
+        binding.recyclerviewReply.adapter = commentAdapter
     }
 
     //Parcelize

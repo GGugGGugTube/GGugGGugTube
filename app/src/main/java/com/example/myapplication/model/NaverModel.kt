@@ -1,3 +1,8 @@
 package com.example.myapplication.model
 
-data class NaverModel(var title: String, var description: String, var url: String?)
+data class NaverModel(
+    val title: String,
+    val description: String,
+    val thumbnail: String?,
+    val link: String
+)

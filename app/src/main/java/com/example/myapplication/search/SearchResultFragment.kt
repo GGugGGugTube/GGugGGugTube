@@ -1,6 +1,8 @@
 package com.example.myapplication.search
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -33,7 +35,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class SearchResultFragment : Fragment() {
+class SearchResultFragment : Fragment(), OnNaverClickedListener {
     private val TAG = "SearchResultFragment"
 
     private lateinit var binding: FragmentSearchResultBinding
@@ -108,8 +110,10 @@ class SearchResultFragment : Fragment() {
                     response.body()!!.items.forEach { item ->
                         val title = item.title
                         val description = item.description
-                        val url = item.thumbnail
-                        resItem.add(NaverModel(title, description, url))
+                        val thumbnail = item.thumbnail?:null
+                        val link = item.link
+
+                        resItem.add(NaverModel(title, description, thumbnail, link))
                     }
                 }
 
@@ -128,9 +132,24 @@ class SearchResultFragment : Fragment() {
     private fun initDictionary(inflater: LayoutInflater, container: ViewGroup?) {
         with(binding) {
             dictionaryAdapter = DictionaryAdapter(mContext)
+            dictionaryAdapter.onNaverClickedListener = this@SearchResultFragment
             searchDictionary.adapter = dictionaryAdapter
             searchDictionary.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        }
+    }
 
+    override fun onNaverClicked(item: NaverModel) {
+        openWebLink(item.link)
+    }
+    private fun openWebLink(link:String){
+        val linkUri = Uri.parse(link)
+        val intent = Intent(Intent.ACTION_VIEW, linkUri)
+
+        if(requireActivity().packageManager.queryIntentActivities(intent, 0).size > 0){
+            Log.d(TAG, "open web link, link: $link")
+            startActivity(intent)
+        }else{
+            Log.d(TAG, "cannot open web link")
         }
     }
 

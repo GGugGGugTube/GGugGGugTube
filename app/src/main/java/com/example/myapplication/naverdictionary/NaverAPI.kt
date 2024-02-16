@@ -7,7 +7,6 @@ import retrofit2.http.Query
 
 interface NaverAPI {
     @GET("v1/search/encyc.json")
-
     fun naverDic(
         @Header("X-Naver-Client-Id") Id: String?,
         @Header("X-Naver-Client-Secret") Secret: String?,
